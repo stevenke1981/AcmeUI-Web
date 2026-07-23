@@ -1,0 +1,9 @@
+import fs from"node:fs";import path from"node:path";import process from"node:process";
+const root=process.cwd(),errors=[],required=["README.md","spec.md","plan.md","todos.md","packages/react/src/index.tsx","packages/vue/src/index.ts","packages/tailwind/src/theme.css","templates/registry.json","apps/gallery/src/main.tsx"];
+for(const rel of required)if(!fs.existsSync(path.join(root,rel)))errors.push(`Missing ${rel}`);
+const registry=JSON.parse(fs.readFileSync(path.join(root,"templates/registry.json"),"utf8")).templates;if(registry.length<40)errors.push(`Expected at least 40 templates, found ${registry.length}`);
+const slugs=new Set();for(const item of registry){if(slugs.has(item.slug))errors.push(`Duplicate slug ${item.slug}`);slugs.add(item.slug);for(const file of["index.html","style.css","script.js"]){const rel=path.join("previews",item.slug,file);if(!fs.existsSync(path.join(root,rel)))errors.push(`Missing ${rel}`)}const html=fs.readFileSync(path.join(root,"previews",item.slug,"index.html"),"utf8");if(!html.includes("<!doctype html>")||!html.includes('name="viewport"'))errors.push(`Invalid preview HTML ${item.slug}`)}
+const react=fs.readFileSync(path.join(root,"packages/react/src/index.tsx"),"utf8"),reactNames=[...react.matchAll(/export (?:function|const) ([A-Z][A-Za-z0-9]+)/g)].map(m=>m[1]),vueIndex=fs.readFileSync(path.join(root,"packages/vue/src/index.ts"),"utf8"),vueNames=[...vueIndex.matchAll(/default as ([A-Z][A-Za-z0-9]+)/g)].map(m=>m[1]);
+const families=vueNames;
+for(const name of families){if(!reactNames.includes(name))errors.push(`React missing ${name}`);if(!vueNames.includes(name))errors.push(`Vue missing ${name}`)}
+if(errors.length){console.error(errors.join("\n"));process.exit(1)}console.log(`✓ ${registry.length} templates`);console.log(`✓ ${new Set(reactNames).size} exported React functions`);console.log(`✓ ${vueNames.length} exported Vue components`);console.log("✓ Registry, previews and framework parity checks passed");

@@ -1,0 +1,14 @@
+{
+  "slug": "event-conference",
+  "name": "Event Conference",
+  "category": "content",
+  "description": "研討會與活動頁",
+  "frameworks": [
+    "react",
+    "vue",
+    "static"
+  ],
+  "palette": "fuchsia",
+  "layout": "event",
+  "preview": "previews/event-conference/index.html"
+}

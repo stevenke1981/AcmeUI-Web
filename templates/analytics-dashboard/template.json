@@ -1,0 +1,14 @@
+{
+  "slug": "analytics-dashboard",
+  "name": "Analytics Dashboard",
+  "category": "dashboard",
+  "description": "分析儀表板",
+  "frameworks": [
+    "react",
+    "vue",
+    "static"
+  ],
+  "palette": "indigo",
+  "layout": "dashboard",
+  "preview": "previews/analytics-dashboard/index.html"
+}

@@ -1,0 +1,14 @@
+{
+  "slug": "fashion-shop",
+  "name": "Fashion Shop",
+  "category": "commerce",
+  "description": "時尚服飾商店",
+  "frameworks": [
+    "react",
+    "vue",
+    "static"
+  ],
+  "palette": "pink",
+  "layout": "editorial",
+  "preview": "previews/fashion-shop/index.html"
+}

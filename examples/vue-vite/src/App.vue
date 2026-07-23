@@ -1,0 +1,1 @@
+<script setup lang="ts">import{Button,Hero,Navbar}from"@acmeui/vue";</script><template><Navbar brand="Vue Example" :links="[{label:'Docs',href:'#'}]"/><Hero title="Vue + AcmeUI" description="Vue SFC components with shared semantic styles."><template #actions><Button>Start</Button></template></Hero></template>

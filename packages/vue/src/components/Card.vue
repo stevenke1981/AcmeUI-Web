@@ -1,0 +1,1 @@
+<template><section class="acme-card"><slot/></section></template>

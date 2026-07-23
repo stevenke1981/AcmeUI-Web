@@ -1,0 +1,14 @@
+{
+  "slug": "documentation",
+  "name": "Documentation",
+  "category": "content",
+  "description": "產品文件中心",
+  "frameworks": [
+    "react",
+    "vue",
+    "static"
+  ],
+  "palette": "indigo",
+  "layout": "docs",
+  "preview": "previews/documentation/index.html"
+}

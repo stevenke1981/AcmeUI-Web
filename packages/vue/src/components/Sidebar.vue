@@ -1,0 +1,1 @@
+<script setup lang="ts">defineProps<{items:Array<{label:string;href:string;active?:boolean}>}>();</script><template><aside class="acme-sidebar"><nav class="acme-stack"><a v-for="item in items" :key="item.href" :href="item.href" :aria-current="item.active?'page':undefined">{{item.label}}</a></nav></aside></template>

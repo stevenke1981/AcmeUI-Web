@@ -1,0 +1,1 @@
+<script setup lang="ts">defineProps<{modelValue?:boolean;label?:string}>();defineEmits<{(e:"update:modelValue",value:boolean):void}>();</script><template><button type="button" role="switch" class="acme-switch" :aria-checked="modelValue" :aria-label="label||'切換'" :data-checked="String(Boolean(modelValue))" @click="$emit('update:modelValue',!modelValue)"/></template>

@@ -1,0 +1,14 @@
+{
+  "slug": "contact",
+  "name": "Contact",
+  "category": "utility",
+  "description": "聯絡與詢價",
+  "frameworks": [
+    "react",
+    "vue",
+    "static"
+  ],
+  "palette": "teal",
+  "layout": "contact",
+  "preview": "previews/contact/index.html"
+}

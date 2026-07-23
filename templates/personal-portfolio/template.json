@@ -1,0 +1,14 @@
+{
+  "slug": "personal-portfolio",
+  "name": "Personal Portfolio",
+  "category": "portfolio",
+  "description": "個人作品集",
+  "frameworks": [
+    "react",
+    "vue",
+    "static"
+  ],
+  "palette": "indigo",
+  "layout": "portfolio",
+  "preview": "previews/personal-portfolio/index.html"
+}

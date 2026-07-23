@@ -1,0 +1,1 @@
+<template><span class="acme-badge"><slot/></span></template>

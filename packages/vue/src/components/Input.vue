@@ -1,0 +1,1 @@
+<script setup lang="ts">defineProps<{modelValue?:string;placeholder?:string;type?:string}>();defineEmits<{(e:"update:modelValue",value:string):void}>();</script><template><input class="acme-input" :value="modelValue" :placeholder="placeholder" :type="type||'text'" @input="$emit('update:modelValue',($event.target as HTMLInputElement).value)"/></template>

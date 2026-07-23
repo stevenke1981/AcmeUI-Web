@@ -1,0 +1,14 @@
+{
+  "slug": "blog",
+  "name": "Blog",
+  "category": "content",
+  "description": "個人或品牌部落格",
+  "frameworks": [
+    "react",
+    "vue",
+    "static"
+  ],
+  "palette": "orange",
+  "layout": "editorial",
+  "preview": "previews/blog/index.html"
+}

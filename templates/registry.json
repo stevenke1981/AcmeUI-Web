@@ -1,0 +1,677 @@
+{
+  "version": "0.1.0",
+  "templates": [
+    {
+      "slug": "saas-launch",
+      "name": "SaaS Launch",
+      "category": "marketing",
+      "description": "SaaS 產品首發頁",
+      "frameworks": [
+        "react",
+        "vue",
+        "static"
+      ],
+      "palette": "indigo",
+      "layout": "split",
+      "preview": "previews/saas-launch/index.html"
+    },
+    {
+      "slug": "ai-product",
+      "name": "AI Product",
+      "category": "marketing",
+      "description": "AI 產品與模型服務",
+      "frameworks": [
+        "react",
+        "vue",
+        "static"
+      ],
+      "palette": "violet",
+      "layout": "showcase",
+      "preview": "previews/ai-product/index.html"
+    },
+    {
+      "slug": "mobile-app",
+      "name": "Mobile App",
+      "category": "marketing",
+      "description": "行動 App 下載與特色",
+      "frameworks": [
+        "react",
+        "vue",
+        "static"
+      ],
+      "palette": "cyan",
+      "layout": "split",
+      "preview": "previews/mobile-app/index.html"
+    },
+    {
+      "slug": "developer-tool",
+      "name": "Developer Tool",
+      "category": "marketing",
+      "description": "開發者工具與 SDK",
+      "frameworks": [
+        "react",
+        "vue",
+        "static"
+      ],
+      "palette": "slate",
+      "layout": "terminal",
+      "preview": "previews/developer-tool/index.html"
+    },
+    {
+      "slug": "startup-waitlist",
+      "name": "Startup Waitlist",
+      "category": "marketing",
+      "description": "新創候補名單",
+      "frameworks": [
+        "react",
+        "vue",
+        "static"
+      ],
+      "palette": "amber",
+      "layout": "centered",
+      "preview": "previews/startup-waitlist/index.html"
+    },
+    {
+      "slug": "product-release",
+      "name": "Product Release",
+      "category": "marketing",
+      "description": "產品版本發布",
+      "frameworks": [
+        "react",
+        "vue",
+        "static"
+      ],
+      "palette": "rose",
+      "layout": "showcase",
+      "preview": "previews/product-release/index.html"
+    },
+    {
+      "slug": "creative-agency",
+      "name": "Creative Agency",
+      "category": "business",
+      "description": "創意與品牌代理商",
+      "frameworks": [
+        "react",
+        "vue",
+        "static"
+      ],
+      "palette": "fuchsia",
+      "layout": "editorial",
+      "preview": "previews/creative-agency/index.html"
+    },
+    {
+      "slug": "consulting-firm",
+      "name": "Consulting Firm",
+      "category": "business",
+      "description": "顧問公司服務",
+      "frameworks": [
+        "react",
+        "vue",
+        "static"
+      ],
+      "palette": "blue",
+      "layout": "split",
+      "preview": "previews/consulting-firm/index.html"
+    },
+    {
+      "slug": "corporate-company",
+      "name": "Corporate Company",
+      "category": "business",
+      "description": "企業形象官網",
+      "frameworks": [
+        "react",
+        "vue",
+        "static"
+      ],
+      "palette": "navy",
+      "layout": "corporate",
+      "preview": "previews/corporate-company/index.html"
+    },
+    {
+      "slug": "local-service",
+      "name": "Local Service",
+      "category": "business",
+      "description": "在地服務與預約",
+      "frameworks": [
+        "react",
+        "vue",
+        "static"
+      ],
+      "palette": "emerald",
+      "layout": "local",
+      "preview": "previews/local-service/index.html"
+    },
+    {
+      "slug": "real-estate",
+      "name": "Real Estate",
+      "category": "business",
+      "description": "房仲與建案展示",
+      "frameworks": [
+        "react",
+        "vue",
+        "static"
+      ],
+      "palette": "teal",
+      "layout": "listing",
+      "preview": "previews/real-estate/index.html"
+    },
+    {
+      "slug": "architecture-studio",
+      "name": "Architecture Studio",
+      "category": "business",
+      "description": "建築與室內設計作品",
+      "frameworks": [
+        "react",
+        "vue",
+        "static"
+      ],
+      "palette": "stone",
+      "layout": "editorial",
+      "preview": "previews/architecture-studio/index.html"
+    },
+    {
+      "slug": "ecommerce-store",
+      "name": "E-commerce Store",
+      "category": "commerce",
+      "description": "通用電商首頁",
+      "frameworks": [
+        "react",
+        "vue",
+        "static"
+      ],
+      "palette": "orange",
+      "layout": "store",
+      "preview": "previews/ecommerce-store/index.html"
+    },
+    {
+      "slug": "fashion-shop",
+      "name": "Fashion Shop",
+      "category": "commerce",
+      "description": "時尚服飾商店",
+      "frameworks": [
+        "react",
+        "vue",
+        "static"
+      ],
+      "palette": "pink",
+      "layout": "editorial",
+      "preview": "previews/fashion-shop/index.html"
+    },
+    {
+      "slug": "electronics-shop",
+      "name": "Electronics Shop",
+      "category": "commerce",
+      "description": "3C 商品商城",
+      "frameworks": [
+        "react",
+        "vue",
+        "static"
+      ],
+      "palette": "blue",
+      "layout": "store",
+      "preview": "previews/electronics-shop/index.html"
+    },
+    {
+      "slug": "restaurant",
+      "name": "Restaurant",
+      "category": "commerce",
+      "description": "餐廳菜單與訂位",
+      "frameworks": [
+        "react",
+        "vue",
+        "static"
+      ],
+      "palette": "red",
+      "layout": "hospitality",
+      "preview": "previews/restaurant/index.html"
+    },
+    {
+      "slug": "coffee-shop",
+      "name": "Coffee Shop",
+      "category": "commerce",
+      "description": "咖啡店品牌與菜單",
+      "frameworks": [
+        "react",
+        "vue",
+        "static"
+      ],
+      "palette": "amber",
+      "layout": "hospitality",
+      "preview": "previews/coffee-shop/index.html"
+    },
+    {
+      "slug": "travel-booking",
+      "name": "Travel Booking",
+      "category": "commerce",
+      "description": "旅遊行程搜尋",
+      "frameworks": [
+        "react",
+        "vue",
+        "static"
+      ],
+      "palette": "sky",
+      "layout": "booking",
+      "preview": "previews/travel-booking/index.html"
+    },
+    {
+      "slug": "hotel-resort",
+      "name": "Hotel & Resort",
+      "category": "commerce",
+      "description": "飯店與度假村訂房",
+      "frameworks": [
+        "react",
+        "vue",
+        "static"
+      ],
+      "palette": "teal",
+      "layout": "hospitality",
+      "preview": "previews/hotel-resort/index.html"
+    },
+    {
+      "slug": "online-course",
+      "name": "Online Course",
+      "category": "education",
+      "description": "線上課程銷售",
+      "frameworks": [
+        "react",
+        "vue",
+        "static"
+      ],
+      "palette": "purple",
+      "layout": "course",
+      "preview": "previews/online-course/index.html"
+    },
+    {
+      "slug": "university-program",
+      "name": "University Program",
+      "category": "education",
+      "description": "學校與招生專頁",
+      "frameworks": [
+        "react",
+        "vue",
+        "static"
+      ],
+      "palette": "blue",
+      "layout": "institution",
+      "preview": "previews/university-program/index.html"
+    },
+    {
+      "slug": "personal-portfolio",
+      "name": "Personal Portfolio",
+      "category": "portfolio",
+      "description": "個人作品集",
+      "frameworks": [
+        "react",
+        "vue",
+        "static"
+      ],
+      "palette": "indigo",
+      "layout": "portfolio",
+      "preview": "previews/personal-portfolio/index.html"
+    },
+    {
+      "slug": "designer-portfolio",
+      "name": "Designer Portfolio",
+      "category": "portfolio",
+      "description": "設計師作品集",
+      "frameworks": [
+        "react",
+        "vue",
+        "static"
+      ],
+      "palette": "lime",
+      "layout": "editorial",
+      "preview": "previews/designer-portfolio/index.html"
+    },
+    {
+      "slug": "developer-portfolio",
+      "name": "Developer Portfolio",
+      "category": "portfolio",
+      "description": "工程師作品集",
+      "frameworks": [
+        "react",
+        "vue",
+        "static"
+      ],
+      "palette": "slate",
+      "layout": "terminal",
+      "preview": "previews/developer-portfolio/index.html"
+    },
+    {
+      "slug": "resume-cv",
+      "name": "Resume / CV",
+      "category": "portfolio",
+      "description": "履歷與經歷頁",
+      "frameworks": [
+        "react",
+        "vue",
+        "static"
+      ],
+      "palette": "cyan",
+      "layout": "resume",
+      "preview": "previews/resume-cv/index.html"
+    },
+    {
+      "slug": "blog",
+      "name": "Blog",
+      "category": "content",
+      "description": "個人或品牌部落格",
+      "frameworks": [
+        "react",
+        "vue",
+        "static"
+      ],
+      "palette": "orange",
+      "layout": "editorial",
+      "preview": "previews/blog/index.html"
+    },
+    {
+      "slug": "magazine",
+      "name": "Magazine",
+      "category": "content",
+      "description": "新聞與雜誌內容站",
+      "frameworks": [
+        "react",
+        "vue",
+        "static"
+      ],
+      "palette": "red",
+      "layout": "magazine",
+      "preview": "previews/magazine/index.html"
+    },
+    {
+      "slug": "documentation",
+      "name": "Documentation",
+      "category": "content",
+      "description": "產品文件中心",
+      "frameworks": [
+        "react",
+        "vue",
+        "static"
+      ],
+      "palette": "indigo",
+      "layout": "docs",
+      "preview": "previews/documentation/index.html"
+    },
+    {
+      "slug": "knowledge-base",
+      "name": "Knowledge Base",
+      "category": "content",
+      "description": "知識庫與搜尋",
+      "frameworks": [
+        "react",
+        "vue",
+        "static"
+      ],
+      "palette": "emerald",
+      "layout": "docs",
+      "preview": "previews/knowledge-base/index.html"
+    },
+    {
+      "slug": "community-forum",
+      "name": "Community Forum",
+      "category": "content",
+      "description": "社群討論首頁",
+      "frameworks": [
+        "react",
+        "vue",
+        "static"
+      ],
+      "palette": "violet",
+      "layout": "community",
+      "preview": "previews/community-forum/index.html"
+    },
+    {
+      "slug": "event-conference",
+      "name": "Event Conference",
+      "category": "content",
+      "description": "研討會與活動頁",
+      "frameworks": [
+        "react",
+        "vue",
+        "static"
+      ],
+      "palette": "fuchsia",
+      "layout": "event",
+      "preview": "previews/event-conference/index.html"
+    },
+    {
+      "slug": "nonprofit",
+      "name": "Nonprofit",
+      "category": "content",
+      "description": "非營利組織募款",
+      "frameworks": [
+        "react",
+        "vue",
+        "static"
+      ],
+      "palette": "green",
+      "layout": "cause",
+      "preview": "previews/nonprofit/index.html"
+    },
+    {
+      "slug": "analytics-dashboard",
+      "name": "Analytics Dashboard",
+      "category": "dashboard",
+      "description": "分析儀表板",
+      "frameworks": [
+        "react",
+        "vue",
+        "static"
+      ],
+      "palette": "indigo",
+      "layout": "dashboard",
+      "preview": "previews/analytics-dashboard/index.html"
+    },
+    {
+      "slug": "admin-console",
+      "name": "Admin Console",
+      "category": "dashboard",
+      "description": "後台管理系統",
+      "frameworks": [
+        "react",
+        "vue",
+        "static"
+      ],
+      "palette": "slate",
+      "layout": "dashboard",
+      "preview": "previews/admin-console/index.html"
+    },
+    {
+      "slug": "crm-dashboard",
+      "name": "CRM Dashboard",
+      "category": "dashboard",
+      "description": "客戶關係管理",
+      "frameworks": [
+        "react",
+        "vue",
+        "static"
+      ],
+      "palette": "blue",
+      "layout": "dashboard",
+      "preview": "previews/crm-dashboard/index.html"
+    },
+    {
+      "slug": "finance-dashboard",
+      "name": "Finance Dashboard",
+      "category": "dashboard",
+      "description": "財務營運儀表板",
+      "frameworks": [
+        "react",
+        "vue",
+        "static"
+      ],
+      "palette": "emerald",
+      "layout": "dashboard",
+      "preview": "previews/finance-dashboard/index.html"
+    },
+    {
+      "slug": "project-management",
+      "name": "Project Management",
+      "category": "dashboard",
+      "description": "專案任務管理",
+      "frameworks": [
+        "react",
+        "vue",
+        "static"
+      ],
+      "palette": "violet",
+      "layout": "kanban",
+      "preview": "previews/project-management/index.html"
+    },
+    {
+      "slug": "inventory-dashboard",
+      "name": "Inventory Dashboard",
+      "category": "dashboard",
+      "description": "庫存與訂單管理",
+      "frameworks": [
+        "react",
+        "vue",
+        "static"
+      ],
+      "palette": "orange",
+      "layout": "dashboard",
+      "preview": "previews/inventory-dashboard/index.html"
+    },
+    {
+      "slug": "support-center",
+      "name": "Support Center",
+      "category": "utility",
+      "description": "客服支援入口",
+      "frameworks": [
+        "react",
+        "vue",
+        "static"
+      ],
+      "palette": "cyan",
+      "layout": "docs",
+      "preview": "previews/support-center/index.html"
+    },
+    {
+      "slug": "status-page",
+      "name": "Status Page",
+      "category": "utility",
+      "description": "服務狀態頁",
+      "frameworks": [
+        "react",
+        "vue",
+        "static"
+      ],
+      "palette": "green",
+      "layout": "status",
+      "preview": "previews/status-page/index.html"
+    },
+    {
+      "slug": "login",
+      "name": "Login",
+      "category": "auth",
+      "description": "登入頁",
+      "frameworks": [
+        "react",
+        "vue",
+        "static"
+      ],
+      "palette": "indigo",
+      "layout": "auth",
+      "preview": "previews/login/index.html"
+    },
+    {
+      "slug": "signup",
+      "name": "Sign Up",
+      "category": "auth",
+      "description": "註冊頁",
+      "frameworks": [
+        "react",
+        "vue",
+        "static"
+      ],
+      "palette": "violet",
+      "layout": "auth",
+      "preview": "previews/signup/index.html"
+    },
+    {
+      "slug": "pricing",
+      "name": "Pricing",
+      "category": "utility",
+      "description": "方案價格比較",
+      "frameworks": [
+        "react",
+        "vue",
+        "static"
+      ],
+      "palette": "blue",
+      "layout": "pricing",
+      "preview": "previews/pricing/index.html"
+    },
+    {
+      "slug": "contact",
+      "name": "Contact",
+      "category": "utility",
+      "description": "聯絡與詢價",
+      "frameworks": [
+        "react",
+        "vue",
+        "static"
+      ],
+      "palette": "teal",
+      "layout": "contact",
+      "preview": "previews/contact/index.html"
+    },
+    {
+      "slug": "coming-soon",
+      "name": "Coming Soon",
+      "category": "utility",
+      "description": "即將上線頁",
+      "frameworks": [
+        "react",
+        "vue",
+        "static"
+      ],
+      "palette": "pink",
+      "layout": "centered",
+      "preview": "previews/coming-soon/index.html"
+    },
+    {
+      "slug": "maintenance",
+      "name": "Maintenance",
+      "category": "utility",
+      "description": "維護通知頁",
+      "frameworks": [
+        "react",
+        "vue",
+        "static"
+      ],
+      "palette": "amber",
+      "layout": "centered",
+      "preview": "previews/maintenance/index.html"
+    },
+    {
+      "slug": "error-404",
+      "name": "404 Error",
+      "category": "utility",
+      "description": "找不到頁面",
+      "frameworks": [
+        "react",
+        "vue",
+        "static"
+      ],
+      "palette": "slate",
+      "layout": "centered",
+      "preview": "previews/error-404/index.html"
+    },
+    {
+      "slug": "newsletter",
+      "name": "Newsletter",
+      "category": "utility",
+      "description": "電子報訂閱",
+      "frameworks": [
+        "react",
+        "vue",
+        "static"
+      ],
+      "palette": "orange",
+      "layout": "centered",
+      "preview": "previews/newsletter/index.html"
+    }
+  ]
+}

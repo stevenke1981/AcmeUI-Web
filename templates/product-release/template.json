@@ -1,0 +1,14 @@
+{
+  "slug": "product-release",
+  "name": "Product Release",
+  "category": "marketing",
+  "description": "產品版本發布",
+  "frameworks": [
+    "react",
+    "vue",
+    "static"
+  ],
+  "palette": "rose",
+  "layout": "showcase",
+  "preview": "previews/product-release/index.html"
+}

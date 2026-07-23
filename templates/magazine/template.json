@@ -1,0 +1,14 @@
+{
+  "slug": "magazine",
+  "name": "Magazine",
+  "category": "content",
+  "description": "新聞與雜誌內容站",
+  "frameworks": [
+    "react",
+    "vue",
+    "static"
+  ],
+  "palette": "red",
+  "layout": "magazine",
+  "preview": "previews/magazine/index.html"
+}

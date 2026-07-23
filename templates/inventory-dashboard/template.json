@@ -1,0 +1,14 @@
+{
+  "slug": "inventory-dashboard",
+  "name": "Inventory Dashboard",
+  "category": "dashboard",
+  "description": "庫存與訂單管理",
+  "frameworks": [
+    "react",
+    "vue",
+    "static"
+  ],
+  "palette": "orange",
+  "layout": "dashboard",
+  "preview": "previews/inventory-dashboard/index.html"
+}

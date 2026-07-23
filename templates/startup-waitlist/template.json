@@ -1,0 +1,14 @@
+{
+  "slug": "startup-waitlist",
+  "name": "Startup Waitlist",
+  "category": "marketing",
+  "description": "新創候補名單",
+  "frameworks": [
+    "react",
+    "vue",
+    "static"
+  ],
+  "palette": "amber",
+  "layout": "centered",
+  "preview": "previews/startup-waitlist/index.html"
+}

@@ -1,0 +1,14 @@
+{
+  "slug": "finance-dashboard",
+  "name": "Finance Dashboard",
+  "category": "dashboard",
+  "description": "財務營運儀表板",
+  "frameworks": [
+    "react",
+    "vue",
+    "static"
+  ],
+  "palette": "emerald",
+  "layout": "dashboard",
+  "preview": "previews/finance-dashboard/index.html"
+}

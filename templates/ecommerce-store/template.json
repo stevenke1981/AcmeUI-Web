@@ -1,0 +1,14 @@
+{
+  "slug": "ecommerce-store",
+  "name": "E-commerce Store",
+  "category": "commerce",
+  "description": "通用電商首頁",
+  "frameworks": [
+    "react",
+    "vue",
+    "static"
+  ],
+  "palette": "orange",
+  "layout": "store",
+  "preview": "previews/ecommerce-store/index.html"
+}

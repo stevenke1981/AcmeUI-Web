@@ -1,0 +1,14 @@
+{
+  "slug": "designer-portfolio",
+  "name": "Designer Portfolio",
+  "category": "portfolio",
+  "description": "設計師作品集",
+  "frameworks": [
+    "react",
+    "vue",
+    "static"
+  ],
+  "palette": "lime",
+  "layout": "editorial",
+  "preview": "previews/designer-portfolio/index.html"
+}

@@ -1,0 +1,14 @@
+{
+  "slug": "community-forum",
+  "name": "Community Forum",
+  "category": "content",
+  "description": "社群討論首頁",
+  "frameworks": [
+    "react",
+    "vue",
+    "static"
+  ],
+  "palette": "violet",
+  "layout": "community",
+  "preview": "previews/community-forum/index.html"
+}

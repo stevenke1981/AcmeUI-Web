@@ -1,0 +1,14 @@
+{
+  "slug": "newsletter",
+  "name": "Newsletter",
+  "category": "utility",
+  "description": "電子報訂閱",
+  "frameworks": [
+    "react",
+    "vue",
+    "static"
+  ],
+  "palette": "orange",
+  "layout": "centered",
+  "preview": "previews/newsletter/index.html"
+}

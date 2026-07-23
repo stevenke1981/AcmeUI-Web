@@ -1,0 +1,14 @@
+{
+  "slug": "coffee-shop",
+  "name": "Coffee Shop",
+  "category": "commerce",
+  "description": "咖啡店品牌與菜單",
+  "frameworks": [
+    "react",
+    "vue",
+    "static"
+  ],
+  "palette": "amber",
+  "layout": "hospitality",
+  "preview": "previews/coffee-shop/index.html"
+}

@@ -1,0 +1,14 @@
+{
+  "slug": "error-404",
+  "name": "404 Error",
+  "category": "utility",
+  "description": "找不到頁面",
+  "frameworks": [
+    "react",
+    "vue",
+    "static"
+  ],
+  "palette": "slate",
+  "layout": "centered",
+  "preview": "previews/error-404/index.html"
+}

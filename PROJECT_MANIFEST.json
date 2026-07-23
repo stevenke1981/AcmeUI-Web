@@ -1,0 +1,18 @@
+{
+  "name": "AcmeUI-Web",
+  "version": "0.1.0",
+  "generated": "2026-07-23",
+  "templates": 48,
+  "react_exported_components": 26,
+  "vue_components": 23,
+  "cli_matrix_cases": 144,
+  "files": 284,
+  "bytes": 608154,
+  "validation": {
+    "registry": true,
+    "preview_html": true,
+    "json_parse": true,
+    "cli_matrix": true,
+    "browser_screenshot": "blocked by runtime administrator policy"
+  }
+}

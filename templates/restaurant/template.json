@@ -1,0 +1,14 @@
+{
+  "slug": "restaurant",
+  "name": "Restaurant",
+  "category": "commerce",
+  "description": "餐廳菜單與訂位",
+  "frameworks": [
+    "react",
+    "vue",
+    "static"
+  ],
+  "palette": "red",
+  "layout": "hospitality",
+  "preview": "previews/restaurant/index.html"
+}

@@ -1,0 +1,1 @@
+<script setup lang="ts">defineProps<{label:string;help?:string;htmlFor?:string}>();</script><template><label class="acme-field" :for="htmlFor"><span class="acme-label">{{label}}</span><slot/><span v-if="help" class="acme-help">{{help}}</span></label></template>

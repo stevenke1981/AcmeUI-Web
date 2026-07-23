@@ -1,0 +1,14 @@
+{
+  "slug": "real-estate",
+  "name": "Real Estate",
+  "category": "business",
+  "description": "房仲與建案展示",
+  "frameworks": [
+    "react",
+    "vue",
+    "static"
+  ],
+  "palette": "teal",
+  "layout": "listing",
+  "preview": "previews/real-estate/index.html"
+}

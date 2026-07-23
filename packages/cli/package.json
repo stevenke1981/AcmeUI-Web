@@ -1,0 +1,15 @@
+{
+  "name": "@acmeui/create",
+  "version": "0.1.0",
+  "type": "module",
+  "bin": {
+    "acmeui": "./bin/acmeui.mjs"
+  },
+  "files": [
+    "bin",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=20.19"
+  }
+}

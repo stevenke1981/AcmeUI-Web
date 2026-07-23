@@ -1,0 +1,14 @@
+{
+  "slug": "corporate-company",
+  "name": "Corporate Company",
+  "category": "business",
+  "description": "企業形象官網",
+  "frameworks": [
+    "react",
+    "vue",
+    "static"
+  ],
+  "palette": "navy",
+  "layout": "corporate",
+  "preview": "previews/corporate-company/index.html"
+}

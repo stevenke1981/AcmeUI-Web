@@ -1,0 +1,14 @@
+{
+  "slug": "local-service",
+  "name": "Local Service",
+  "category": "business",
+  "description": "在地服務與預約",
+  "frameworks": [
+    "react",
+    "vue",
+    "static"
+  ],
+  "palette": "emerald",
+  "layout": "local",
+  "preview": "previews/local-service/index.html"
+}

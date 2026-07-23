@@ -1,0 +1,11 @@
+{
+  "name": "@acmeui/styles",
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    "./base.css": "./src/base.css"
+  },
+  "dependencies": {
+    "@acmeui/tokens": "workspace:*"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "slug": "university-program",
+  "name": "University Program",
+  "category": "education",
+  "description": "學校與招生專頁",
+  "frameworks": [
+    "react",
+    "vue",
+    "static"
+  ],
+  "palette": "blue",
+  "layout": "institution",
+  "preview": "previews/university-program/index.html"
+}

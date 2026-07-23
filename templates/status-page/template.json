@@ -1,0 +1,14 @@
+{
+  "slug": "status-page",
+  "name": "Status Page",
+  "category": "utility",
+  "description": "服務狀態頁",
+  "frameworks": [
+    "react",
+    "vue",
+    "static"
+  ],
+  "palette": "green",
+  "layout": "status",
+  "preview": "previews/status-page/index.html"
+}

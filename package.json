@@ -1,0 +1,23 @@
+{
+  "name": "acmeui-web",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Multi-framework static UI component library and template platform.",
+  "packageManager": "pnpm@10.15.0",
+  "engines": {
+    "node": ">=20.19"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @acmeui/gallery dev",
+    "build": "pnpm -r --if-present build",
+    "typecheck": "pnpm -r --if-present typecheck",
+    "lint": "node scripts/validate.mjs",
+    "test": "node scripts/validate.mjs && node scripts/test-cli.mjs",
+    "gallery": "pnpm --filter @acmeui/gallery dev",
+    "create": "node packages/cli/bin/acmeui.mjs create",
+    "preview:static": "node scripts/serve-static.mjs"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.2"
+  }
+}

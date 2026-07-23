@@ -1,0 +1,14 @@
+{
+  "slug": "developer-tool",
+  "name": "Developer Tool",
+  "category": "marketing",
+  "description": "開發者工具與 SDK",
+  "frameworks": [
+    "react",
+    "vue",
+    "static"
+  ],
+  "palette": "slate",
+  "layout": "terminal",
+  "preview": "previews/developer-tool/index.html"
+}

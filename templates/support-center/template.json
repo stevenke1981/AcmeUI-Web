@@ -1,0 +1,14 @@
+{
+  "slug": "support-center",
+  "name": "Support Center",
+  "category": "utility",
+  "description": "客服支援入口",
+  "frameworks": [
+    "react",
+    "vue",
+    "static"
+  ],
+  "palette": "cyan",
+  "layout": "docs",
+  "preview": "previews/support-center/index.html"
+}

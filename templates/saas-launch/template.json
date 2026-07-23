@@ -1,0 +1,14 @@
+{
+  "slug": "saas-launch",
+  "name": "SaaS Launch",
+  "category": "marketing",
+  "description": "SaaS 產品首發頁",
+  "frameworks": [
+    "react",
+    "vue",
+    "static"
+  ],
+  "palette": "indigo",
+  "layout": "split",
+  "preview": "previews/saas-launch/index.html"
+}

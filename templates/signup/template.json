@@ -1,0 +1,14 @@
+{
+  "slug": "signup",
+  "name": "Sign Up",
+  "category": "auth",
+  "description": "註冊頁",
+  "frameworks": [
+    "react",
+    "vue",
+    "static"
+  ],
+  "palette": "violet",
+  "layout": "auth",
+  "preview": "previews/signup/index.html"
+}

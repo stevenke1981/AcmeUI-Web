@@ -1,0 +1,1 @@
+<script setup lang="ts">defineProps<{brand:string;links:Array<{label:string;href:string}>}>();</script><template><header class="acme-navbar"><div class="acme-container acme-navbar__inner"><strong>{{brand}}</strong><nav class="acme-navbar__links"><a v-for="link in links" :key="link.href" :href="link.href">{{link.label}}</a></nav><slot name="action"/></div></header></template>

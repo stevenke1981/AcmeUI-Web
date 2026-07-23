@@ -1,0 +1,14 @@
+{
+  "slug": "coming-soon",
+  "name": "Coming Soon",
+  "category": "utility",
+  "description": "即將上線頁",
+  "frameworks": [
+    "react",
+    "vue",
+    "static"
+  ],
+  "palette": "pink",
+  "layout": "centered",
+  "preview": "previews/coming-soon/index.html"
+}

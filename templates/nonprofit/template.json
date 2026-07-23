@@ -1,0 +1,14 @@
+{
+  "slug": "nonprofit",
+  "name": "Nonprofit",
+  "category": "content",
+  "description": "非營利組織募款",
+  "frameworks": [
+    "react",
+    "vue",
+    "static"
+  ],
+  "palette": "green",
+  "layout": "cause",
+  "preview": "previews/nonprofit/index.html"
+}

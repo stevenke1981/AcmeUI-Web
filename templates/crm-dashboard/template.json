@@ -1,0 +1,14 @@
+{
+  "slug": "crm-dashboard",
+  "name": "CRM Dashboard",
+  "category": "dashboard",
+  "description": "客戶關係管理",
+  "frameworks": [
+    "react",
+    "vue",
+    "static"
+  ],
+  "palette": "blue",
+  "layout": "dashboard",
+  "preview": "previews/crm-dashboard/index.html"
+}

@@ -1,0 +1,14 @@
+{
+  "slug": "consulting-firm",
+  "name": "Consulting Firm",
+  "category": "business",
+  "description": "顧問公司服務",
+  "frameworks": [
+    "react",
+    "vue",
+    "static"
+  ],
+  "palette": "blue",
+  "layout": "split",
+  "preview": "previews/consulting-firm/index.html"
+}

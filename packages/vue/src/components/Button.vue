@@ -1,0 +1,1 @@
+<script setup lang="ts">withDefaults(defineProps<{variant?:"primary"|"secondary"|"outline"|"ghost";loading?:boolean;disabled?:boolean}>(),{variant:"primary",loading:false,disabled:false});</script><template><button class="acme-button" :class="`acme-button--${variant}`" :disabled="disabled||loading"><slot>{{loading?"載入中…":""}}</slot></button></template>

@@ -1,0 +1,14 @@
+{
+  "slug": "online-course",
+  "name": "Online Course",
+  "category": "education",
+  "description": "線上課程銷售",
+  "frameworks": [
+    "react",
+    "vue",
+    "static"
+  ],
+  "palette": "purple",
+  "layout": "course",
+  "preview": "previews/online-course/index.html"
+}

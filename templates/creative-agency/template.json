@@ -1,0 +1,14 @@
+{
+  "slug": "creative-agency",
+  "name": "Creative Agency",
+  "category": "business",
+  "description": "創意與品牌代理商",
+  "frameworks": [
+    "react",
+    "vue",
+    "static"
+  ],
+  "palette": "fuchsia",
+  "layout": "editorial",
+  "preview": "previews/creative-agency/index.html"
+}

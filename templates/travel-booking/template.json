@@ -1,0 +1,14 @@
+{
+  "slug": "travel-booking",
+  "name": "Travel Booking",
+  "category": "commerce",
+  "description": "旅遊行程搜尋",
+  "frameworks": [
+    "react",
+    "vue",
+    "static"
+  ],
+  "palette": "sky",
+  "layout": "booking",
+  "preview": "previews/travel-booking/index.html"
+}

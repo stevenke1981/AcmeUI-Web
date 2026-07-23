@@ -1,0 +1,1 @@
+@utility acme-focus{outline:3px solid color-mix(in srgb,var(--acme-ring) 45%,transparent);outline-offset:2px}@utility acme-surface{border:1px solid var(--acme-border);border-radius:var(--acme-radius-lg);background:var(--acme-surface);box-shadow:var(--acme-shadow-sm)}

@@ -1,0 +1,9 @@
+{
+  "name": "@acmeui/static",
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    "./base.css": "./src/base.css",
+    "./tokens.css": "./src/tokens.css"
+  }
+}

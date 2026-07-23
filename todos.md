@@ -1,0 +1,12 @@
+# Todos
+- [x] Monorepo and semantic tokens
+- [x] React component package
+- [x] Vue 3 component package
+- [x] Tailwind CSS v4 adapter
+- [x] Plain HTML/CSS distribution
+- [x] 48 templates and previews
+- [x] CLI generator and React Gallery
+- [x] React, Vue and static examples
+- [x] Validation, CI and Docker
+- [ ] Visual regression baselines after browser-approved release
+- [ ] Publish versioned npm packages

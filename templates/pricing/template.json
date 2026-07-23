@@ -1,0 +1,14 @@
+{
+  "slug": "pricing",
+  "name": "Pricing",
+  "category": "utility",
+  "description": "方案價格比較",
+  "frameworks": [
+    "react",
+    "vue",
+    "static"
+  ],
+  "palette": "blue",
+  "layout": "pricing",
+  "preview": "previews/pricing/index.html"
+}

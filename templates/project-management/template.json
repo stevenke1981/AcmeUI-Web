@@ -1,0 +1,14 @@
+{
+  "slug": "project-management",
+  "name": "Project Management",
+  "category": "dashboard",
+  "description": "專案任務管理",
+  "frameworks": [
+    "react",
+    "vue",
+    "static"
+  ],
+  "palette": "violet",
+  "layout": "kanban",
+  "preview": "previews/project-management/index.html"
+}

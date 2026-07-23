@@ -1,0 +1,14 @@
+{
+  "slug": "electronics-shop",
+  "name": "Electronics Shop",
+  "category": "commerce",
+  "description": "3C 商品商城",
+  "frameworks": [
+    "react",
+    "vue",
+    "static"
+  ],
+  "palette": "blue",
+  "layout": "store",
+  "preview": "previews/electronics-shop/index.html"
+}

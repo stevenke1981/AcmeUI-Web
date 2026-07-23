@@ -1,0 +1,1 @@
+<script setup lang="ts">defineProps<{items:Array<{label:string;href?:string}>}>();</script><template><nav aria-label="麵包屑" class="acme-breadcrumb"><template v-for="(item,index) in items" :key="item.label"><span v-if="index>0">/</span><a v-if="item.href" :href="item.href">{{item.label}}</a><span v-else>{{item.label}}</span></template></nav></template>

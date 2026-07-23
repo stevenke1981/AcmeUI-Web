@@ -1,0 +1,14 @@
+{
+  "slug": "resume-cv",
+  "name": "Resume / CV",
+  "category": "portfolio",
+  "description": "履歷與經歷頁",
+  "frameworks": [
+    "react",
+    "vue",
+    "static"
+  ],
+  "palette": "cyan",
+  "layout": "resume",
+  "preview": "previews/resume-cv/index.html"
+}

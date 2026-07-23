@@ -1,0 +1,14 @@
+{
+  "slug": "ai-product",
+  "name": "AI Product",
+  "category": "marketing",
+  "description": "AI 產品與模型服務",
+  "frameworks": [
+    "react",
+    "vue",
+    "static"
+  ],
+  "palette": "violet",
+  "layout": "showcase",
+  "preview": "previews/ai-product/index.html"
+}

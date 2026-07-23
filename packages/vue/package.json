@@ -1,0 +1,18 @@
+{
+  "name": "@acmeui/vue",
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "peerDependencies": {
+    "vue": "^3.5.0"
+  },
+  "scripts": {
+    "typecheck": "vue-tsc --noEmit -p tsconfig.json"
+  },
+  "devDependencies": {
+    "vue-tsc": "^3.0.7",
+    "typescript": "^5.9.2"
+  }
+}

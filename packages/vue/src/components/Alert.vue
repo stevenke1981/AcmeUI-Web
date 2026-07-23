@@ -1,0 +1,1 @@
+<script setup lang="ts">withDefaults(defineProps<{tone?:"info"|"success"|"warning"|"danger";title:string}>(),{tone:"info"});</script><template><div role="alert" class="acme-alert" :class="tone!=='info'?`acme-alert--${tone}`:''"><strong>{{title}}</strong><div><slot/></div></div></template>

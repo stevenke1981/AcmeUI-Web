@@ -1,0 +1,9 @@
+{
+  "name": "@acmeui/tokens",
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    "./tokens.css": "./src/tokens.css",
+    "./tokens.json": "./src/tokens.json"
+  }
+}

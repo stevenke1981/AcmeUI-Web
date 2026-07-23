@@ -1,0 +1,14 @@
+{
+  "slug": "login",
+  "name": "Login",
+  "category": "auth",
+  "description": "登入頁",
+  "frameworks": [
+    "react",
+    "vue",
+    "static"
+  ],
+  "palette": "indigo",
+  "layout": "auth",
+  "preview": "previews/login/index.html"
+}

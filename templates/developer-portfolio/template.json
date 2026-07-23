@@ -1,0 +1,14 @@
+{
+  "slug": "developer-portfolio",
+  "name": "Developer Portfolio",
+  "category": "portfolio",
+  "description": "工程師作品集",
+  "frameworks": [
+    "react",
+    "vue",
+    "static"
+  ],
+  "palette": "slate",
+  "layout": "terminal",
+  "preview": "previews/developer-portfolio/index.html"
+}

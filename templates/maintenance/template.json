@@ -1,0 +1,14 @@
+{
+  "slug": "maintenance",
+  "name": "Maintenance",
+  "category": "utility",
+  "description": "維護通知頁",
+  "frameworks": [
+    "react",
+    "vue",
+    "static"
+  ],
+  "palette": "amber",
+  "layout": "centered",
+  "preview": "previews/maintenance/index.html"
+}

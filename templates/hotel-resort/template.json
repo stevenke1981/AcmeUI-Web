@@ -1,0 +1,14 @@
+{
+  "slug": "hotel-resort",
+  "name": "Hotel & Resort",
+  "category": "commerce",
+  "description": "飯店與度假村訂房",
+  "frameworks": [
+    "react",
+    "vue",
+    "static"
+  ],
+  "palette": "teal",
+  "layout": "hospitality",
+  "preview": "previews/hotel-resort/index.html"
+}

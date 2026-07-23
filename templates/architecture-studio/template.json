@@ -1,0 +1,14 @@
+{
+  "slug": "architecture-studio",
+  "name": "Architecture Studio",
+  "category": "business",
+  "description": "建築與室內設計作品",
+  "frameworks": [
+    "react",
+    "vue",
+    "static"
+  ],
+  "palette": "stone",
+  "layout": "editorial",
+  "preview": "previews/architecture-studio/index.html"
+}

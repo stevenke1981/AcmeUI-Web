@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.vite/
+coverage/
+*.tsbuildinfo
+.codebase-memory/
+.playwright-cli/
+artifacts/
+output/
+*.log
+.env
+.env.*
+!.env.example
+tmp/

@@ -1,0 +1,14 @@
+{
+  "slug": "knowledge-base",
+  "name": "Knowledge Base",
+  "category": "content",
+  "description": "知識庫與搜尋",
+  "frameworks": [
+    "react",
+    "vue",
+    "static"
+  ],
+  "palette": "emerald",
+  "layout": "docs",
+  "preview": "previews/knowledge-base/index.html"
+}

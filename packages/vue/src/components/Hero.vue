@@ -1,0 +1,1 @@
+<script setup lang="ts">defineProps<{title:string;description:string}>();</script><template><section class="acme-hero"><div class="acme-container acme-hero__grid"><div><h1>{{title}}</h1><p>{{description}}</p><div class="acme-cluster"><slot name="actions"/></div></div><div><slot name="visual"/></div></div></section></template>

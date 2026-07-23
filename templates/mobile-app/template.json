@@ -1,0 +1,14 @@
+{
+  "slug": "mobile-app",
+  "name": "Mobile App",
+  "category": "marketing",
+  "description": "行動 App 下載與特色",
+  "frameworks": [
+    "react",
+    "vue",
+    "static"
+  ],
+  "palette": "cyan",
+  "layout": "split",
+  "preview": "previews/mobile-app/index.html"
+}

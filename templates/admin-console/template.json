@@ -1,0 +1,14 @@
+{
+  "slug": "admin-console",
+  "name": "Admin Console",
+  "category": "dashboard",
+  "description": "後台管理系統",
+  "frameworks": [
+    "react",
+    "vue",
+    "static"
+  ],
+  "palette": "slate",
+  "layout": "dashboard",
+  "preview": "previews/admin-console/index.html"
+}
