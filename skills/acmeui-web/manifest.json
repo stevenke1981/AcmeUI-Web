@@ -1,0 +1,21 @@
+{
+  "name": "acmeui-web",
+  "version": "1.0.0",
+  "description": "Agent skill for building, extending, reviewing, and deploying AcmeUI Web projects.",
+  "entry": "SKILL.md",
+  "project": "https://github.com/stevenke1981/AcmeUI-Web",
+  "license": "MIT",
+  "validation": "node scripts/check-project.mjs <repo>",
+  "files": [
+    "SKILL.md",
+    "INSTALL.md",
+    "VALIDATION.json",
+    "agents/openai.yaml",
+    "manifest.json",
+    "references/workflows.md",
+    "references/api-reference.md",
+    "references/project-map.md",
+    "examples/prompts.md",
+    "scripts/check-project.mjs"
+  ]
+}

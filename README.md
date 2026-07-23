@@ -53,9 +53,21 @@ docs                架構、設計系統、部署
 ## 驗證
 ```bash
 node scripts/validate.mjs
+node scripts/validate-skill.mjs
 node scripts/test-cli.mjs
 ```
 完整依賴安裝後執行 `pnpm typecheck && pnpm build`。
+
+## Agent Skill
+
+專案內建 [`acmeui-web` Skill](skills/acmeui-web/SKILL.md)，涵蓋跨框架元件、
+語意 Token、模板、CLI、Gallery、可存取性與發布流程。Repo 的 `AGENTS.md`
+會要求相符任務先載入 Skill；`pnpm lint` 與 `pnpm test` 也會驗證 Skill
+結構、manifest、Codex 介面 metadata，以及專案健康檢查結果。
+
+```bash
+node skills/acmeui-web/scripts/check-project.mjs .
+```
 
 ## License
 MIT。第三方產品名稱僅用於描述設計參考來源。

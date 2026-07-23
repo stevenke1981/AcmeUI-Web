@@ -1,0 +1,4 @@
+interface:
+  display_name: "AcmeUI Web"
+  short_description: "Build and maintain AcmeUI Web projects"
+  default_prompt: "Use $acmeui-web to implement and validate this AcmeUI Web task."

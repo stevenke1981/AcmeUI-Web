@@ -13,6 +13,9 @@ Date: 2026-07-23
 - CLI exhaustive matrix: 48 templates × 3 frameworks = 144 generated projects.
 - Generated project metadata and required framework entry files.
 - Node syntax checks for CLI and validation scripts.
+- AcmeUI Web Skill frontmatter via the standard Skill Creator validator.
+- Skill manifest, Codex `agents/openai.yaml`, relative validation snapshot, and
+  live repository health through `scripts/validate-skill.mjs`.
 
 ## Environment limitation
 A Chromium/Playwright visual screenshot pass was attempted, but local `file://`
@@ -24,8 +27,12 @@ HTML parsing and generation tests passed. Run the Gallery locally after
 ## Commands
 ```bash
 node scripts/validate.mjs
+node scripts/validate-skill.mjs
+node skills/acmeui-web/scripts/check-project.mjs .
 node scripts/test-cli.mjs
 pnpm install
+pnpm lint
+pnpm test
 pnpm typecheck
 pnpm build
 pnpm dev

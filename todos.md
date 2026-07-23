@@ -8,5 +8,6 @@
 - [x] CLI generator and React Gallery
 - [x] React, Vue and static examples
 - [x] Validation, CI and Docker
+- [x] Project-integrated AcmeUI Web agent Skill with metadata and validation gate
 - [ ] Visual regression baselines after browser-approved release
 - [ ] Publish versioned npm packages

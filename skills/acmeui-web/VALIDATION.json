@@ -1,0 +1,11 @@
+{
+  "root": ".",
+  "project": "acmeui-web",
+  "version": "0.1.0",
+  "skillVersion": "1.0.0",
+  "nodeRequirement": ">=20.19",
+  "templates": 48,
+  "missingRequiredFiles": [],
+  "missingPreviewFiles": [],
+  "healthy": true
+}
