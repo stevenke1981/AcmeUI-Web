@@ -1,0 +1,23 @@
+plan:
+  objective: 交付可公開使用的台股訊息入口與完整保留的當沖試算流程。
+  tasks:
+    - id: T1
+      task: 建立市場資料 Pages Function 與可測試的資料轉換核心
+      output: 同源市場摘要、熱門股、新聞與股票搜尋 API
+      verify: Node 測試、wrangler pages dev API smoke
+      status: completed
+    - id: T2
+      task: 改造首頁資訊架構與市場資訊互動
+      output: 市場看板、熱門股、新聞、股票查詢及狀態 UI
+      verify: 本機瀏覽器操作與無障礙快照
+      status: completed
+    - id: T3
+      task: 保護當沖計算與既有內容
+      output: 計算器仍為主功能且舊流程無退化
+      verify: calculator.test.mjs 與真人輸入驗收
+      status: completed
+    - id: T4
+      task: 全面驗收、Baseline、Git 與 Cloudflare
+      output: 驗收紀錄、commit、push、production 部署
+      verify: 品質閘道、四寬度、正式 API/頁面 HTTP 與互動
+      status: completed

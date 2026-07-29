@@ -1,0 +1,32 @@
+baseline:
+  id: daytrading-market-portal-20260729
+  date: 2026-07-29
+  production_url: https://daytrading-calculator-tw.pages.dev/
+  protected:
+    calculator:
+      default_buy_price: 100
+      default_sell_price: 101.24
+      default_shares: 1000
+      default_net_profit: 1008
+      default_net_return_percent: 1.008
+      minimum_target_return_percent: 1
+      invariant: 買賣成交金額、雙邊手續費、賣出交易稅與損益兩平公式不得退化。
+    portal:
+      invariant: 當沖計算器保持首頁主功能，市場資訊為官方盤後資料並顯示來源、日期、非即時與 partial 狀態。
+      endpoints:
+        - /api/market
+        - /api/stock?query=2330
+      no_fabricated_data: true
+    content:
+      adsense_client: ca-pub-7808800294872316
+      adsense_script_count: 1
+      song: 一飛衝天
+      knowledge_section: 當沖基本常識與必要條件
+    quality:
+      widths:
+        - 360
+        - 768
+        - 1280
+        - 1536
+      wcag_baseline: AA
+      visible_keyboard_focus: true

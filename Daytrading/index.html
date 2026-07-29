@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>台股市場資訊站｜當沖小算盤</title>
+    <meta
+      name="description"
+      content="整合 TWSE、TPEx 官方盤後市場資訊、個股當沖資格查詢與台股現股當沖損益試算。"
+    />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href='data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%2232%22%20height=%2232%22%20viewBox=%220%200%2032%2032%22%3E%3Crect%20width=%2232%22%20height=%2232%22%20rx=%226%22%20fill=%22%23003F5F%22/%3E%3Ctext%20x=%2216%22%20y=%2220%22%20text-anchor=%22middle%22%20font-size=%2214%22%20fill=%22white%22%20font-family=%22Arial,%20sans-serif%22%20font-weight=%22700%22%3E%CE%B1%3C/text%3E%3C/svg%3E'
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7808800294872316"
+      crossorigin="anonymous"
+    ></script>
+    <script src="calculator.js" defer></script>
+    <script src="market-info.js" defer></script>
+  </head>
+  <body>
+    <a class="acme-skip-link" href="#main-content">跳到主要內容</a>
+    <header class="acme-site-header">
+      <div class="acme-site-header-inner">
+        <a class="acme-brand" href="#main-content" aria-label="台股市場資訊站首頁">
+          <span class="acme-brand-mark" aria-hidden="true">市</span>
+          <span>
+            <strong>台股市場資訊站</strong>
+            <small>官方盤後資料・非即時行情</small>
+          </span>
+        </a>
+        <nav class="acme-site-nav" aria-label="主要導覽">
+          <a href="#calculator">當沖試算</a>
+          <a href="#market-overview">市場概況</a>
+          <a href="#stock-search">個股查詢</a>
+          <a href="#knowledge-title">當沖常識</a>
+        </nav>
+      </div>
+    </header>
+    <main id="main-content" class="acme-page" tabindex="-1">
+      <section id="calculator" class="acme-card acme-calculator-shell" aria-labelledby="calculator-title">
+        <header class="acme-stack">
+          <p class="acme-kicker">台股當沖試算工具</p>
+          <h1 id="calculator-title">當沖小算盤</h1>
+          <p class="acme-subtitle">價差不是獲利，扣完成本才算數。</p>
+          <p class="acme-disclaimer">試算，不是投資建議，僅供參考。</p>
+        </header>
+
+        <div class="acme-grid">
+          <section class="acme-card panel">
+            <h2>交易輸入</h2>
+
+            <div class="acme-field" role="radiogroup" aria-label="交易方向">
+              <label class="acme-label">交易方向</label>
+              <div class="acme-segment">
+                <label class="acme-segment-item" for="direction-buy">
+                  <input
+                    type="radio"
+                    name="trade-direction"
+                    value="buyThenSell"
+                    id="direction-buy"
+                    checked
+                  />
+                  <span>先買後賣</span>
+                </label>
+                <label class="acme-segment-item" for="direction-sell">
+                  <input
+                    type="radio"
+                    name="trade-direction"
+                    value="sellThenBuy"
+                    id="direction-sell"
+                  />
+                  <span>先賣後買</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="acme-auto-price" role="status" aria-live="polite">
+              <strong>自動對價</strong>
+              <span id="auto-price-status">輸入任一價格，另一側會自動反推淨報酬率至少 1% 的價格。</span>
+            </div>
+
+            <div class="acme-field">
+              <label class="acme-label" for="buy-price">買進價（NT$）</label>
+              <input
+                id="buy-price"
+                class="acme-input"
+                type="number"
+                inputmode="decimal"
+                step="0.01"
+                min="0.01"
+                placeholder="例如 100.00"
+                aria-describedby="buy-price-help buy-price-error"
+              />
+              <p id="buy-price-help" class="acme-help">修改賣出價時，買進價會依目標淨報酬率自動反推。</p>
+              <p id="buy-price-error" class="acme-error" role="status" aria-live="polite"></p>
+            </div>
+
+            <div class="acme-field">
+              <label class="acme-label" for="sell-price">賣出價（NT$）</label>
+              <input
+                id="sell-price"
+                class="acme-input"
+                type="number"
+                inputmode="decimal"
+                step="0.01"
+                min="0.01"
+                placeholder="例如 101.00"
+                aria-describedby="sell-price-help sell-price-error"
+              />
+              <p id="sell-price-help" class="acme-help">修改買進價時，賣出價會依目標淨報酬率自動反推。</p>
+              <p id="sell-price-error" class="acme-error" role="status" aria-live="polite"></p>
+            </div>
+
+            <div class="acme-field">
+              <label class="acme-label" for="share-count">股數</label>
+              <input
+                id="share-count"
+                class="acme-input"
+                type="number"
+                inputmode="numeric"
+                min="1"
+                step="1"
+                placeholder="例如 1000"
+                aria-describedby="share-count-help share-count-error"
+              />
+              <p id="share-count-help" class="acme-help">請輸入正整數。</p>
+              <p id="share-count-error" class="acme-error" role="status" aria-live="polite"></p>
+              <div class="acme-chips" role="group" aria-label="股數快捷選項">
+                <button type="button" data-shares="100" class="acme-chip">100</button>
+                <button type="button" data-shares="500" class="acme-chip">500</button>
+                <button type="button" data-shares="1000" class="acme-chip">1,000</button>
+                <button type="button" data-shares="2000" class="acme-chip">2,000</button>
+              </div>
+            </div>
+
+            <div class="acme-actions">
+              <button type="button" id="reset-sample" class="acme-button">重設範例</button>
+            </div>
+          </section>
+
+          <section class="acme-card panel">
+            <h2>試算結果</h2>
+            <p id="status-title" class="acme-result-title">請先完成有效輸入</p>
+            <div class="acme-kpi" id="net-profit">NT$0</div>
+            <p id="status-text" class="acme-status status-neutral">待輸入完整資料，先輸入價格與股數。</p>
+
+            <div class="acme-stats">
+              <div><span>投入金額</span><strong id="gross-buy">—</strong></div>
+              <div><span>毛價差</span><strong id="gross-diff">—</strong></div>
+              <div><span>交易總成本</span><strong id="total-cost">—</strong></div>
+              <div><span>淨報酬率</span><strong id="net-return">—</strong></div>
+              <div><span>損益兩平賣價</span><strong id="breakeven">—</strong></div>
+            </div>
+
+            <p id="human-summary" class="acme-summary" aria-live="polite">
+              請先完成輸入，即時顯示損益與費用明細。
+            </p>
+          </section>
+        </div>
+
+        <section class="acme-card">
+          <h2>成本明細</h2>
+          <dl class="acme-metrics">
+            <div><dt>買進成交金額</dt><dd id="metric-buy-amount">—</dd></div>
+            <div><dt>買進手續費</dt><dd id="metric-buy-fee">—</dd></div>
+            <div><dt>賣出成交金額</dt><dd id="metric-sell-amount">—</dd></div>
+            <div><dt>賣出手續費</dt><dd id="metric-sell-fee">—</dd></div>
+            <div><dt>證券交易稅</dt><dd id="metric-tax">—</dd></div>
+            <div><dt>總成本</dt><dd id="metric-total-cost">—</dd></div>
+            <div><dt>淨損益</dt><dd id="metric-net-profit">—</dd></div>
+          </dl>
+        </section>
+
+        <section class="acme-card">
+          <details id="advanced-settings">
+            <summary>費率與進階設定</summary>
+            <div class="acme-fields-two">
+              <div class="acme-field">
+                <label class="acme-label" for="commission-rate">券商手續費率（%）</label>
+                <input
+                  id="commission-rate"
+                  class="acme-input"
+                  type="number"
+                  step="0.0001"
+                  min="0"
+                  value="0.1425"
+                  aria-describedby="commission-rate-help commission-rate-error"
+                />
+                <p id="commission-rate-help" class="acme-help">每筆比例，例如 0.1425 代表 0.1425%。</p>
+                <p id="commission-rate-error" class="acme-error" role="status" aria-live="polite"></p>
+              </div>
+              <div class="acme-field">
+                <label class="acme-label" for="commission-discount">電子下單折扣（折）</label>
+                <input
+                  id="commission-discount"
+                  class="acme-input"
+                  type="number"
+                  step="0.1"
+                  min="1"
+                  max="10"
+                  value="2.8"
+                  aria-describedby="commission-discount-help commission-discount-error"
+                />
+                <p id="commission-discount-help" class="acme-help">以「折」為單位，如 2.8 折，實作等於 x 0.28。</p>
+                <p id="commission-discount-error" class="acme-error" role="status" aria-live="polite"></p>
+              </div>
+              <div class="acme-field">
+                <label class="acme-label" for="minimum-fee">每筆最低手續費（NT$）</label>
+                <input
+                  id="minimum-fee"
+                  class="acme-input"
+                  type="number"
+                  step="0.1"
+                  min="0"
+                  value="20"
+                  aria-describedby="minimum-fee-help minimum-fee-error"
+                />
+                <p id="minimum-fee-help" class="acme-help">每筆手續費下限，可為小數。</p>
+                <p id="minimum-fee-error" class="acme-error" role="status" aria-live="polite"></p>
+              </div>
+              <label class="acme-check">
+                <input id="apply-minimum-fee" type="checkbox" checked />
+                <span>啟用最低手續費</span>
+              </label>
+              <div class="acme-field">
+                <label class="acme-label" for="tax-rate">當沖證交稅率（%）</label>
+                <input
+                  id="tax-rate"
+                  class="acme-input"
+                  type="number"
+                  step="0.0001"
+                  min="0"
+                  value="0.15"
+                  aria-describedby="tax-rate-help tax-rate-error"
+                />
+                <p id="tax-rate-help" class="acme-help">賣出成交金額乘稅率。</p>
+                <p id="tax-rate-error" class="acme-error" role="status" aria-live="polite"></p>
+              </div>
+              <div class="acme-field">
+                <label class="acme-label" for="target-return">目標淨報酬率（%）</label>
+                <input
+                  id="target-return"
+                  class="acme-input"
+                  type="number"
+                  step="0.1"
+                  min="1"
+                  value="1"
+                  aria-describedby="target-return-help target-return-error"
+                />
+                <p id="target-return-help" class="acme-help">最低 1%，修改後會依最近編輯的價格重新反推。</p>
+                <p id="target-return-error" class="acme-error" role="status" aria-live="polite"></p>
+              </div>
+            </div>
+          </details>
+          <p class="acme-warning-note">各券商規則不同，最終金額以券商規則和對帳單為準。</p>
+        </section>
+      </section>
+
+      <section id="market-overview" class="acme-market-area" aria-labelledby="market-overview-title">
+          <header class="acme-section-heading">
+            <div>
+              <p class="acme-kicker">官方最新收盤資料</p>
+              <h2 id="market-overview-title">上市與上櫃市場概況</h2>
+            </div>
+            <p class="acme-market-note">
+              以下為 TWSE 與 TPEx 官方盤後資料，非即時行情；不同來源的資料日期可能不同。
+            </p>
+          </header>
+
+          <div id="market-overview-status" class="acme-data-state" role="status" aria-live="polite">
+            正在讀取官方市場資料…
+          </div>
+
+          <div class="acme-market-summary-grid">
+            <article class="acme-market-card" aria-labelledby="twse-summary-title">
+              <div class="acme-market-card-heading">
+                <div>
+                  <span class="acme-market-label">TWSE</span>
+                  <h3 id="twse-summary-title">上市市場</h3>
+                </div>
+                <time id="twse-summary-date">日期讀取中</time>
+              </div>
+              <div id="twse-summary-data" class="acme-market-placeholder">載入中…</div>
+            </article>
+
+            <article class="acme-market-card" aria-labelledby="tpex-summary-title">
+              <div class="acme-market-card-heading">
+                <div>
+                  <span class="acme-market-label">TPEx</span>
+                  <h3 id="tpex-summary-title">上櫃市場</h3>
+                </div>
+                <time id="tpex-summary-date">日期讀取中</time>
+              </div>
+              <div id="tpex-summary-data" class="acme-market-placeholder">載入中…</div>
+            </article>
+          </div>
+
+          <div class="acme-ranking-grid">
+            <article class="acme-market-card" aria-labelledby="twse-turnover-title">
+              <div class="acme-market-card-heading">
+                <div>
+                  <span class="acme-market-label">TWSE</span>
+                  <h3 id="twse-turnover-title">上市成交金額排行</h3>
+                </div>
+              </div>
+              <ol id="twse-turnover-list" class="acme-ranking-list">
+                <li class="acme-market-placeholder">載入中…</li>
+              </ol>
+            </article>
+
+            <article class="acme-market-card" aria-labelledby="tpex-turnover-title">
+              <div class="acme-market-card-heading">
+                <div>
+                  <span class="acme-market-label">TPEx</span>
+                  <h3 id="tpex-turnover-title">上櫃成交金額排行</h3>
+                </div>
+              </div>
+              <ol id="tpex-turnover-list" class="acme-ranking-list">
+                <li class="acme-market-placeholder">載入中…</li>
+              </ol>
+            </article>
+          </div>
+
+          <article class="acme-market-card" aria-labelledby="market-news-title">
+            <div class="acme-market-card-heading">
+              <div>
+                <span class="acme-market-label">TWSE NEWS</span>
+                <h3 id="market-news-title">證交所最新消息</h3>
+              </div>
+              <a
+                href="https://www.twse.com.tw/zh/about/news/news.html"
+                target="_blank"
+                rel="noopener noreferrer"
+              >前往官方消息</a>
+            </div>
+            <ul id="twse-news-list" class="acme-news-list">
+              <li class="acme-market-placeholder">載入中…</li>
+            </ul>
+          </article>
+
+          <p id="market-source-note" class="acme-source-note">
+            資料來源：臺灣證券交易所、證券櫃檯買賣中心。資料時間讀取中。
+          </p>
+        </section>
+
+        <section id="stock-search" class="acme-market-area" aria-labelledby="stock-search-title">
+          <header class="acme-section-heading">
+            <div>
+              <p class="acme-kicker">個股盤後查詢</p>
+              <h2 id="stock-search-title">以股票代號或名稱搜尋</h2>
+            </div>
+            <p class="acme-market-note">
+              顯示官方最近收盤的開高低收、漲跌、成交量與當沖標的狀態。
+            </p>
+          </header>
+
+          <form id="stock-search-form" class="acme-stock-search" role="search">
+            <div class="acme-field">
+              <label class="acme-label" for="stock-query">股票代號或名稱</label>
+              <div class="acme-search-control">
+                <input
+                  id="stock-query"
+                  class="acme-input"
+                  name="query"
+                  type="search"
+                  minlength="1"
+                  maxlength="40"
+                  autocomplete="off"
+                  placeholder="例如：2330 或 台積電"
+                  aria-describedby="stock-search-help stock-search-status"
+                />
+                <button type="submit" class="acme-button acme-button-primary">查詢</button>
+              </div>
+              <p id="stock-search-help" class="acme-help">
+                本站不提供即時報價或買賣訊號。選取收盤價後可帶入上方試算器。
+              </p>
+            </div>
+          </form>
+
+          <div id="stock-search-status" class="acme-data-state" role="status" aria-live="polite">
+            請輸入股票代號或名稱。
+          </div>
+          <div id="stock-search-results" class="acme-stock-results" aria-live="polite"></div>
+          <p id="stock-source-note" class="acme-source-note">
+            資料來源與日期會隨查詢結果顯示。
+          </p>
+        </section>
+
+        <section class="acme-card acme-knowledge" aria-labelledby="knowledge-title">
+          <div class="acme-knowledge-heading">
+            <p class="acme-kicker">開始前先確認</p>
+            <h2 id="knowledge-title">當沖基本常識與必要條件</h2>
+            <p class="acme-subtitle">
+              當沖是同一帳戶、同一營業日，對同一檔且同數量的現款買進與現券賣出互相沖銷，最後按差額交割。
+              這個頁面只做成本試算，不會替你確認交易資格或標的資格。
+            </p>
+          </div>
+
+          <div class="acme-knowledge-grid">
+            <article class="acme-knowledge-block">
+              <h3>下單前的必要條件</h3>
+              <ol class="acme-checklist">
+                <li>
+                  <strong>先取得券商核准</strong>
+                  <span>一般個人通常須開立受託買賣帳戶滿 3 個月，且最近 1 年成交 10 筆以上，並簽署概括授權同意書與風險預告書；實際門檻以你的券商審核為準。</span>
+                </li>
+                <li>
+                  <strong>確認股票是當沖標的</strong>
+                  <span>上市櫃股票不是全部都能當沖，且標的可能每日異動；下單前要查證交所或櫃買中心公告。</span>
+                </li>
+                <li>
+                  <strong>同日、同檔、同數量完成反向交易</strong>
+                  <span>只沖銷相同數量；未完成的部位可能轉為一般交割、借券或其他券商處理流程。</span>
+                </li>
+                <li>
+                  <strong>準備資金、券源與風控額度</strong>
+                  <span>先買後賣要有足夠款項；先賣後買還要確認券商允許、券源與相關費用，不代表一定能成交。</span>
+                </li>
+              </ol>
+            </article>
+
+            <article class="acme-knowledge-block">
+              <h3>新手一定要知道</h3>
+              <ul class="acme-fact-list">
+                <li><strong>成本會吃掉價差：</strong>買賣各有手續費，賣出另有證交稅；滑價、最低手續費也要算進去。</li>
+                <li><strong>1% 不是獲利保證：</strong>本工具的目標報酬率只是費用後的數學門檻，不代表一定成交或一定賺錢。</li>
+                <li><strong>流動性與價格限制很重要：</strong>漲跌停、暫停交易、委託未成交，都可能讓你無法在預期價格完成沖銷。</li>
+                <li><strong>不要把試算當成交易建議：</strong>先確認最大可承受損失、停損規則與當日可用資金，再決定是否交易。</li>
+              </ul>
+            </article>
+          </div>
+
+          <div class="acme-knowledge-links">
+            <strong>官方查核入口</strong>
+            <a href="https://www.twse.com.tw/zh/products/system/day-trading.html" target="_blank" rel="noopener noreferrer">證交所當日沖銷交易專區</a>
+            <a href="https://www.twse.com.tw/zh/trading/day-trading.html" target="_blank" rel="noopener noreferrer">每日當沖交易標的</a>
+            <a href="https://www.twse.com.tw/downloads/zh/trading/information/i5_3.pdf" target="_blank" rel="noopener noreferrer">風險預告書暨概括授權同意書</a>
+            <a href="https://law-out.mof.gov.tw/LawContent.aspx?id=FL006079&amp;kw=" target="_blank" rel="noopener noreferrer">財政部證券交易稅條例</a>
+          </div>
+        </section>
+
+        <section class="acme-card acme-music" aria-labelledby="music-title">
+          <div class="acme-music-copy">
+            <p class="acme-kicker">Suno 原創歌曲</p>
+            <h2 id="music-title">一飛衝天</h2>
+            <p>冷靜計算、穩穩向前。試算時搭配這首振奮的華語流行搖滾歌曲。</p>
+          </div>
+          <audio controls preload="metadata">
+            <source src="audio/yi-fei-chong-tian.mp3" type="audio/mpeg" />
+            您的瀏覽器不支援音訊播放。
+          </audio>
+          <div class="acme-music-actions">
+            <a class="acme-button" href="audio/yi-fei-chong-tian.mp3" download="一飛衝天.mp3">下載 MP3</a>
+          </div>
+          <details class="acme-lyrics">
+            <summary>查看〈一飛衝天〉歌詞</summary>
+            <div class="acme-lyrics-body">
+              <p>清晨的城市還沒醒來<br />螢幕上的光先照進未來<br />每一次選擇都算得明白<br />穩住呼吸，再等待</p>
+              <p>風聲很快，心不能亂<br />數字起落，像海浪拍岸<br />不是憑運氣去追那道光<br />把風險握在手掌</p>
+              <p><strong>一飛衝天，穿越所有界線<br />把夢想寫在今天<br />不怕路遠，不怕考驗<br />每一步都走得堅決</strong></p>
+              <p><strong>一飛衝天，向著更高藍天<br />讓勇氣點亮雙眼<br />穩穩向前，超越昨天<br />我們一起飛向明天</strong></p>
+            </div>
+          </details>
+        </section>
+
+      <footer class="acme-footer">
+        <ul>
+          <li><a href="https://www.mof.gov.tw/singlehtml/384fb3077bb349ea973e7fc6f13b6974?cntId=4493245d64e5422887a375921e889465" target="_blank" rel="noopener noreferrer">財政部當沖稅率</a></li>
+          <li><a href="https://www.twse.com.tw/zh/products/system/day-trading.html" target="_blank" rel="noopener noreferrer">TWSE 當沖專區</a></li>
+          <li><a href="https://twse-regulation.twse.com.tw/TW/law/DOC01.aspx?FLCODE=FL007304&FLNO=94" target="_blank" rel="noopener noreferrer">TWSE 營業細則 94 條</a></li>
+        </ul>
+        <p>法規預設值核對：2026-07-23</p>
+        <p>本工具僅供試算，不構成投資、稅務或交易建議。</p>
+      </footer>
+    </main>
+  </body>
+</html>

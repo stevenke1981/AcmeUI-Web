@@ -1,0 +1,26 @@
+architecture:
+  style: progressive-enhancement-static-site-with-pages-functions
+  frontend:
+    files:
+      - index.html
+      - styles.css
+      - calculator.js
+      - market-info.js
+    contract: 前端只呼叫同源 /api/market 與 /api/stock，任何失敗都保留計算機並顯示可理解狀態。
+  backend:
+    platform: Cloudflare Pages Functions
+    routes:
+      - /api/market
+      - /api/stock?query=2330
+    sources:
+      - TWSE OpenAPI FMTQIK
+      - TWSE OpenAPI STOCK_DAY_ALL
+      - TWSE OpenAPI TWTB4U
+      - TWSE OpenAPI newsList
+      - TPEx OpenAPI tpex_mainborad_highlight
+    cache: edge Cache-Control 5 minutes with stale-while-revalidate
+  boundaries:
+    - calculator.js 不依賴市場 API。
+    - upstream adapters 與資料正規化集中在 functions/_shared/market-data.mjs。
+    - 不保存使用者查詢或個人資料。
+    - API 回應包含來源日期與 partial/errors，禁止以假資料冒充成功。

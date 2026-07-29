@@ -1,0 +1,4 @@
+.codebase-memory/
+.playwright-cli/
+.wrangler/
+*.tmp

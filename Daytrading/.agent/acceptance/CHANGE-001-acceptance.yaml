@@ -1,0 +1,33 @@
+change_id: CHANGE-001
+date: 2026-07-29
+outcome: passed_with_external_source_limit
+requirements:
+  calculator_remains_primary:
+    status: pass
+    evidence: 預設案例與個股帶入案例均通過，既有計算公式與輸入參數未退化。
+  official_market_information:
+    status: pass_with_limit
+    evidence: TWSE 正式站資料正常；TPEx 官方端點在 Cloudflare 邊緣重新導向錯誤頁，API 以 HTTP 200、partial true 與 no-store 表示部分成功，介面明示資料不可用且不補假資料。
+  stock_search:
+    status: pass
+    evidence: 正式站查詢 2330 顯示台積電 OHLC、成交量、成交值、資料日期與當沖標的狀態。
+  calculator_handoff:
+    status: pass
+    evidence: 收盤 2280 帶入買進價後，賣出價自動成為 2308.10，股數 1000、目標 1%、淨報酬率 1.0003%。
+  responsive_accessible_ui:
+    status: pass
+    evidence: 360、768、1280、1536 px 均無水平溢位；正式站 console 0 errors、0 warnings。
+  protected_content:
+    status: pass
+    evidence: AdSense 發布者腳本、當沖常識、官方連結與一飛衝天歌曲均保留。
+verification:
+  automated:
+    - node Daytrading/market-info.test.mjs
+    - node Daytrading/calculator.test.mjs
+    - pnpm test
+    - pnpm typecheck
+    - pnpm build
+  production_url: https://daytrading-calculator-tw.pages.dev/
+residual_limits:
+  - TPEx 官方服務目前拒絕或重新導向 Cloudflare Worker 子請求；正式 API 回傳 partial 與 no-store，UI 顯示可取得的 TWSE 資料及清楚的來源錯誤。
+  - 市場資料為官方盤後資料，不是盤中即時行情。

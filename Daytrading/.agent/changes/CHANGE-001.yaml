@@ -1,0 +1,27 @@
+change:
+  id: CHANGE-001
+  type: feature
+  title: 台股市場訊息站與當沖核心整合
+  risk: medium
+  impact:
+    modules:
+      - index.html
+      - styles.css
+      - market-info.js
+      - functions/
+      - _headers
+      - project documentation
+    affected_flows:
+      - 首頁載入
+      - 市場資料與股票搜尋
+      - 當沖計算與進階設定
+      - Cloudflare Pages deployment
+    public_contract:
+      - 新增 /api/market
+      - 新增 /api/stock
+      - calculator.js 既有 API 不變
+    rollback: 回復本次 commit，重新部署前一個 Cloudflare Pages production deployment。
+  verify:
+    - Pages Function unit tests
+    - calculator regression tests
+    - local browser and Cloudflare production acceptance

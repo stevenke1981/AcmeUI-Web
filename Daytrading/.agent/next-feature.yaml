@@ -1,0 +1,8 @@
+next_feature:
+  candidate: 本機自選股與最近查詢
+  decision: recommend_only
+  reason: 涉及保存期限、隱私提示與使用者流程選擇，這一輪不自動擴張產品範圍。
+  proposed_scope:
+    - 使用 localStorage 保存自選股，不建立帳號或後端個資。
+    - 明示資料為官方盤後且可能部分不可用。
+    - 提供清除紀錄與鍵盤操作。
