@@ -6,13 +6,31 @@
   --surface-glow-start: #edf3ff;
   --surface-glow-end: #ecf2ff;
   --surface-header: rgba(255, 255, 255, 0.96);
+  --surface-calculator: #eef5ff;
+  --surface-trade-input: #fff3f2;
+  --surface-trade-result: #effaf5;
+  --surface-cost: #fff8e8;
+  --surface-settings: #f5f1ff;
+  --surface-market: #eaf9f8;
+  --surface-search: #eef2ff;
+  --surface-knowledge: #fff9e9;
+  --surface-music: #f8f1ff;
   --text-primary: #15213a;
   --text-secondary: #36435f;
   --border-default: #d9e0ee;
+  --border-calculator: #bcd3f6;
+  --border-trade-input: #f1c6c2;
+  --border-trade-result: #bfe4d2;
+  --border-cost: #ead49a;
+  --border-settings: #d6c8f3;
+  --border-market: #addfd9;
+  --border-search: #c7d1f6;
+  --border-knowledge: #ead7a3;
+  --border-music: #ddc8ef;
   --accent-primary: #1d4ed8;
   --accent-contrast: #ffffff;
-  --status-positive: #0e7660;
-  --status-negative: #a63a3a;
+  --status-positive: #b42336;
+  --status-negative: #087a55;
   --status-warning: #9d6f00;
   --focus-ring: 0 0 0 3px rgba(55, 95, 245, 0.45);
   --radius-lg: 16px;
@@ -171,7 +189,29 @@ body {
 }
 
 .acme-calculator-shell {
+  background: var(--surface-calculator);
+  border-color: var(--border-calculator);
   border-top: 4px solid var(--accent-primary);
+}
+
+.acme-trade-input {
+  background: var(--surface-trade-input);
+  border-color: var(--border-trade-input);
+}
+
+.acme-trade-result {
+  background: var(--surface-trade-result);
+  border-color: var(--border-trade-result);
+}
+
+.acme-cost-panel {
+  background: var(--surface-cost);
+  border-color: var(--border-cost);
+}
+
+.acme-settings-panel {
+  background: var(--surface-settings);
+  border-color: var(--border-settings);
 }
 
 .acme-kicker {
@@ -432,7 +472,13 @@ dd {
   padding: 18px;
   border: 1px solid var(--border-default);
   border-radius: var(--radius-lg);
-  background: var(--surface-subtle);
+  background: var(--surface-market);
+  border-color: var(--border-market);
+}
+
+#stock-search {
+  background: var(--surface-search);
+  border-color: var(--border-search);
 }
 
 .acme-section-heading {
@@ -762,7 +808,8 @@ dd {
   gap: 16px;
   background:
     radial-gradient(circle at top right, color-mix(in srgb, var(--accent-primary) 14%, transparent), transparent 45%),
-    var(--surface-card);
+    var(--surface-music);
+  border-color: var(--border-music);
 }
 
 .acme-music-copy h2 {
@@ -777,6 +824,8 @@ dd {
 
 .acme-knowledge {
   gap: 18px;
+  background: var(--surface-knowledge);
+  border-color: var(--border-knowledge);
 }
 
 .acme-knowledge-heading {
@@ -996,5 +1045,20 @@ a {
   * {
     animation: none !important;
     transition: none !important;
+  }
+}
+
+@media (forced-colors: active) {
+  .acme-calculator-shell,
+  .acme-trade-input,
+  .acme-trade-result,
+  .acme-cost-panel,
+  .acme-settings-panel,
+  .acme-market-area,
+  #stock-search,
+  .acme-knowledge,
+  .acme-music {
+    background: Canvas;
+    border-color: CanvasText;
   }
 }
