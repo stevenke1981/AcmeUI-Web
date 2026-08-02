@@ -2,7 +2,9 @@
 
 目前狀態：網站已演進為台股市場資訊站，提供 TWSE／TPEx 官方盤後摘要、排行、消息、個股與當沖資格查詢；當沖小算盤仍是主功能。
 
-正式站：<https://daytrading-calculator-tw.pages.dev/>
+主要網址：<https://daytrading.aquamoon.app/>
+
+Cloudflare Pages 備援網址：<https://daytrading-calculator-tw.pages.dev/>（自訂網域 DNS 尚在驗證）
 
 ## 已完成修改
 
@@ -30,6 +32,7 @@
 - `audio/yi-fei-chong-tian.mp3`、`audio/一飛衝天-歌詞.md`：加入 Suno v5.5 原創歌曲與完整歌詞。
 - `index.html`、`styles.css`：加入「當沖基本常識與必要條件」教育區塊，含官方查核入口與響應式雙欄排版。
 - `index.html`、`styles.css`：以低飽和淡色與同色系邊框區分交易輸入、結果、成本、設定、市場、搜尋、常識與音樂區塊；狀態色改採台股上漲／獲利紅、下跌／虧損綠。
+- `index.html`：將 canonical 與 Open Graph URL 更新為 `https://daytrading.aquamoon.app/`。
 
 ## 驗證紀錄
 
@@ -58,7 +61,8 @@
 - Cloudflare Pages production
   - Project：`daytrading-calculator-tw`
   - 結果：正式首頁、CSS、JavaScript 均為 HTTP 200
-  - 正式網址：<https://daytrading-calculator-tw.pages.dev/>
+  - 備援網址：<https://daytrading-calculator-tw.pages.dev/>
+  - 主要網址：<https://daytrading.aquamoon.app/>（Pages custom domain 已建立，待 CNAME 驗證）
   - 結果：首頁、CSS、JavaScript、MP3 均為 HTTP 200；MP3 為 `audio/mpeg`
   - 結果：Chromium 實測 `$1,008`、`1.008%` 與自動賣價 `$101.24`
   - 結果：賣價 `150` 可反推買價 `148.17`；目標 `2%` 可反推買價 `146.72`
@@ -72,6 +76,7 @@
 - 歌曲：〈一飛衝天〉，Suno 版本 <https://suno.com/song/1f0044b4-fa41-4636-8f9b-ea3dd11d9472>，長度約 2:53。
 - 當沖基本常識區已上線，正式網址查得四項必要條件（含 3 個月／10 筆常見門檻）、四項新手提醒與四個官方查核入口。
 - 已加入 Google AdSense Auto ads 發布者腳本與相容 CSP；因未提供廣告單元 slot，未建立虛構的固定廣告區塊。
+- Cloudflare Pages 已建立 `daytrading.aquamoon.app` custom domain；DNS 尚未完成前，先保留 `pages.dev` 備援網址。
 
 ## 限制
 

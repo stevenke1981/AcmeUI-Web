@@ -88,3 +88,10 @@ pnpm build
 - Windows forced-colors 模式會回到系統 Canvas／CanvasText，避免自訂淡色降低高對比可讀性。
 - 瀏覽器 computed style：8 個主要功能區取得 8 種不同背景；正向色為 `#b42336`、負向色為 `#087a55`。
 - 實際視覺檢查：桌面雙欄與手機單欄皆能清楚區分各區塊，360／768／1280／1536 px 的 `scrollWidth` 均等於 viewport，console 無輸出。
+
+## 自訂網域驗收
+
+- Cloudflare Pages custom domain：`daytrading.aquamoon.app` 已加入 `daytrading-calculator-tw` 專案。
+- DNS 必要設定：`CNAME daytrading → daytrading-calculator-tw.pages.dev`。
+- 目前驗收狀態：Cloudflare 回報 `CNAME record not set`，因此自訂網域尚未 active；`pages.dev` 備援網址仍可使用。
+- URL metadata 驗收：最新 deployment `de47a90c-04af-4721-a872-0de65aa9ef87` 的首頁 HTTP 200，canonical 為 `https://daytrading.aquamoon.app/`。

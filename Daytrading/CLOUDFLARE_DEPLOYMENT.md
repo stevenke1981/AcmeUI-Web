@@ -4,9 +4,15 @@
 
 - Pages project：`daytrading-calculator-tw`
 - Production branch：`main`
-- Production URL：<https://daytrading-calculator-tw.pages.dev/>
+- 主要網址：<https://daytrading.aquamoon.app/>
+- Cloudflare Pages 備援網址：<https://daytrading-calculator-tw.pages.dev/>
+- Custom domain：`daytrading.aquamoon.app`
+- DNS record：`CNAME daytrading → daytrading-calculator-tw.pages.dev`
+- 目前狀態：Pages custom domain 已建立；待 DNS CNAME 生效後由 Cloudflare 核發憑證並切換為 active。
 - 首次部署 ID：`f6922568-57b9-41d0-9d9d-673939612b47`
 - 首次部署時間：2026-07-24（Asia/Taipei）
+- 最新部署 ID：`de47a90c-04af-4721-a872-0de65aa9ef87`
+- 最新部署預覽：<https://de47a90c.daytrading-calculator-tw.pages.dev/>
 - 最新部署可用 `npx --yes wrangler pages deployment list --project-name daytrading-calculator-tw` 查詢。
 
 ## 發布內容

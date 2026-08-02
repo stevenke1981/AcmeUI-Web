@@ -41,7 +41,9 @@
 
 ## 正式網站
 
-<https://daytrading-calculator-tw.pages.dev/>
+主要網址：<https://daytrading.aquamoon.app/>
+
+Cloudflare Pages 備援網址：<https://daytrading-calculator-tw.pages.dev/>
 
 ## 官方參考
 
