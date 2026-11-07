@@ -64,7 +64,7 @@ Browser / CDN / static host
 
 Responsibilities:
 
-- `packages/tokens`: source of truth for semantic values.
+- `packages/tokens`: `src/tokens.json` is the source of truth; regenerate CSS with `pnpm tokens:build` (`pnpm test` fails on drift).
 - `packages/styles`: framework-neutral `acme-*` class contract.
 - `packages/core`: shared deterministic helpers and types.
 - `packages/react`: React wrappers and interactive state.
