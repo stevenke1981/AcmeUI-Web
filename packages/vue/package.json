@@ -14,5 +14,8 @@
   "devDependencies": {
     "vue-tsc": "^3.0.7",
     "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "@acmeui/core": "workspace:*"
   }
 }
