@@ -18,7 +18,8 @@
     "create": "node packages/cli/bin/acmeui.mjs create",
     "preview:static": "node scripts/serve-static.mjs",
     "test:unit": "vitest run",
-    "typecheck:tests": "vue-tsc --noEmit -p tsconfig.tests.json"
+    "typecheck:tests": "vue-tsc --noEmit -p tsconfig.tests.json",
+    "test:cli:installed": "node scripts/test-cli.mjs --installed"
   },
   "devDependencies": {
     "@testing-library/dom": "^10.4.2",

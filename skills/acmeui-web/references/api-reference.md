@@ -87,3 +87,9 @@ slots. These are intentional framework idioms, not identical TypeScript APIs.
 Avatar initials now expose role=img/name; actual images retain native alt text.
 Breadcrumb marks the last non-link item current. Pricing buttons never implicitly
 submit a containing form. Shared CSS and semantic tokens are unchanged.
+
+CLI parsing (R008): create requires exactly one safe name; the three flags accept
+`--key value` and `--key=value`, in either order relative to the name. Unknown,
+duplicate and missing/empty values fail before output creation. list/help accept
+no extra arguments. Generated React/Vue theme listeners are scoped to the app
+root and removed by the framework's unmount lifecycle.

@@ -111,3 +111,26 @@ a claim of identical framework types or complete API equivalence.
 NOT_RUN: human browser/responsive review (360/768/1280/1536), screen readers,
 physical touch/DPI, full WCAG AA audit, screenshots and approved visual baselines.
 Independent scaffold dependency installation remains R008. No publication/release.
+
+## 2026-11-10 / R008
+
+CLI parsing now rejects unknown/duplicate/missing flags and extra positional
+arguments before writing, with space/equals syntax and read-only usage tests.
+Generated React/Vue theme listeners are app-scoped and cleaned on unmount;
+Vitest compiles/mounts actual generated components, clicks retained buttons after
+unmount, remounts and verifies unrelated buttons are untouched.
+
+`pnpm test`: PASS (170 Vitest cases, 144 scaffolds, 96 workspace bundles).
+`pnpm typecheck` / `pnpm build`: PASS; no build warnings observed.
+`pnpm test:cli:installed`: PASS, now a separate required CI command. It validates
+identical manifests per framework, performs three isolated pnpm installations
+(ignore-workspace / ignore-scripts), then runs all 144 original build scripts.
+96 React/Vue outputs each typecheck and write Vite dist; 48 static scripts report
+readiness. Identical manifests reuse the isolated dependencies, never workspace
+node_modules; this is not 144 independent installs. Temporary artifacts stay in
+repo tmp/ and stores in .cache/.
+
+NOT_RUN: npm/yarn install matrices, other OS, human browser/responsive review
+(360/768/1280/1536), screen readers, touch/DPI, full WCAG AA, screenshots and
+approved visual baselines. Static uses full-page lifetime, not framework unmount.
+No package publication, release, deployment or repository settings changes.

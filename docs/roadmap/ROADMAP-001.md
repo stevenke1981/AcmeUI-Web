@@ -24,8 +24,8 @@
 | R004 | P1 | 靜態 HTML Tabs / Modal 漸進增強範例與可選 JS；鍵盤、焦點、cleanup 測試；更新 framework matrix 與 Gallery 連結 | [PR #6](https://github.com/stevenke1981/AcmeUI-Web/pull/6) 已合併（native Tab 待瀏覽器） |
 | R005 | P1 | 表單／Switch／Button／Progress／Pagination 邊界行為與 React / Vue 對照測試；修正可重現 API 差異並更新 Gallery | [PR #7](https://github.com/stevenke1981/AcmeUI-Web/pull/7) 已合併 |
 | R006 | P1 | 語意 overlay / switch tokens、亮暗色文字與 focus 對比自動計算、Gallery accessible names、axe 基線；不得以 jsdom 代替瀏覽器審查 | 已完成自動化（110 tests / 本機 gates PASS；瀏覽器審查 NOT_RUN） |
-| R007 | P2 | 其餘展示元件的語意、插槽、原生屬性與 export API 測試；單元測試也納入 TypeScript 檢查 | 已完成自動化（147 tests；人工瀏覽器 NOT_RUN） |
-| R008 | P2 | CLI 完整參數 parser（未知／重複／缺值 flags）、產物 theme listener cleanup 與套件安裝後實際 build matrix | 待辦 |
+| R007 | P2 | 其餘展示元件的語意、插槽、原生屬性與 export API 測試；單元測試也納入 TypeScript 檢查 | [PR #9](https://github.com/stevenke1981/AcmeUI-Web/pull/9) 已合併（147 tests；人工瀏覽器 NOT_RUN） |
+| R008 | P2 | CLI 完整參數 parser（未知／重複／缺值 flags）、產物 theme listener cleanup 與套件安裝後實際 build matrix | 已完成（170 tests；3 隔離安裝 / 144 script builds） |
 | R009 | P2 | 以 HTML parser 驗證 48 預覽的巢狀結構／重複 ID／連結；360/768/1280/1536 自動瀏覽器 layout smoke 與跨框架比較 | 待辦 |
 | R010 | P2 | CI / docs 的驗證命令與結果範圍同步，build warnings 分類並設 gate；建立 Gallery 全家族覆蓋檢查 | 待辦 |
 

@@ -57,3 +57,26 @@ describe("CLI generated project contract", () => {
     expect(fs.readFileSync(path.join(out, "keep.txt"), "utf8")).toBe("existing content\n");
   });
 });
+
+describe('strict argument parsing', () => {
+  it.each([
+    ['create'], ['create', 'demo', 'extra'], ['create', 'demo', '--unknown', 'x'],
+    ['create', 'demo', '--framework', 'vue', '--framework', 'react'],
+    ['create', 'demo', '--template=saas-launch', '--template', 'saas-launch'],
+    ['create', 'demo', '--out=x', '--out=y'], ['create', 'demo', '--out='],
+    ['create', 'demo', '--template', '--framework', 'vue'],
+    ['create', 'demo', '--framework='], ['create', 'demo', '--out', '  '],
+    ['list', '--framework', 'react'], ['help', 'extra'], ['unknown'],
+  ])('rejects %j before writing', (...args) => {
+    const result = run(...args);
+    expect(result.status).not.toBe(0); expect(result.stderr).toMatch(/未知|重複|缺值|多餘|專案名稱|不接受/);
+    expect(fs.readdirSync(temp)).toEqual([]);
+  });
+  it('accepts equals syntax, options before the name and paths with spaces', () => {
+    expect(run('create', '--framework=static', 'demo', '--template=saas-launch', '--out', 'with spaces').status).toBe(0);
+    expect(fs.existsSync(path.join(temp, 'with spaces/index.html'))).toBe(true);
+  });
+  it.each([[], ['help'], ['--help'], ['-h'], ['create', '--help'], ['list']])('supports read-only usage %j', (...args) => {
+    expect(run(...args).status).toBe(0); expect(fs.readdirSync(temp)).toEqual([]);
+  });
+});
