@@ -45,7 +45,11 @@ Modal 使用具 `aria-labelledby` 的 `<dialog class="acme-dialog">`，內含
 沒有原生 API 時不接管按鈕，應保留範例中的可閱讀 fallback。暫不支援巢狀 Modal。
 
 Vitest 使用 jsdom，native dialog API 以 test doubles 驗證委派與 cleanup，
-不證明瀏覽器 Tab／Escape、觸控或螢幕閱讀器行為。視覺與真人審查仍為 NOT_RUN。
+不證明瀏覽器行為。R013 另以 Chromium 在四尺寸與亮暗色驗證原生 modality、
+Tab／Shift+Tab、背景焦點阻擋、Escape／close 及開啟者焦點還原。
+Chromium 在 Tab 邊界可能先離開 document，下一次按鍵才回到 dialog；
+實測範圍與 JSON 附件見 [browser smoke](../../docs/BROWSER_SMOKE.md)。
+視覺、真人瀏覽器審查、觸控與螢幕閱讀器仍為 NOT_RUN。
 互動模式參考 [WAI Tabs](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/) 與
 [WAI Modal Dialog](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/)。
 
