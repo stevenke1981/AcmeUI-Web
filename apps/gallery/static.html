@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="AcmeUI 靜態 HTML Tabs 與原生 Modal 漸進增強範例">
+  <title>Static Tabs / Modal — AcmeUI</title>
+  <link rel="stylesheet" href="../../packages/static/src/base.css">
+</head>
+<body>
+<main class="acme-container acme-stack">
+  <h1>Static HTML Tabs / Modal</h1>
+  <p><a href="./index.html">返回 Gallery</a>。停用 JavaScript 時仍可閱讀所有分頁；啟用後使用左右方向鍵、Home 與 End 切換。</p>
+  <div class="acme-tabs" data-acme-tabs>
+    <nav class="acme-tabs__list" data-acme-tablist aria-label="靜態元件示範">
+      <a class="acme-tabs__trigger" id="overview-tab" href="#overview" data-acme-tab>總覽</a>
+      <a class="acme-tabs__trigger" id="usage-tab" href="#usage" data-acme-tab>使用方式</a>
+      <a class="acme-tabs__trigger" id="keyboard-tab" href="#keyboard" data-acme-tab>鍵盤</a>
+    </nav>
+    <section id="overview"><h2>總覽</h2><p>與 React、Vue 和 Tailwind 共用語意樣式。</p></section>
+    <section id="usage"><h2>使用方式</h2><p>可選的 ES module 不會自動變更頁面；初始化函式傳回 cleanup。</p></section>
+    <section id="keyboard"><h2>鍵盤</h2><p>方向鍵循環切換；Tab 前往目前內容。</p></section>
+  </div>
+  <section id="modal-fallback">
+    <h2>對話框內容</h2>
+    <p>此範例使用原生 dialog。沒有 JavaScript 或不支援 showModal 的瀏覽器仍可閱讀這段說明。</p>
+    <button class="acme-button acme-button--primary" type="button" data-acme-modal-open>開啟對話框</button>
+  </section>
+  <dialog class="acme-dialog" aria-labelledby="dialog-title">
+    <div class="acme-modal__panel acme-stack">
+      <h2 id="dialog-title">原生 Modal</h2>
+      <p>瀏覽器處理背景 inert 與 Tab／Shift+Tab；Escape 或關閉按鈕會還原開啟者焦點。</p>
+      <label class="acme-field">姓名<input class="acme-input" name="name"></label>
+      <button class="acme-button acme-button--primary" type="button" data-acme-modal-close>關閉</button>
+    </div>
+  </dialog>
+</main>
+<script type="module">
+  import { enhanceTabs, enhanceModal } from "../../packages/static/src/interactions.mjs";
+  let cleanupTabs, cleanupModal;
+  function initialize() {
+    cleanupTabs = enhanceTabs(document.querySelector("[data-acme-tabs]"));
+    cleanupModal = enhanceModal(document.querySelector("dialog"), document.querySelectorAll("[data-acme-modal-open]"));
+  }
+  initialize();
+  window.addEventListener("pagehide", () => { cleanupModal(); cleanupTabs(); });
+  window.addEventListener("pageshow", event => { if (event.persisted) initialize(); });
+</script>
+</body>
+</html>

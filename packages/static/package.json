@@ -4,6 +4,7 @@
   "type": "module",
   "exports": {
     "./base.css": "./src/base.css",
-    "./tokens.css": "./src/tokens.css"
+    "./tokens.css": "./src/tokens.css",
+    "./interactions": "./src/interactions.mjs"
   }
 }
