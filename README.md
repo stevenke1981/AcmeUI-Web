@@ -82,3 +82,8 @@ Gallery 的靜態 Tabs／Modal 範例位於 `/static.html`。新增表單行為�
 語意色彩對比與 axe DOM gate；覆蓋範圍及未驗證項目見
 [Accessibility automation scope](docs/ACCESSIBILITY.md)。自動化通過不代表真人
 瀏覽器、視覺 baseline 或完整 WCAG AA 稽核通過。
+
+R009 另加入 48 預覽的 HTML parser / 本機連結 gate，以及 `pnpm test:browser`
+的四尺寸 Chromium smoke、React/Vue/static/Tailwind 代表元件比較。安裝命令、
+CI artifacts 與未驗證範圍見 [browser smoke](docs/BROWSER_SMOKE.md)；
+這不建立或核准視覺回歸 baseline。

@@ -17,3 +17,15 @@ Card composition helpers，也檢查 static/shared CSS 漂移。新增公開家�
 靜態 HTML 的 [Tabs／Modal 範例](../apps/gallery/static.html) 由 Gallery 一起打包。
 Tailwind 只提供樣式；可搭配相同的 HTML 與互動 module。原生 dialog 的 Tab、
 inert、Escape 實際瀏覽器行為尚未驗證；jsdom 測試僅驗證 native API 委派。
+
+## Tailwind reset 與自動化版面比較
+
+Tailwind adapter 匯入 theme/utilities，刻意不匯入 preflight；請搭配
+`@acmeui/styles/base.css`，由共享 CSS 管理 reset。原先疊加 preflight 會改變
+Hero、段落、表格等原生預設樣式，導致跨框架差異。`acme-focus` 使用不透明的
+`--acme-ring`，與共享 `:focus-visible` 一致。
+
+`pnpm test:browser` 實際編譯 Tailwind fixture，在 360/768/1280/1536 與 light/dark
+比較 React/Vue/static/Tailwind 的代表元件幾何與 computed styles（容許 1px
+捨入差異），也檢查原生鍵盤 focus-visible。這是自動 smoke，不是截圖 baseline
+或人工視覺核准。完整範圍見 [browser smoke](BROWSER_SMOKE.md)。

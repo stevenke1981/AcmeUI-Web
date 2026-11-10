@@ -103,6 +103,10 @@ describe("repository validation rejects drift", () => {
     fs.renameSync(file, `${file}.hold`);
     rejects("Missing previews/saas-launch/index.html");
   });
+  it("rejects preview nesting through the HTML parser", () => {
+    edit("previews/saas-launch/index.html", text => text.replace("</main>", "<ul><div>Invalid child</div></ul></main>"));
+    rejects("element-permitted-content");
+  });
   it("detects catalog content drift", () => {
     edit("docs/TEMPLATE_CATALOG.md", text => text.replace("SaaS Launch", "Different title"));
     rejects("Catalog drift saas-launch");

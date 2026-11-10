@@ -134,3 +134,32 @@ NOT_RUN: npm/yarn install matrices, other OS, human browser/responsive review
 (360/768/1280/1536), screen readers, touch/DPI, full WCAG AA, screenshots and
 approved visual baselines. Static uses full-page lifetime, not framework unmount.
 No package publication, release, deployment or repository settings changes.
+
+## 2026-11-10 / R009
+
+All 48 previews now pass selected HTML5 parser content/parent/close-order and
+ID/attribute rules plus local file/fragment/asset checks (external URLs unfetched).
+Malformed fixtures and an invalid-preview subprocess prove rejection. Parser and
+layout guard Vitest coverage brings `pnpm test` to 185 passing cases, plus the
+existing 144 scaffold checks and 96 workspace-toolchain bundles.
+
+`pnpm typecheck` / `pnpm build`: PASS, including browser TypeScript fixtures;
+no build warnings observed. `pnpm test:browser`: PASS, 25 Chromium headless cases.
+It visits 48 previews at 360/768/1280/1536 in both themes (384 visits), compares
+16 selectors across 13 representative React/Vue/static/compiled-Tailwind
+families (1px geometry tolerance; selected computed styles exact), checks actual
+keyboard focus-visible/ring color and Gallery Tabs/Modal viewport/Escape/opener.
+An injected negative fixture verifies overflow/style detection. Results and
+failure traces live in ignored output/browser/ and hosted CI artifacts.
+
+The first browser run reproduced 12 failures. Fixes shrink login/signup inputs,
+wrap pagination in identical shared/static CSS, omit Tailwind preflight in favor
+of the common reset and align its focus utility with the opaque semantic ring.
+Gallery pagination text and integration docs now describe this behavior. Tokens
+are unchanged. See docs/BROWSER_SMOKE.md for the exact automated scope.
+
+NOT_RUN: human browser/visual review at the four widths, screen readers, physical
+touch/DPI, Firefox/WebKit/other OS, native static dialog Tab/inert/Escape, complete
+rendered contrast/label checks, full family/state screenshots, full WCAG AA audit
+and human-approved visual baselines. No screenshot baselines were created or
+approved. R010 remains open; publication/releases/settings were not changed.

@@ -1,3 +1,6 @@
-@import "tailwindcss";
+/* Shared AcmeUI styles own the reset; omit Tailwind preflight for parity. */
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
 @import "@acmeui/tokens/tokens.css";
 @theme inline{--color-background:var(--acme-background);--color-foreground:var(--acme-foreground);--color-surface:var(--acme-surface);--color-muted:var(--acme-muted);--color-muted-foreground:var(--acme-muted-foreground);--color-primary:var(--acme-primary);--color-primary-foreground:var(--acme-primary-foreground);--color-border:var(--acme-border);--radius-sm:var(--acme-radius-sm);--radius-md:var(--acme-radius-md);--radius-lg:var(--acme-radius-lg);--font-sans:var(--acme-font-sans)}

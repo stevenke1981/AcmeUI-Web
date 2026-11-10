@@ -1,9 +1,25 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
-    "types": ["node", "vitest/globals"],
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "types": [
+      "node",
+      "vitest/globals"
+    ],
     "allowJs": true
   },
-  "include": ["packages/*/test/**/*.ts", "packages/*/test/**/*.tsx", "scripts/test/**/*.ts", "scripts/test/**/*.tsx", "packages/vue/src/**/*.vue"]
+  "include": [
+    "packages/*/test/**/*.ts",
+    "packages/*/test/**/*.tsx",
+    "scripts/test/**/*.ts",
+    "scripts/test/**/*.tsx",
+    "packages/vue/src/**/*.vue",
+    "scripts/browser/**/*.ts",
+    "scripts/browser/**/*.tsx",
+    "scripts/browser/**/*.vue"
+  ]
 }
