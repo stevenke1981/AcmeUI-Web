@@ -5,7 +5,21 @@ This is an ongoing development record, not a published release or a statement of
 production readiness. Current evidence is in VALIDATION.md and test.md. Entries
 below are historical snapshots; later slices supersede earlier open-work notes.
 
-## Current development / R010
+## Current development / R011
+
+ROADMAP-002 records the second audit at d493d70 and the next automatable gaps.
+R011 repairs dynamic React/Vue Tabs selection recovery and Vue keyboard refs
+after reorder; Gallery and API/static docs demonstrate the contract. Shared
+CSS/tokens remain aligned across React/Vue/Tailwind/static.
+
+Local five-command gates PASS: 219 Vitest, 144 scaffolds, 96 workspace bundles,
+three isolated installs / 144 package-script builds, typecheck/build and 25
+Chromium cases at all four widths/both themes. Hosted CI/merge evidence is in
+the PR. R012–R015 remain in ROADMAP-002. Human browser/visual review, screen
+readers, physical touch/DPI, full WCAG AA audit and approved baselines remain
+NOT_RUN. No publication, release, deployment or settings change.
+
+## Historical development / R010
 
 R010 adds a classified, fatal Vite build-warning gate, rendered coverage for all
 23 Gallery families, Sidebar/Footer examples and axe coverage, synchronized

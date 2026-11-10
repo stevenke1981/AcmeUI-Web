@@ -1,6 +1,6 @@
 # Test Strategy
 
-## Current required gates (R010)
+## Current required gates (R011)
 
 After `pnpm install --frozen-lockfile`, run the same five commands as
 `.github/workflows/ci.yml`:
@@ -71,6 +71,21 @@ physical touch/DPI, Firefox/WebKit/other OS, native static dialog Tab/inert/Esca
 complete rendered contrast/label checks, full WCAG AA audit, full family/state
 screenshots, human-approved visual baselines, npm/yarn install matrices.
 No npm publication, release, deployment or settings change is part of this work.
+
+## R011 / dynamic Tabs
+
+New React/Vue cases reproduced eight failures before the fix. Both adapters now
+normalize invalid/removed selections, clear selection on an empty list and select
+the first item on refill. Existing selection survives reorder; Vue button refs
+track current render indices. Empty-string values are valid. Gallery's behavior
+tab demonstrates removal, clearing/refill and reorder using shared styles.
+
+Local five-command gate: PASS (219 Vitest, 144 scaffolds, 96 workspace bundles,
+three isolated installs / 144 package-script builds, typecheck/build, 25 Chromium
+cases at 360/768/1280/1536 in light/dark). No CSS/token changes. Static/Tailwind
+markup remains fixed during enhancement; cleanup/reinitialize is documented.
+Human checks and approved visual baselines remain NOT_RUN. Follow-up work is in
+[ROADMAP-002](docs/roadmap/ROADMAP-002.md); hosted status remains in the PR.
 
 ## Historical evidence
 

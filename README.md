@@ -73,7 +73,8 @@ script；這不是 144 次獨立安裝。Chromium 安裝只需在尚未安裝時
 `pnpm test` 另包含 Vitest 與全部 CLI 產物檢查：144 組結構驗證、96 組
 React/Vue 來源型別檢查與 Vite 打包（沿用 example toolchain）。驗證器也會
 拒絕元件家族、shared/static CSS、registry metadata、catalog 與 Gallery 資料
-漂移。尚待實作與未驗證範圍見 [ROADMAP-001](docs/roadmap/ROADMAP-001.md)
+漂移。尚待實作與未驗證範圍見 [ROADMAP-001](docs/roadmap/ROADMAP-001.md)、
+第二輪 [ROADMAP-002](docs/roadmap/ROADMAP-002.md)
 及 [VALIDATION.md](VALIDATION.md)。
 
 ## Agent Skill

@@ -17,6 +17,50 @@ const items = [
 const visiblePanel = () => Array.from(document.querySelectorAll<HTMLElement>("[role=tabpanel]")).find(p => p.style.display !== "none");
 
 describe("Vue Tabs keyboard", () => {
+  it("falls back to the first item for an unknown default value", () => {
+    attach(mount(Tabs, { props: { items, defaultValue: "missing" }, attachTo: document.body }));
+    expect(document.querySelector('[role=tab][aria-selected=true]')?.textContent).toBe("Alpha");
+    expect(visiblePanel()?.textContent).toBe("Panel A");
+  });
+
+  it("supports an empty-string value", () => {
+    attach(mount(Tabs, { props: { items: [...items, { value: "", label: "Empty", content: "Empty panel" }], defaultValue: "" }, attachTo: document.body }));
+    expect(document.querySelector('[role=tab][aria-selected=true]')?.textContent).toBe("Empty");
+  });
+
+  it("recovers after loading and clearing an initially empty list", async () => {
+    const view = attach(mount(Tabs, { props: { items: [], defaultValue: "b" }, attachTo: document.body }));
+    expect(document.querySelector('[role=tab]')).toBeNull();
+    await view.setProps({ items });
+    expect(document.querySelector('[role=tab][aria-selected=true]')?.textContent).toBe("Alpha");
+    await view.findAll('[role=tab]')[2].trigger('click');
+    await view.setProps({ items: [] });
+    expect(document.querySelector('[role=tabpanel]')).toBeNull();
+    await view.setProps({ items });
+    expect(document.querySelector('[role=tab][aria-selected=true]')?.textContent).toBe("Alpha");
+  });
+
+  it("replaces a removed selection and does not resurrect it when reinserted", async () => {
+    const view = attach(mount(Tabs, { props: { items, defaultValue: "b" }, attachTo: document.body }));
+    await view.setProps({ items: [items[0], items[2]] });
+    expect(document.querySelector<HTMLElement>('[role=tab][aria-selected=true]')?.tabIndex).toBe(0);
+    expect(visiblePanel()?.textContent).toBe("Panel A");
+    await view.setProps({ items, defaultValue: "c" });
+    expect(document.querySelector('[role=tab][aria-selected=true]')?.textContent).toBe("Alpha");
+  });
+
+  it("preserves selection and keyboard targets after reorder and prepend", async () => {
+    const view = attach(mount(Tabs, { props: { items, defaultValue: "b" }, attachTo: document.body }));
+    await view.setProps({ items: [{ value: "d", label: "Delta", content: "Panel D" }, items[2], items[1], items[0]] });
+    const beta = view.find('[role=tab][aria-selected=true]');
+    expect(beta.text()).toBe("Beta");
+    (beta.element as HTMLElement).focus();
+    await beta.trigger('keydown', { key: 'ArrowRight' });
+    expect(document.activeElement?.textContent).toBe("Alpha");
+    await view.findAll('[role=tab]')[3].trigger('keydown', { key: 'Home' });
+    expect(document.activeElement?.textContent).toBe("Delta");
+  });
+
   it("moves selection and focus with arrows, wrapping, and Home/End", async () => {
     attach(mount(Tabs, { props: { items }, attachTo: document.body }));
     const [a, b, c] = Array.from(document.querySelectorAll<HTMLButtonElement>("[role=tab]"));

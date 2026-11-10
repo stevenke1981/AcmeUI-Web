@@ -35,6 +35,9 @@ Tabs 容器需有 `[data-acme-tablist]`，其下每個 `[data-acme-tab]` 是具�
 設定 tablist/tab/tabpanel、aria 關聯、roving tabindex 與 hidden。水平方向鍵、
 Home/End 會自動選取並移動焦點；點擊保留 Ctrl/Meta 等修飾鍵的原生連結行為。
 目前支援固定、單層、由左至右的水平 Tabs；cleanup 前請保持該元件 markup 穩定。
+React/Vue Tabs 支援動態清單：無效 defaultValue 或已移除的選取會回到第一項，
+清空後重新載入也選取第一項；重排保留有效選取。靜態/Tailwind HTML 若需要
+重建分頁，先 cleanup、更新連結/section，再呼叫 enhanceTabs；不監聽 DOM 變動。
 
 Modal 使用具 `aria-labelledby` 的 `<dialog class="acme-dialog">`，內含
 `.acme-modal__panel` 與 `[data-acme-modal-close]` 按鈕。`showModal()` 讓瀏覽器
