@@ -63,3 +63,28 @@ still uses unchanged shared/static CSS and semantic tokens across all adapters.
 DOM activation tests do not prove real-browser Space/Enter or native Tab behavior.
 Human browser review at 360/768/1280/1536, screenshots, screen readers, physical
 touch/DPI and approved visual baselines remain NOT_RUN. No npm/release/deployment.
+
+## 2026-11-10 / R006
+
+Semantic switch and Gallery code tokens, stronger input/muted colors and an
+opaque focus ring now have unrounded light/dark contrast calculations (4.5:1
+text, 3:1 tested indicators). Overlay already moved to a semantic token in R004.
+Shared/static CSS and generated token files remain aligned across adapters.
+Gallery search, status announcements, navigation/tablist names, heading order
+and main landmark are covered. Initial R006 tests reproduced 8 failed cases.
+
+`pnpm test`: PASS (110 Vitest cases, 144 scaffolds, 96 generated bundles).
+`pnpm typecheck` / `pnpm build`: PASS; no build warnings observed.
+Axe scans light/dark Gallery Buttons/form/Pricing/open-Modal states plus the
+static example before/after Tabs enhancement, with an unnamed-control negative
+fixture. Color-contrast and canvas-dependent label-content-name-mismatch are
+explicitly disabled; landmark-one-main / page-has-heading-one incomplete results
+are explicitly allowed pending browser visibility checks. New incomplete IDs
+and all enabled-rule violations fail. See docs/ACCESSIBILITY.md for exact scope.
+
+NOT_RUN: human real-browser review at 360/768/1280/1536, native dialog Tab/inert/
+Escape, rendered contrast/label-content-name checks, image/gradient contrast,
+screen readers, physical touch/DPI, cross-framework screenshots, full WCAG AA
+audit and human-approved visual baselines. R007–R010 and independent scaffold
+installation remain open. No npm publication, release, deployment or settings
+change was performed.

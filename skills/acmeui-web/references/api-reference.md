@@ -22,7 +22,9 @@ Notable conventions:
   with 載入中…, disables activation and sets `aria-busy`.
 - `Switch`: controlled `checked` or uncontrolled `defaultChecked`, `onCheckedChange`,
   `disabled` and native button attributes. It always uses `type="button"`.
-- `Tabs`: item array with `value`, `label`, and `content`.
+- `Tabs`: item array with `value`, `label`, and `content`; optional `label` names
+  the tablist (default 分頁內容) in both frameworks.
+- `Navbar`: optional `label` names its navigation (default 主要導覽), in both frameworks.
 - `Modal`: controlled `open`, `title`, `onClose`.
 - Modal focus in React / Vue skips hidden, inert, aria-hidden, disabled and
   negative-tabindex descendants. Tab from the panel falls back to the first

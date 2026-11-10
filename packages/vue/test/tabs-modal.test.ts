@@ -3,6 +3,7 @@ import { mount, type VueWrapper } from "@vue/test-utils";
 import { defineComponent, h, nextTick, ref } from "vue";
 import Tabs from "../src/components/Tabs.vue";
 import Modal from "../src/components/Modal.vue";
+import Navbar from "../src/components/Navbar.vue";
 
 const mounted: VueWrapper[] = [];
 afterEach(() => { mounted.splice(0).forEach(w => w.unmount()); document.body.innerHTML = ""; });
@@ -42,7 +43,8 @@ describe("Vue Tabs keyboard", () => {
   });
 
   it("links tabs and panels and still switches on click", async () => {
-    attach(mount(Tabs, { props: { items, defaultValue: "b" }, attachTo: document.body }));
+    attach(mount(Tabs, { props: { items, defaultValue: "b", label: "Example tabs" }, attachTo: document.body }));
+    expect(document.querySelector("[role=tablist]")?.getAttribute("aria-label")).toBe("Example tabs");
     const selected = document.querySelector<HTMLElement>("[role=tab][aria-selected=true]")!;
     expect(selected.textContent).toBe("Beta");
     const panel = document.getElementById(selected.getAttribute("aria-controls")!)!;
@@ -112,4 +114,11 @@ describe("Vue Modal focus", () => {
     document.dispatchEvent(new KeyboardEvent("keydown", { key: "Tab", bubbles: true }));
     expect(document.activeElement).toBe(close);
   });
+});
+
+it("Vue Navbar exposes a configurable navigation name", async () => {
+  const view = attach(mount(Navbar, { props: { brand: "Acme", links: [], label: "Product navigation" }, attachTo: document.body }));
+  expect(document.querySelector("nav")?.getAttribute("aria-label")).toBe("Product navigation");
+  await view.setProps({ label: "" });
+  expect(document.querySelector("nav")?.getAttribute("aria-label")).toBe("主要導覽");
 });
