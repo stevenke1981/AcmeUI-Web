@@ -44,6 +44,10 @@ describe("static progressive Tabs", () => {
       expect(target.tabIndex).toBe(0);
     }
     expect(fireEvent.keyDown(a, { key: "ArrowDown" })).toBe(true);
+    expect(fireEvent.keyDown(c, { key: " " })).toBe(false);
+    expect(c.getAttribute("aria-selected")).toBe("true");
+    fireEvent.click(a);
+    expect(fireEvent.keyDown(c, { key: "Enter" })).toBe(false);
     fireEvent.click(c);
     expect(c.getAttribute("aria-selected")).toBe("true");
     expect(a.tabIndex).toBe(-1);

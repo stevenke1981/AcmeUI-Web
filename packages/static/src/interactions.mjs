@@ -40,7 +40,7 @@ export function enhanceTabs(root) {
   const keydown = event => {
     const current = tabs.indexOf(event.target);
     if (current < 0) return;
-    const next = { ArrowRight: (current + 1) % tabs.length, ArrowLeft: (current - 1 + tabs.length) % tabs.length, Home: 0, End: tabs.length - 1 }[event.key];
+    const next = new Map([["ArrowRight", (current + 1) % tabs.length], ["ArrowLeft", (current - 1 + tabs.length) % tabs.length], ["Home", 0], ["End", tabs.length - 1], ["Enter", current], [" ", current]]).get(event.key);
     if (next === undefined) return;
     event.preventDefault(); select(next); tabs[next].focus();
   };
