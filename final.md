@@ -91,3 +91,23 @@ screen readers, physical touch/DPI, cross-framework screenshots, full WCAG AA
 audit and human-approved visual baselines. R007–R010 and independent scaffold
 installation remain open. No npm publication, release, deployment or settings
 change was performed.
+
+## 2026-11-10 / R007
+
+Remaining presentation families now have React/Vue semantic, content/slot,
+native-attribute and event tests; composition helpers and public prop/row types
+are checked. Initial presentation fixtures had 11 failed cases (two were fixed
+in the fixture's Vue class handling). Fixes add named Avatar initials, scoped
+column headers/current breadcrumbs, Vue cell/icon scoped slots and explicit
+Pricing button type. Gallery/static docs demonstrate the public behavior.
+Shared CSS/tokens are unchanged across React/Vue/Tailwind/static.
+
+`pnpm test`: PASS (147 Vitest cases, 144 scaffolds, 96 workspace bundles).
+`pnpm typecheck`: PASS, now including every unit test via vue-tsc; this also
+caught unsupported Testing Library role-query options. `pnpm build`: PASS,
+no warnings observed. React/Vue extension idioms are documented; this is not
+a claim of identical framework types or complete API equivalence.
+
+NOT_RUN: human browser/responsive review (360/768/1280/1536), screen readers,
+physical touch/DPI, full WCAG AA audit, screenshots and approved visual baselines.
+Independent scaffold dependency installation remains R008. No publication/release.

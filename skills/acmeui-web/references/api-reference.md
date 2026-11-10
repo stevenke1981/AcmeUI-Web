@@ -75,3 +75,15 @@ Normalization affects rendering/events, not the parent value; Pagination remains
 controlled (`onPageChange` in React, `change` in Vue). Navigation buttons have
 explicit names and `type="button"`. Static/Tailwind users apply the same classes
 and native attributes; no separate form-state runtime is provided.
+
+## Presentation extensions (R007)
+
+React `DataTable<T>` uses typed `column.render(value, row)`; Vue uses the typed
+`#cell="{ value, row, column }"` scoped slot with a string fallback. Vue row keys
+remain dynamic strings; React keys are `keyof T`. Both render scoped column headers.
+React FeatureGrid takes `item.icon`; Vue uses `#icon="{ item }"`. Navbar brand is
+ReactNode in React and text in Vue; actions/visuals use React props or named Vue
+slots. These are intentional framework idioms, not identical TypeScript APIs.
+Avatar initials now expose role=img/name; actual images retain native alt text.
+Breadcrumb marks the last non-link item current. Pricing buttons never implicitly
+submit a containing form. Shared CSS and semantic tokens are unchanged.

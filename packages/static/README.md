@@ -45,3 +45,21 @@ Vitest 使用 jsdom，native dialog API 以 test doubles 驗證委派與 cleanup
 不證明瀏覽器 Tab／Escape、觸控或螢幕閱讀器行為。視覺與真人審查仍為 NOT_RUN。
 互動模式參考 [WAI Tabs](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/) 與
 [WAI Modal Dialog](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/)。
+
+## 內容語意
+
+React / Vue 的 Avatar、DataTable、Breadcrumb 與下列靜態標記使用相同語意；
+Tailwind adapter 也使用同一份 class contract。
+
+```html
+<span class="acme-avatar"><span role="img" aria-label="Ada Lovelace">AL</span></span>
+<nav class="acme-breadcrumb" aria-label="麵包屑">
+  <a href="/">首頁</a><span aria-current="page">成員</span>
+</nav>
+<div class="acme-table-wrap"><table class="acme-table">
+  <caption>成員</caption><thead><tr><th scope="col">姓名</th></tr></thead>
+  <tbody><tr><td>Ada</td></tr></tbody>
+</table></div>
+```
+
+方案按鈕使用 `type="button"`，放入表單時不隱式送出。

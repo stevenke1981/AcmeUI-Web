@@ -10,14 +10,15 @@
   "scripts": {
     "dev": "pnpm --filter @acmeui/gallery dev",
     "build": "pnpm -r --if-present build",
-    "typecheck": "pnpm -r --if-present typecheck",
+    "typecheck": "pnpm -r --if-present typecheck && pnpm typecheck:tests",
     "lint": "node scripts/build-tokens.mjs --check && node scripts/validate.mjs && node scripts/validate-skill.mjs",
     "test": "node scripts/build-tokens.mjs --check && node scripts/validate.mjs && node scripts/validate-skill.mjs && node scripts/test-cli.mjs --compile && vitest run",
     "tokens:build": "node scripts/build-tokens.mjs",
     "gallery": "pnpm --filter @acmeui/gallery dev",
     "create": "node packages/cli/bin/acmeui.mjs create",
     "preview:static": "node scripts/serve-static.mjs",
-    "test:unit": "vitest run"
+    "test:unit": "vitest run",
+    "typecheck:tests": "vue-tsc --noEmit -p tsconfig.tests.json"
   },
   "devDependencies": {
     "@testing-library/dom": "^10.4.2",
@@ -30,6 +31,10 @@
     "react-dom": "^19.2.8",
     "typescript": "^5.9.2",
     "vitest": "^3.2.7",
-    "vue": "^3.5.40"
+    "vue": "^3.5.40",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "vue-tsc": "^3.0.7"
   }
 }

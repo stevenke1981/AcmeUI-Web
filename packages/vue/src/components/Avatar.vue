@@ -1,1 +1,5 @@
-<script setup lang="ts">defineProps<{src?:string;name:string}>();const initial=(name:string)=>name.trim().split(/\s+/).slice(0,2).map(v=>v[0]?.toUpperCase()||"").join("");</script><template><span class="acme-avatar"><img v-if="src" :src="src" :alt="name"/><template v-else>{{initial(name)}}</template></span></template>
+<script setup lang="ts">
+import { initials } from '@acmeui/core';
+defineProps<{src?:string;name:string}>();
+</script>
+<template><span class="acme-avatar"><img v-if="src" :src="src" :alt="name"/><span v-else role="img" :aria-label="name">{{initials(name)}}</span></span></template>
