@@ -1,6 +1,6 @@
 # Test Strategy
 
-## Current required gates (R012)
+## Current required gates (R013)
 
 After `pnpm install --frozen-lockfile`, run the same five commands as
 `.github/workflows/ci.yml`:
@@ -26,7 +26,7 @@ Use repo-local `COREPACK_HOME="$PWD/.cache/corepack"` and
 | `pnpm test:cli:installed` | Three isolated pnpm manifest installations; all 144 unmodified generated build scripts, including 96 React/Vue typechecks and dist outputs; identical manifests reuse each isolated install |
 | `pnpm typecheck` | Core/React/Vue/Gallery plus unit-test and browser TypeScript fixtures |
 | `pnpm build` | Gallery (including static example) and React/Vue examples, with build-warning gate |
-| `pnpm test:browser` | 25 headless Chromium cases; all 48 previews at four widths/two themes, representative four-adapter style/geometry comparison, focus ring and Gallery Tabs/Modal; see docs/BROWSER_SMOKE.md |
+| `pnpm test:browser` | 35 headless Chromium cases; all 48 previews at four widths/two themes, representative four-adapter style/geometry comparison, focus ring, Gallery Tabs/Modal and native static dialog; see docs/BROWSER_SMOKE.md |
 
 Vitest imports the actual Gallery App, visits every tab and opens its Modal in
 both themes. All 23 families must render using their real class/semantic
@@ -67,7 +67,7 @@ It also checks that the JSON reporter and failure-output paths resolve under the
 uploaded `output/browser/` directory; R010 fixes the former misplaced report.
 
 NOT_RUN: human browser/visual review at 360/768/1280/1536, screen readers,
-physical touch/DPI, Firefox/WebKit/other OS, native static dialog Tab/inert/Escape,
+physical touch/DPI, Firefox/WebKit/other OS,
 complete rendered contrast/label checks, full WCAG AA audit, full family/state
 screenshots, human-approved visual baselines, npm/yarn install matrices.
 No npm publication, release, deployment or settings change is part of this work.
@@ -102,6 +102,23 @@ or a guarantee against concurrent filesystem replacement.
 All five local gates PASS: 234 Vitest / 18 files, existing scaffold/install/build
 matrices, typecheck/build and 25 Chromium cases. Components, Gallery, CSS and
 semantic tokens are unchanged. Human checks remain NOT_RUN.
+
+## R013 / native static dialog browser evidence
+
+Ten new Chromium cases add eight viewport/theme scenarios, one 360px no-JS
+fallback scenario and one injected non-modal counterexample. They exercise the
+existing static Gallery page, native modality, Enter/Space, Tab/Shift+Tab,
+background programmatic focus blocking, viewport fit, Escape/close and opener
+restoration. Boundary JSON records the observed unfocused-document transition;
+see docs/BROWSER_SMOKE.md for the exact single-transition allowance and the
+initial fixture's eight failed assumptions. No runtime or style change was needed.
+
+Three additional Vitest cases check native close events, a disconnected opener
+and cleanup/reinitialization with a new opener using explicit jsdom doubles.
+All five local gates PASS: 237 Vitest / 18 files, existing scaffold/install/build
+matrices, typecheck/build and 35 Chromium cases (zero unexpected/flaky/skipped).
+These remain automated Chromium results; human keyboard/visual review and full
+WCAG AA remain NOT_RUN. R014/R015 remain in ROADMAP-002.
 
 ## Historical evidence
 
@@ -265,7 +282,7 @@ Gallery pagination text and integration docs now describe this behavior. Tokens
 are unchanged. See docs/BROWSER_SMOKE.md for the exact automated scope.
 
 NOT_RUN: human browser/visual review at the four widths, screen readers, physical
-touch/DPI, Firefox/WebKit/other OS, native static dialog Tab/inert/Escape, complete
+touch/DPI, Firefox/WebKit/other OS, complete
 rendered contrast/label checks, full family/state screenshots, full WCAG AA audit
 and human-approved visual baselines. No screenshot baselines were created or
 approved. R010 remains open; publication/releases/settings were not changed.

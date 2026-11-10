@@ -110,3 +110,7 @@ Sidebar／Footer 範例。Gallery 與 React／Vue example 的正式 build、CLI 
 打包會把 Vite `warn`／`warnOnce` 分類並立即設為失敗（含未知類別，沒有豁免）。
 隔離產物 build 使用輸出文字 gate；詳細分類、限制與目前證據見
 [驗證策略](test.md) 與 [驗證報告](VALIDATION.md)。
+
+R013 擴充為 35 個 Chromium 案例，加入原生 static dialog 四尺寸/亮暗色的
+鍵盤、背景焦點阻擋與焦點還原，以及無 JavaScript fallback / 非模態反例。
+Tab 邊界的 document-focus 行為與限制見 [browser smoke](docs/BROWSER_SMOKE.md)。

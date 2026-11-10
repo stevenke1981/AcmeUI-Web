@@ -6,7 +6,7 @@ Date: 2026-11-11
 
 Current command/scope contract: [test.md](test.md),
 [accessibility scope](docs/ACCESSIBILITY.md) and
-[browser smoke](docs/BROWSER_SMOKE.md). R012 results follow the historical entries
+[browser smoke](docs/BROWSER_SMOKE.md). R013 results follow the historical entries
 below. Earlier counts and open-work statements describe their original slices.
 
 Baseline `79aa7d1`: `pnpm test` passed (8 Vitest cases, 144 CLI scaffolds),
@@ -290,7 +290,7 @@ WCAG AA audit, approved visual baselines, npm/yarn install matrices. No npm
 publication, release, deployment or repository settings changes. CI and merge
 evidence are in the PR; local passing results alone do not authorize merge.
 
-## 2026-11-11 / R012 (current)
+## 2026-11-11 / R012
 
 R011 merged as PR #13 after both hosted validate checks succeeded; this slice
 starts from synced master ee344b3. Real preview-server HTTP tests reproduced
@@ -311,3 +311,36 @@ rendered contrast/label checks, full WCAG AA audit, full screenshots, approved
 visual baselines, npm/yarn install matrices, adversarial concurrent filesystem
 replacement. No npm publication/release/deployment/settings changes. Hosted
 CI/merge evidence remains in the PR; local results alone do not authorize merge.
+
+## 2026-11-11 / R013 (current)
+
+R012 merged in PR #14 after both hosted validate checks passed. This slice starts
+at synced master 5284adf and adds browser coverage for the existing native static
+dialog plus three Vitest lifecycle regressions. Runtime, Gallery markup, CSS and
+tokens are unchanged; all four adapters retain the same shared visual contract.
+
+The first focused browser run had eight failed fixture assumptions about
+single-keypress Tab wrapping. Instrumentation observed body active with
+`document.hasFocus()` false at the Chromium document boundary. The corrected
+fixture permits that one transition before returning to the dialog, while still
+rejecting focused body/background controls. A non-modal show() counterexample
+proves the modality check distinguishes a merely visible dialog. No runtime fix
+was needed. Focus-state JSON is attached to the browser results.
+
+- `pnpm test`: PASS, 237 Vitest / 18 files, 144 scaffolds, 96 generated React/Vue
+  typechecks/bundles with workspace toolchains.
+- `pnpm test:cli:installed`: PASS, three isolated pnpm installs / 144 original
+  package-script builds (identical manifests reuse each install).
+- `pnpm typecheck` / `pnpm build`: PASS; no production-build warnings observed.
+- `pnpm test:browser`: PASS, 35 Chromium cases at four widths/both themes;
+  report.json: 35 expected, zero unexpected/flaky/skipped and zero global errors.
+  Native dialog checks real Enter/Space, Tab/Shift+Tab, background focus blocking,
+  Escape/close, viewport fit and opener restoration. The no-JS case runs at 360px;
+  the injected non-modal counterexample runs at the default viewport.
+
+NOT_RUN: human browser/visual and keyboard review (360/768/1280/1536), screen
+readers, physical touch/DPI, Firefox/WebKit/other OS, complete rendered contrast/
+label checks, full family/state screenshots, full WCAG AA audit, human-approved
+visual baselines and npm/yarn install matrices. No publication, release,
+deployment or settings changes. R014/R015 remain open. Hosted CI and merge
+status are in the PR; local results alone do not authorize merge.

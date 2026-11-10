@@ -62,7 +62,7 @@ describe("static progressive Tabs", () => {
   });
 });
 
-describe("static native Modal integration (native Tab behavior requires a browser)", () => {
+describe("static native Modal delegation (jsdom doubles; native behavior is in the browser gate)", () => {
   function modal() {
     fixture();
     const dialog = document.querySelector("dialog")!, opener = document.querySelector<HTMLButtonElement>("[data-acme-modal-open]")!;
@@ -107,5 +107,29 @@ describe("static native Modal integration (native Tab behavior requires a browse
     expect(() => { opener.click(); cleanup(); }).not.toThrow();
     expect(dialog.open).toBe(false);
     expect(document.querySelector("#modal-fallback")).not.toBeNull();
+  });
+  it("restores focus after a native close event independent of the close button", () => {
+    const { dialog, opener } = modal();
+    opener.focus(); opener.click();
+    dialog.removeAttribute("open"); dialog.dispatchEvent(new Event("close"));
+    expect(document.activeElement).toBe(opener);
+    opener.click(); expect(dialog.showModal).toHaveBeenCalledTimes(2);
+  });
+  it("skips a disconnected opener when native close fires", () => {
+    const { dialog, opener } = modal();
+    opener.focus(); opener.click(); opener.remove();
+    const focus = vi.spyOn(opener, "focus");
+    dialog.close(); expect(focus).not.toHaveBeenCalled();
+    expect(dialog.open).toBe(false);
+  });
+  it("can reinitialize after cleanup with a different opener", () => {
+    const { dialog, opener, cleanup } = modal();
+    cleanup();
+    const alternate = document.createElement("button"); alternate.textContent = "Alternate opener";
+    document.body.append(alternate); cleanups.push(enhanceModal(dialog, [alternate]));
+    opener.click(); expect(dialog.open).toBe(false);
+    alternate.focus(); alternate.click(); expect(dialog.open).toBe(true);
+    dialog.close(); expect(document.activeElement).toBe(alternate);
+    expect(dialog.showModal).toHaveBeenCalledTimes(1);
   });
 });

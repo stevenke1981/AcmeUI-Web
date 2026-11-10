@@ -5,6 +5,13 @@ human-approved visual baseline. R009 automated Chromium layout smoke has run;
 its exact scope is in [BROWSER_SMOKE.md](BROWSER_SMOKE.md). Human review remains
 NOT_RUN.
 
+R013 additionally exercises the real native static dialog in automated Chromium
+at all four widths/both themes: Enter/Space, Tab/Shift+Tab, native modality and
+background focus blocking, Escape/close and opener restoration. The exact
+document-focus boundary allowance and injected non-modal counterexample are in
+[BROWSER_SMOKE.md](BROWSER_SMOKE.md). This does not convert human keyboard review,
+screen-reader, touch or full WCAG checks into passing results.
+
 ## Color contract (R006)
 
 `packages/tokens/src/tokens.json` remains the source of truth. Run

@@ -19,8 +19,8 @@
 | ID | 優先序 | 範圍與自動驗收 | 狀態 |
 |---|---|---|---|
 | R011 | P1 | React/Vue Tabs 正規化無效選取、空清單、移除/重排；Vitest 對照測試、Gallery 動態範例與 API/static 說明；不改 CSS/tokens | [PR #13](https://github.com/stevenke1981/AcmeUI-Web/pull/13) 已合併；本機五 gates、兩組 hosted CI PASS |
-| R012 | P1 | Static preview server 使用目錄邊界與實際路徑限制，安全處理畸形 URL；Vitest 真實 HTTP 測試含同前綴目錄、symlink、錯誤後服務存活、正常 HTML/CSS/JS | 已實作；本機五 gates PASS（234 Vitest / 25 Chromium），CI/合併見 PR |
-| R013 | P1 | Chromium 操作真實 static dialog：四尺寸/亮暗色、鍵盤開啟、Tab/Shift+Tab、背景 focus 阻擋、Escape/close 焦點還原；保留 Vitest 委派/cleanup 回歸，記錄瀏覽器範圍 | 待實作（本次 3/3） |
+| R012 | P1 | Static preview server 使用目錄邊界與實際路徑限制，安全處理畸形 URL；Vitest 真實 HTTP 測試含同前綴目錄、symlink、錯誤後服務存活、正常 HTML/CSS/JS | [PR #14](https://github.com/stevenke1981/AcmeUI-Web/pull/14) 已合併；本機五 gates、兩組 hosted CI PASS |
+| R013 | P1 | Chromium 操作真實 static dialog：四尺寸/亮暗色、鍵盤開啟、Tab/Shift+Tab、背景 focus 阻擋、Escape/close 焦點還原；保留 Vitest 委派/cleanup 回歸，記錄瀏覽器範圍 | 已實作；本機五 gates PASS（237 Vitest / 35 Chromium），CI/合併見本切片 PR |
 | R014 | P2 | Static Tabs 初始化前拒絕重複 tab id / 歧義關聯，錯誤後 markup 不變；Vitest 反例與重建測試 | 後續 |
 | R015 | P1 | React/Vue Modal 背景互動隔離契約與焦點外移防護；Vitest/browser 跨框架測試、Gallery 及 cleanup 邊界；先定義巢狀/多實例限制 | 後續 |
 
@@ -37,3 +37,13 @@ Firefox/WebKit/其他 OS、完整 rendered contrast/label 稽核、全家族/狀
 
 視覺 baseline 等待人工核准的瀏覽器 release。npm publish、建立 release、部署與
 repo settings 變更皆不在本次範圍；不得宣稱專案完成或 production-ready。
+
+## R013 實測補充
+
+原生 dialog 在 Chromium 的 Tab 邊界可能出現 body active 且 document.hasFocus()
+為 false 的一次轉移，再按同方向 Tab 才回到對話框。初版 fixture 假設一步循環，
+造成 8 個失敗；量測後修正該假設，未更動 runtime。測試只容許這一種離開 document
+的狀態，背景控制項或仍有焦點的 body 都會失敗；反例以 show() 取代 showModal()
+證明可區分非模態 dialog。完整附件與範圍見 docs/BROWSER_SMOKE.md。
+
+本次三個切片已實作；R014、R015 留待後續，不因此宣稱專案完成或 production-ready。

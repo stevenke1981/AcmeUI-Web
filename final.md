@@ -5,7 +5,24 @@ This is an ongoing development record, not a published release or a statement of
 production readiness. Current evidence is in VALIDATION.md and test.md. Entries
 below are historical snapshots; later slices supersede earlier open-work notes.
 
-## Current development / R012
+## Current development / R013
+
+R011 / PR #13 and R012 / PR #14 are merged after both hosted validate checks
+passed. R013 adds real Chromium coverage for the existing native static dialog,
+no-JS fallback and a non-modal counterexample, plus three Vitest lifecycle tests.
+The initial eight browser failures were fixture assumptions about native Tab
+boundaries; measured document-focus behavior and the exact allowance are recorded
+in docs/BROWSER_SMOKE.md. Runtime, Gallery markup, CSS and tokens are unchanged.
+
+All five local gates PASS: 237 Vitest, 144 scaffolds, 96 workspace bundles,
+three isolated installs / 144 original build scripts, typecheck/build and 35
+Chromium cases (zero unexpected/flaky/skipped). Hosted evidence is in the PR.
+ROADMAP-002 retains R014/R015. Human browser/visual/keyboard review, screen
+readers, physical touch/DPI, full WCAG AA and approved baselines remain NOT_RUN.
+No publication, release, deployment or settings changes; no production-readiness
+claim or visual baseline approval is made.
+
+## Historical development / R012
 
 R011 is merged in PR #13 (both hosted CI checks passed). From synced master,
 R012 fixes the static preview server's path boundary and malformed-request
