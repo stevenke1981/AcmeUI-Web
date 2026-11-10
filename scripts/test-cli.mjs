@@ -37,6 +37,10 @@ try {
     }
   }
   console.log(`✓ CLI generated ${projects.length} projects (${registry.length} templates × 3 frameworks); HTML, metadata and static script syntax checked`);
+  if (process.argv.includes("--installed")) {
+    const { checkInstalledBuilds } = await import("./test-cli-installed.mjs");
+    await checkInstalledBuilds(root, projects);
+  }
   if (process.argv.includes("--compile")) {
     const { checkGeneratedBuilds } = await import("./test-cli-builds.mjs");
     await checkGeneratedBuilds(root, temp, projects);
