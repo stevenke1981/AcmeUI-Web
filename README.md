@@ -56,7 +56,19 @@ node scripts/validate.mjs
 node scripts/validate-skill.mjs
 node scripts/test-cli.mjs
 ```
-完整依賴安裝後執行 `pnpm typecheck && pnpm build`。
+完整依賴安裝後，本機與 CI 使用相同的必要命令：
+
+```bash
+pnpm test
+pnpm test:cli:installed
+pnpm typecheck
+pnpm build
+PLAYWRIGHT_BROWSERS_PATH="$PWD/.cache/ms-playwright" pnpm exec playwright install chromium --only-shell
+pnpm test:browser
+```
+
+`test:cli:installed` 會進行 3 次隔離 pnpm 安裝，執行全部 144 個產物的 build
+script；這不是 144 次獨立安裝。Chromium 安裝只需在尚未安裝時執行。
 
 `pnpm test` 另包含 Vitest 與全部 CLI 產物檢查：144 組結構驗證、96 組
 React/Vue 來源型別檢查與 Vite 打包（沿用 example toolchain）。驗證器也會
@@ -87,3 +99,9 @@ R009 另加入 48 預覽的 HTML parser / 本機連結 gate，以及 `pnpm test:
 的四尺寸 Chromium smoke、React/Vue/static/Tailwind 代表元件比較。安裝命令、
 CI artifacts 與未驗證範圍見 [browser smoke](docs/BROWSER_SMOKE.md)；
 這不建立或核准視覺回歸 baseline。
+
+R010 將 Gallery 的 23 個公開家族逐一納入可到達狀態的 DOM 覆蓋檢查，補上
+Sidebar／Footer 範例。Gallery 與 React／Vue example 的正式 build、CLI workspace
+打包會把 Vite `warn`／`warnOnce` 分類並立即設為失敗（含未知類別，沒有豁免）。
+隔離產物 build 使用輸出文字 gate；詳細分類、限制與目前證據見
+[驗證策略](test.md) 與 [驗證報告](VALIDATION.md)。

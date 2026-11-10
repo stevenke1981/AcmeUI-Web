@@ -1,5 +1,29 @@
-# Release 0.1.0
+# AcmeUI Web development report
 Multi-framework component and template platform with React, Vue 3, Tailwind CSS v4, plain HTML/CSS, CLI scaffolding, Gallery, 48 templates, documentation and deployment presets.
+
+This is an ongoing development record, not a published release or a statement of
+production readiness. Current evidence is in VALIDATION.md and test.md. Entries
+below are historical snapshots; later slices supersede earlier open-work notes.
+
+## Current development / R010
+
+R010 adds a classified, fatal Vite build-warning gate, rendered coverage for all
+23 Gallery families, Sidebar/Footer examples and axe coverage, synchronized
+CI/documentation command contracts, and a corrected browser JSON artifact path.
+Shared CSS, tokens and public framework APIs are unchanged.
+
+Local results: `pnpm test` PASS (209 Vitest cases, 144 scaffold checks,
+96 workspace-toolchain typechecks/bundles), `pnpm typecheck` PASS, `pnpm build`
+PASS, `pnpm test:cli:installed` PASS (three isolated installs / 144 original
+build scripts), `pnpm test:browser` PASS (25 Chromium cases at all four widths
+and both themes). Exact scope, unsuccessful intermediate execution and logger
+limitations are recorded in VALIDATION.md / test.md; hosted evidence is in the PR.
+
+R001–R010 automation is implemented. Remaining unchecked todos are human-approved
+visual baselines and versioned npm publication, both outside this session's
+authorized automation. Human browser review, screen readers, physical touch/DPI,
+full WCAG AA audit and approved baselines remain NOT_RUN. No publication, release,
+deployment or repository settings change was performed.
 
 ## Agent Skill integration
 

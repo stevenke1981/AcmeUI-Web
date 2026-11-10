@@ -1,8 +1,9 @@
 # Accessibility automation scope
 
 This is a DOM/token regression baseline, not a WCAG conformance statement or a
-human-approved visual baseline. R009 browser layout work and human review remain
-open.
+human-approved visual baseline. R009 automated Chromium layout smoke has run;
+its exact scope is in [BROWSER_SMOKE.md](BROWSER_SMOKE.md). Human review remains
+NOT_RUN.
 
 ## Color contract (R006)
 
@@ -32,7 +33,7 @@ text, anti-aliasing, focus clipping/obscuring, or actual rendered layouts.
 ## DOM baseline
 
 `pnpm test` includes `scripts/test/accessibility.test.tsx` with axe-core. It scans
-the Gallery's Buttons, form, Pricing and open Modal states under light/dark theme
+all four Gallery tabs (including Sidebar/Footer) and open Modal states under light/dark theme
 state, plus the static example before/after Tabs enhancement. An unnamed-button
 negative case proves the gate reports a violation. Search naming/filtering,
 result announcements and framework navigation/tablist names have regression
@@ -62,7 +63,9 @@ native dialog Tab/inert/Escape, screen readers, physical touch/DPI, rendered
 contrast/label-content-name checks, image/gradient contrast, cross-framework
 screenshots, a full WCAG AA audit and approved visual baselines remain NOT_RUN.
 The 48 template previews are covered by existing structural checks, not this axe
-baseline. Independent generated-project installation/builds remain R008.
+baseline; R009 separately checks their parser/layout scope. R008 runs three
+isolated pnpm installs and all 144 generated build scripts; npm/yarn and other
+OS installation matrices remain NOT_RUN.
 
 References: [WCAG text contrast](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html),
 [WCAG non-text contrast](https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html),

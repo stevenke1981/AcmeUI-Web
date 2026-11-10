@@ -103,12 +103,13 @@ describe("Gallery axe DOM baseline (not browser conformance)", () => {
     fireEvent.change(search, { target: { value: "" } });
     expect(document.querySelectorAll(".template-card")).toHaveLength(48);
   });
-  for (const theme of ["light", "dark"]) it(`${theme}: scans buttons, form, pricing and open Modal states`, async () => {
+  for (const theme of ["light", "dark"]) it(`${theme}: scans every Gallery tab and open Modal states`, async () => {
     shell(); render(<App />);
     if (theme === "dark") fireEvent.click(screen.getByRole("switch", { name: "深色模式" }));
     expect(document.querySelector("[data-theme]")?.getAttribute("data-theme")).toBe(theme);
     await scan();
     fireEvent.click(screen.getByRole("tab", { name: "表單與邊界行為" })); await scan();
+    fireEvent.click(screen.getByRole("tab", { name: "內容與資料" })); await scan();
     fireEvent.click(screen.getByRole("tab", { name: "Pricing" })); await scan();
     fireEvent.click(screen.getByRole("button", { name: "建立專案" }));
     expect(screen.getByRole("dialog", { name: "建立新專案" })).toBeTruthy(); await scan();

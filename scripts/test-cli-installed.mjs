@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { spawn } from 'node:child_process';
+import { assertBuildOutput } from './build-warnings.mjs';
 
 /** Install each distinct generated manifest in isolation, then build every output.
  * No workspace dependencies are linked. Identical manifests reuse that isolated
@@ -31,7 +32,8 @@ export async function checkInstalledBuilds(root, projects) {
       while (next < targets.length) {
         const { out, slug } = targets[next++];
         const output = await run(['run', 'build'], out);
-        if (/\bwarn(?:ing)?\b/i.test(output)) throw new Error(`${slug}/${framework} build warning:\n${output}`);
+        try { assertBuildOutput(output); }
+        catch (error) { throw new Error(`${slug}/${framework}: ${error.message}\n${output}`, { cause: error }); }
         if (framework !== 'static' && !fs.existsSync(path.join(out, 'dist/index.html'))) throw new Error(`${slug}/${framework}: missing built document`);
         if (++done % 12 === 0) console.log(`✓ Installed ${framework} package-script builds ${done}/${targets.length}`);
       }

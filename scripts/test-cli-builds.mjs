@@ -3,6 +3,7 @@ import path from "node:path";
 import { createRequire } from "node:module";
 import { pathToFileURL } from "node:url";
 import { spawnSync } from "node:child_process";
+import { createBuildWarningLogger } from "./build-warnings.mjs";
 
 /** Uses installed example toolchains; does not prove independent dependency installation. */
 export async function checkGeneratedBuilds(root, temp, projects) {
@@ -28,16 +29,16 @@ export async function checkGeneratedBuilds(root, temp, projects) {
     const result = spawnSync(process.execPath, [compiler, "--noEmit", "-p", configPath], { encoding: "utf8" });
     if (result.status !== 0) throw new Error(`${framework} generated typecheck failed:\n${result.stdout}\n${result.stderr}`);
 
-    const { build } = await import(pathToFileURL(require.resolve("vite")).href);
+    const { build, createLogger } = await import(pathToFileURL(require.resolve("vite")).href);
     let count = 0;
     for (const { out, slug } of targets) {
-      const warnings = [];
-      await build({ root: out, logLevel: "warn", build: { write: false }, customLogger: {
-        hasWarned: false, info() {}, clearScreen() {}, hasErrorLogged() { return false; },
-        warn(message) { warnings.push(message); }, warnOnce(message) { warnings.push(message); },
-        error(message) { throw new Error(message); },
-      } });
-      if (warnings.length) throw new Error(`${slug}/${framework} build warnings:\n${warnings.join("\n")}`);
+      try {
+        await build({ root: out, logLevel: "warn", build: { write: false },
+          customLogger: createBuildWarningLogger(createLogger("silent")),
+        });
+      } catch (error) {
+        throw new Error(`${slug}/${framework} build failed: ${error.message}`, { cause: error });
+      }
       count++;
       if (count % 12 === 0) console.log(`✓ Generated ${framework} bundles ${count}/${targets.length}`);
     }
