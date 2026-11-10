@@ -68,6 +68,22 @@ const Harness = defineComponent({
 const flush = async () => { await nextTick(); await nextTick(); };
 
 describe("Vue Modal focus", () => {
+  it("skips hidden and nonsequential content when wrapping from the close button", async () => {
+    attach(mount(Modal, {
+      props: { open: true, title: "Dialog" }, attachTo: document.body,
+      slots: { default: '<button id="visible">Visible action</button><div hidden><button>Hidden action</button></div><button tabindex="-1">Programmatic only</button>' },
+    }));
+    await flush();
+    document.dispatchEvent(new KeyboardEvent("keydown", { key: "Tab", shiftKey: true }));
+    expect(document.activeElement).toBe(document.getElementById("visible"));
+    document.dispatchEvent(new KeyboardEvent("keydown", { key: "Tab" }));
+    const close = document.querySelector<HTMLElement>("[aria-label='關閉']")!;
+    expect(document.activeElement).toBe(close);
+    document.querySelector<HTMLElement>("[role=dialog]")!.focus();
+    document.dispatchEvent(new KeyboardEvent("keydown", { key: "Tab" }));
+    expect(document.activeElement).toBe(close);
+  });
+
   it("focuses inside, closes on Escape and restores focus to the opener", async () => {
     attach(mount(Harness, { attachTo: document.body }));
     const opener = document.getElementById("opener")!;

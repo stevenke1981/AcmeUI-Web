@@ -58,6 +58,21 @@ function Harness({ onClose }: { onClose?: () => void }) {
 }
 
 describe("React Modal focus", () => {
+  it("skips hidden and nonsequential content when wrapping from the close button", () => {
+    render(<Modal open title="Dialog" onClose={() => {}}>
+      <button>Visible action</button>
+      <div hidden><button>Hidden action</button></div>
+      <button tabIndex={-1}>Programmatic only</button>
+    </Modal>);
+    fireEvent.keyDown(document, { key: "Tab", shiftKey: true });
+    expect(document.activeElement).toBe(screen.getByText("Visible action"));
+    fireEvent.keyDown(document, { key: "Tab" });
+    expect(document.activeElement).toBe(screen.getByLabelText("關閉"));
+    screen.getByRole("dialog").focus();
+    fireEvent.keyDown(document, { key: "Tab" });
+    expect(document.activeElement).toBe(screen.getByLabelText("關閉"));
+  });
+
   it("focuses inside, closes on Escape and restores focus to the opener", () => {
     const onClose = vi.fn();
     render(<Harness onClose={onClose} />);
