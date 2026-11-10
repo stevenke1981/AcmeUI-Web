@@ -21,6 +21,9 @@ The runner always uses repo `.cache/ms-playwright`; outputs go to ignored
 `output/browser/`. Two localhost Vite servers run only for the test lifetime.
 CI installs the same lockfile/browser and uploads the JSON report, computed
 layout attachments and failure traces. No screenshot snapshots are generated.
+R010 corrects the JSON reporter path relative to the Playwright config directory:
+`output/browser/report.json` now sits beside `output/browser/results/` under the
+CI upload path. A Vitest guard checks both resolved paths against that directory.
 See the official [Playwright browser installation](https://playwright.dev/docs/browsers)
 and [HTML-validate rules](https://html-validate.org/rules/index.html).
 

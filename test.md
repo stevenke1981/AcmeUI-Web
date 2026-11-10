@@ -1,4 +1,82 @@
 # Test Strategy
+
+## Current required gates (R010)
+
+After `pnpm install --frozen-lockfile`, run the same five commands as
+`.github/workflows/ci.yml`:
+
+```bash
+pnpm test
+pnpm test:cli:installed
+pnpm typecheck
+pnpm build
+PLAYWRIGHT_BROWSERS_PATH="$PWD/.cache/ms-playwright" pnpm exec playwright install chromium --only-shell
+pnpm test:browser
+```
+
+The browser installation is a prerequisite, not an additional test result.
+Run these commands in order: the browser gate uses development servers, and
+concurrent fixture/build writes can reload pages during measurements.
+Use repo-local `COREPACK_HOME="$PWD/.cache/corepack"` and
+`TMPDIR="$PWD/.cache/tmp"` when needed. CLI fixtures remain under `tmp/`.
+
+| Command | Automated scope |
+|---|---|
+| `pnpm test` | Generated token drift, shared/static CSS, 23-family export contract, registry/metadata/catalog/Gallery data, selected HTML parser/local-link rules, Skill, 144 scaffolds, 96 workspace-toolchain typechecks/bundles, Vitest |
+| `pnpm test:cli:installed` | Three isolated pnpm manifest installations; all 144 unmodified generated build scripts, including 96 React/Vue typechecks and dist outputs; identical manifests reuse each isolated install |
+| `pnpm typecheck` | Core/React/Vue/Gallery plus unit-test and browser TypeScript fixtures |
+| `pnpm build` | Gallery (including static example) and React/Vue examples, with build-warning gate |
+| `pnpm test:browser` | 25 headless Chromium cases; all 48 previews at four widths/two themes, representative four-adapter style/geometry comparison, focus ring and Gallery Tabs/Modal; see docs/BROWSER_SMOKE.md |
+
+Vitest imports the actual Gallery App, visits every tab and opens its Modal in
+both themes. All 23 families must render using their real class/semantic
+selectors. The selector contract is compared to runtime public exports, with
+only the three documented Card helpers excluded. This checks reachable examples,
+not all props/states or full visual parity. Axe scans all four tabs and open Modal
+states, with the explicit jsdom exclusions in docs/ACCESSIBILITY.md.
+
+### Build warning policy
+
+Gallery and both example Vite configs install `scripts/build-warnings.mjs` for
+production builds; generated workspace-toolchain bundles reuse its logger.
+Every Vite `warn` / `warnOnce` diagnostic throws, including messages without a
+literal warning keyword. Classification is diagnostic only: `css`, `asset`
+(including missing resources/source maps), `configuration` (including deprecated
+options), `dependency`, `bundle` (including chunk size), and `unknown`. There is
+no allowlist, severity exemption or warning-limit increase. Vite's normal error
+handling and development-server logging stay in place.
+
+Vitest injects a real bundler warning into each of the three workspace configs
+and verifies rejection. Categories, ANSI cleanup and both logger methods have
+negative cases; informational text remains informational. These expected fixture
+build failures appear in test output and are not warnings from `pnpm build`.
+
+Isolated scaffold build scripts do not import repo tooling. Their separate
+captured-output gate conservatively rejects `warn`/`warning`, `(!)`, chunk-size
+and unresolved-resource markers, then applies the same diagnostic categories.
+This text fallback is not a structured logger guarantee for arbitrary output.
+Dependency installation notices and development-server/browser-runner diagnostics
+are outside this production-build gate. Pre-config Vite/Node diagnostics are not
+intercepted by the custom logger; generated builds' captured output still rejects
+matching lines regardless of their source.
+
+`validation-commands.test.ts` prevents these five required commands drifting
+between CI, README, this strategy and VALIDATION. Hosted check and merge evidence
+remain in each PR; local results alone do not authorize merging.
+It also checks that the JSON reporter and failure-output paths resolve under the
+uploaded `output/browser/` directory; R010 fixes the former misplaced report.
+
+NOT_RUN: human browser/visual review at 360/768/1280/1536, screen readers,
+physical touch/DPI, Firefox/WebKit/other OS, native static dialog Tab/inert/Escape,
+complete rendered contrast/label checks, full WCAG AA audit, full family/state
+screenshots, human-approved visual baselines, npm/yarn install matrices.
+No npm publication, release, deployment or settings change is part of this work.
+
+## Historical evidence
+
+The entries below record the scope at each earlier slice. Current coverage is
+the table above; earlier statements that a later slice remained open are history.
+
 - `node scripts/validate.mjs`: required files, 23-family export contract, shared/static
   CSS drift, registry schema + metadata, preview files, catalog and Gallery data.
 - `node scripts/validate-skill.mjs`: Skill structure, metadata, manifest and live project health.

@@ -27,10 +27,11 @@
 | R007 | P2 | 其餘展示元件的語意、插槽、原生屬性與 export API 測試；單元測試也納入 TypeScript 檢查 | [PR #9](https://github.com/stevenke1981/AcmeUI-Web/pull/9) 已合併（147 tests；人工瀏覽器 NOT_RUN） |
 | R008 | P2 | CLI 完整參數 parser（未知／重複／缺值 flags）、產物 theme listener cleanup 與套件安裝後實際 build matrix | [PR #10](https://github.com/stevenke1981/AcmeUI-Web/pull/10) 已合併（170 tests；3 隔離安裝 / 144 script builds） |
 | R009 | P2 | 以 HTML parser 驗證 48 預覽的巢狀結構／重複 ID／連結；360/768/1280/1536 自動瀏覽器 layout smoke 與跨框架比較 | 已完成自動化（185 Vitest / 25 Chromium；人工審查 NOT_RUN） |
-| R010 | P2 | CI / docs 的驗證命令與結果範圍同步，build warnings 分類並設 gate；建立 Gallery 全家族覆蓋檢查 | 待辦 |
+| R010 | P2 | CI / docs 的驗證命令與結果範圍同步，build warnings 分類並設 gate；建立 Gallery 全家族覆蓋檢查 | 已完成自動化（209 Vitest / 25 Chromium；人工審查 NOT_RUN） |
 
-本次接續工作最多依序完成 R007–R009，各自一個 PR，合併後同步 master。
-其餘項目維持 todos 未勾選，不將測試通過等同於專案完成。
+R001–R010 的自動化切片已實作；目前 todos 沒有其餘已授權的未勾選自動化項目。
+視覺 baseline 與 npm 發布繼續維持未勾選，不將自動化通過等同於專案完成或
+人工審查通過。CI 與合併證據見各 PR；不等待額度已用盡的 Codex review。
 
 ## 基準驗證與限制
 

@@ -1,10 +1,13 @@
 # Validation Report
 
-Date: 2026-11-10
+Date: 2026-11-11
 
 ## Automated evidence history
 
-Latest scope: R009 below and [browser smoke](docs/BROWSER_SMOKE.md).
+Current command/scope contract: [test.md](test.md),
+[accessibility scope](docs/ACCESSIBILITY.md) and
+[browser smoke](docs/BROWSER_SMOKE.md). R010 results follow the historical entries
+below. Earlier counts and open-work statements describe their original slices.
 
 Baseline `79aa7d1`: `pnpm test` passed (8 Vitest cases, 144 CLI scaffolds),
 `pnpm typecheck` passed, `pnpm build` passed without warnings.
@@ -52,7 +55,7 @@ R003 / Repository contracts:
 - Current preview checks remain structural string checks, **not** full HTML
   parser validation or browser validation. Those remain R009.
 
-See [ROADMAP-001](docs/roadmap/ROADMAP-001.md) for remaining R007–R010 work.
+See [ROADMAP-001](docs/roadmap/ROADMAP-001.md) for current roadmap status.
 
 ## NOT_RUN
 
@@ -72,8 +75,11 @@ establish full visual parity or accessibility conformance.
 
 ```bash
 pnpm test
+pnpm test:cli:installed
 pnpm typecheck
 pnpm build
+PLAYWRIGHT_BROWSERS_PATH="$PWD/.cache/ms-playwright" pnpm exec playwright install chromium --only-shell
+pnpm test:browser
 ```
 
 In this environment, Corepack's default global cache was not writable.
@@ -211,3 +217,51 @@ touch/DPI, Firefox/WebKit/other OS, native static dialog Tab/inert/Escape, compl
 rendered contrast/label checks, full family/state screenshots, full WCAG AA audit
 and human-approved visual baselines. No screenshot baselines were created or
 approved. R010 remains open; publication/releases/settings were not changed.
+
+## 2026-11-10–11 / R010 (current)
+
+Mode: review/fix. The first focused negative run reproduced five failures:
+all three workspace configs accepted a real bundler warning, and light/dark
+Gallery lacked rendered Sidebar/Footer examples. A separate negative case
+reproduced the JSON reporter writing outside CI's uploaded artifact directory.
+
+- `pnpm test`: PASS, 209 Vitest cases across 17 files, 144 scaffold checks and
+  96 generated React/Vue typechecks/bundles with workspace example toolchains.
+- `pnpm test:cli:installed`: PASS, three isolated pnpm manifest installations
+  and all 144 original generated build scripts. Identical manifests reuse each
+  isolated install; this is not 144 independent installations.
+- `pnpm typecheck`: PASS, including unit-test and browser TypeScript fixtures.
+- `pnpm build`: PASS, Gallery/static example plus React/Vue examples; no
+  production-build warnings observed in the passing run.
+- `pnpm test:browser`: PASS, 25 Chromium cases, all four widths in both themes,
+  384 preview visits and the existing representative adapter/focus/Gallery
+  comparisons. `output/browser/report.json` records 25 expected, zero unexpected,
+  zero flaky, zero skipped and zero global errors. JSON, layout attachments and
+  failure output now share CI's `output/browser/` upload directory.
+
+The shared Vite logger classifies CSS, asset/source-map, configuration,
+dependency, bundle and unknown diagnostics. Every `warn`/`warnOnce` fails,
+including unknown/keyword-free warnings; there are no exemptions. Vitest
+injects a real warning into each workspace config. Independent generated scripts
+retain a conservative captured-output gate; its matching/classification limits,
+development logging and pre-config limitations are explicit in test.md.
+
+Gallery now demonstrates all 23 runtime public families in reachable tabs/Modal
+states in light/dark themes, with Sidebar/Footer added to the presentation tab.
+Axe now scans that tab as well. The same shared CSS and semantic tokens still
+serve React/Vue/Tailwind/static; no product CSS or token values changed.
+CI's five required commands are checked against README/test/validation docs.
+Historical scope statements are explicitly identified as historical.
+
+An overlapping local run failed with page reload/context errors and a roughly
+31-minute execution interruption; the CLI gate also rejected PLUGIN_TIMINGS.
+That run was not counted as passing. The final ordered rerun above passed without
+relaxing checks. Browser workers emitted Node NO_COLOR/FORCE_COLOR notices,
+outside the production-build gate. Run the documented commands in order.
+
+NOT_RUN: human browser/visual review at 360/768/1280/1536, screen readers,
+physical touch/DPI, Firefox/WebKit/other OS, native static dialog Tab/inert/Escape,
+complete rendered contrast/label checks, full family/state screenshots, full
+WCAG AA audit, human-approved visual baselines and npm/yarn installation matrices.
+No npm publication, release, deployment or repository settings change occurred.
+Hosted CI/merge evidence is in the PR; local results alone do not authorize merge.
