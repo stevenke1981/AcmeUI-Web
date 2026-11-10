@@ -24,3 +24,12 @@ The default test gate validates 144 scaffolds, typechecks/bundles all 96 React/V
 outputs using workspace example toolchains, and runs 30 Vitest cases.
 Independent dependency installation remains unverified. Typecheck/build pass;
 no token or component styling changes were introduced.
+
+## 2026-11-10 development / R003
+
+Repository validation now enforces both framework export surfaces, shared/static
+CSS consistency and registry/metadata/catalog/Gallery alignment, with negative
+fixtures verifying failures. All local gates pass (50 Vitest cases, 144 scaffold
+checks, 96 workspace-toolchain typechecks/bundles). R004–R010 remain open.
+Human browser/responsive review, screen readers, touch/DPI, visual baselines and
+independent scaffold installation remain NOT_RUN; no release was created.

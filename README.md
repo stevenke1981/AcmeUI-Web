@@ -58,6 +58,12 @@ node scripts/test-cli.mjs
 ```
 完整依賴安裝後執行 `pnpm typecheck && pnpm build`。
 
+`pnpm test` 另包含 Vitest 與全部 CLI 產物檢查：144 組結構驗證、96 組
+React/Vue 來源型別檢查與 Vite 打包（沿用 example toolchain）。驗證器也會
+拒絕元件家族、shared/static CSS、registry metadata、catalog 與 Gallery 資料
+漂移。尚待實作與未驗證範圍見 [ROADMAP-001](docs/roadmap/ROADMAP-001.md)
+及 [VALIDATION.md](VALIDATION.md)。
+
 ## Agent Skill
 
 專案內建 [`acmeui-web` Skill](skills/acmeui-web/SKILL.md)，涵蓋跨框架元件、

@@ -1,5 +1,6 @@
 # Test Strategy
-- `node scripts/validate.mjs`: files, registry, previews, component parity.
+- `node scripts/validate.mjs`: required files, 23-family export contract, shared/static
+  CSS drift, registry schema + metadata, preview files, catalog and Gallery data.
 - `node scripts/validate-skill.mjs`: Skill structure, metadata, manifest and live project health.
 - `node scripts/test-cli.mjs`: React, Vue and static scaffolding smoke tests.
 - `node scripts/test-cli.mjs --compile`: full 144 scaffolds plus 96 generated
@@ -21,3 +22,11 @@
 including CLI error paths, semantic HTML and nonempty-target preservation.
 `pnpm typecheck` / `pnpm build` pass. Independent installation and generated
 package-script builds remain NOT_RUN; shared workspace dependencies are used.
+
+## 2026-11-10 / R003
+
+`pnpm test` passes 50 Vitest cases, including 20 repository fixture cases that
+exercise validator exit codes and diagnostics. It also validates 144 scaffolds
+and 96 generated React/Vue typechecks/bundles. `pnpm typecheck` / `pnpm build`
+pass without observed warnings. Export checks cover names, not full type/API
+parity; preview HTML checks remain structural rather than parser/browser based.
