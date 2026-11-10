@@ -1,6 +1,6 @@
 # Test Strategy
 
-## Current required gates (R011)
+## Current required gates (R012)
 
 After `pnpm install --frozen-lockfile`, run the same five commands as
 `.github/workflows/ci.yml`:
@@ -22,7 +22,7 @@ Use repo-local `COREPACK_HOME="$PWD/.cache/corepack"` and
 
 | Command | Automated scope |
 |---|---|
-| `pnpm test` | Generated token drift, shared/static CSS, 23-family export contract, registry/metadata/catalog/Gallery data, selected HTML parser/local-link rules, Skill, 144 scaffolds, 96 workspace-toolchain typechecks/bundles, Vitest |
+| `pnpm test` | Generated token drift, shared/static CSS, 23-family export contract, registry/metadata/catalog/Gallery data, selected HTML parser/local-link rules, Skill, 144 scaffolds, 96 workspace-toolchain typechecks/bundles, Vitest including real preview-server HTTP requests |
 | `pnpm test:cli:installed` | Three isolated pnpm manifest installations; all 144 unmodified generated build scripts, including 96 React/Vue typechecks and dist outputs; identical manifests reuse each isolated install |
 | `pnpm typecheck` | Core/React/Vue/Gallery plus unit-test and browser TypeScript fixtures |
 | `pnpm build` | Gallery (including static example) and React/Vue examples, with build-warning gate |
@@ -86,6 +86,22 @@ cases at 360/768/1280/1536 in light/dark). No CSS/token changes. Static/Tailwind
 markup remains fixed during enhancement; cleanup/reinitialize is documented.
 Human checks and approved visual baselines remain NOT_RUN. Follow-up work is in
 [ROADMAP-002](docs/roadmap/ROADMAP-002.md); hosted status remains in the PR.
+
+## R012 / preview server HTTP boundary
+
+Fifteen Vitest HTTP cases start the real CLI server in isolated repo `tmp/`
+fixtures. Before the fix, seven cases failed: a same-prefix sibling and two
+escaping symlinks leaked fixture content, and four malformed request targets
+terminated the server. Directory-boundary and realpath checks now deny escapes;
+invalid URL/encoding/NUL input returns 400 without terminating the process.
+Normal HTML/CSS/JS, nested/encoded paths, internal symlinks and 404 recovery pass.
+Fixtures and out-of-root targets stay inside repo tmp; no other repo is read.
+This is a local preview-server regression scope, not a general security audit
+or a guarantee against concurrent filesystem replacement.
+
+All five local gates PASS: 234 Vitest / 18 files, existing scaffold/install/build
+matrices, typecheck/build and 25 Chromium cases. Components, Gallery, CSS and
+semantic tokens are unchanged. Human checks remain NOT_RUN.
 
 ## Historical evidence
 

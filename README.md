@@ -25,6 +25,10 @@ pnpm dev
 ```
 不安裝相依套件也可直接開啟 `previews/index.html`。
 
+`pnpm preview:static` 提供 `previews/` 的 HTTP 預覽。服務以目錄邊界與 realpath
+檢查限制讀取範圍；根目錄外的路徑/symlink 回傳 403，畸形 URL 回傳 400，
+服務仍繼續回應正常請求。repo 內的真實 HTTP fixtures 會驗證這些情境。
+
 ## CLI
 ```bash
 node packages/cli/bin/acmeui.mjs list

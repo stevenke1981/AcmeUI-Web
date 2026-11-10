@@ -18,8 +18,8 @@
 
 | ID | 優先序 | 範圍與自動驗收 | 狀態 |
 |---|---|---|---|
-| R011 | P1 | React/Vue Tabs 正規化無效選取、空清單、移除/重排；Vitest 對照測試、Gallery 動態範例與 API/static 說明；不改 CSS/tokens | 已實作；本機五 gates PASS（219 Vitest / 25 Chromium），CI/合併見 PR |
-| R012 | P1 | Static preview server 使用目錄邊界與實際路徑限制，安全處理畸形 URL；Vitest 真實 HTTP 測試含同前綴目錄、symlink、錯誤後服務存活、正常 HTML/CSS/JS | 待實作（本次 2/3） |
+| R011 | P1 | React/Vue Tabs 正規化無效選取、空清單、移除/重排；Vitest 對照測試、Gallery 動態範例與 API/static 說明；不改 CSS/tokens | [PR #13](https://github.com/stevenke1981/AcmeUI-Web/pull/13) 已合併；本機五 gates、兩組 hosted CI PASS |
+| R012 | P1 | Static preview server 使用目錄邊界與實際路徑限制，安全處理畸形 URL；Vitest 真實 HTTP 測試含同前綴目錄、symlink、錯誤後服務存活、正常 HTML/CSS/JS | 已實作；本機五 gates PASS（234 Vitest / 25 Chromium），CI/合併見 PR |
 | R013 | P1 | Chromium 操作真實 static dialog：四尺寸/亮暗色、鍵盤開啟、Tab/Shift+Tab、背景 focus 阻擋、Escape/close 焦點還原；保留 Vitest 委派/cleanup 回歸，記錄瀏覽器範圍 | 待實作（本次 3/3） |
 | R014 | P2 | Static Tabs 初始化前拒絕重複 tab id / 歧義關聯，錯誤後 markup 不變；Vitest 反例與重建測試 | 後續 |
 | R015 | P1 | React/Vue Modal 背景互動隔離契約與焦點外移防護；Vitest/browser 跨框架測試、Gallery 及 cleanup 邊界；先定義巢狀/多實例限制 | 後續 |

@@ -5,7 +5,21 @@ This is an ongoing development record, not a published release or a statement of
 production readiness. Current evidence is in VALIDATION.md and test.md. Entries
 below are historical snapshots; later slices supersede earlier open-work notes.
 
-## Current development / R011
+## Current development / R012
+
+R011 is merged in PR #13 (both hosted CI checks passed). From synced master,
+R012 fixes the static preview server's path boundary and malformed-request
+handling. Fifteen real HTTP regressions verify directory/symlink confinement,
+400/403/404 recovery and valid assets in repo-local fixtures. Framework APIs,
+Gallery, CSS and tokens are unchanged.
+
+All five local gates PASS: 234 Vitest, scaffold/install/build matrices,
+typecheck/build and 25 Chromium cases at four widths/both themes. CI and merge
+status are recorded in the PR. R013–R015 remain open. Human browser/visual review,
+screen readers, touch/DPI, full WCAG AA and approved baselines remain NOT_RUN.
+No publication, release, deployment or settings changes.
+
+## Historical development / R011
 
 ROADMAP-002 records the second audit at d493d70 and the next automatable gaps.
 R011 repairs dynamic React/Vue Tabs selection recovery and Vue keyboard refs

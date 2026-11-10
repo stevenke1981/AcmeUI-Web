@@ -6,7 +6,7 @@ Date: 2026-11-11
 
 Current command/scope contract: [test.md](test.md),
 [accessibility scope](docs/ACCESSIBILITY.md) and
-[browser smoke](docs/BROWSER_SMOKE.md). R011 results follow the historical entries
+[browser smoke](docs/BROWSER_SMOKE.md). R012 results follow the historical entries
 below. Earlier counts and open-work statements describe their original slices.
 
 Baseline `79aa7d1`: `pnpm test` passed (8 Vitest cases, 144 CLI scaffolds),
@@ -266,7 +266,7 @@ WCAG AA audit, human-approved visual baselines and npm/yarn installation matrice
 No npm publication, release, deployment or repository settings change occurred.
 Hosted CI/merge evidence is in the PR; local results alone do not authorize merge.
 
-## 2026-11-11 / R011 (current)
+## 2026-11-11 / R011
 
 Second audit starts at d493d70; findings/acceptance are in ROADMAP-002. Focused
 regression run reproduced 8 failed cases before the fix. React/Vue Tabs now
@@ -289,3 +289,25 @@ complete rendered contrast/label checks, full family/state screenshots, full
 WCAG AA audit, approved visual baselines, npm/yarn install matrices. No npm
 publication, release, deployment or repository settings changes. CI and merge
 evidence are in the PR; local passing results alone do not authorize merge.
+
+## 2026-11-11 / R012 (current)
+
+R011 merged as PR #13 after both hosted validate checks succeeded; this slice
+starts from synced master ee344b3. Real preview-server HTTP tests reproduced
+seven failures before the fix. Requests now use directory-boundary and realpath
+checks to deny same-prefix and symlink escapes; malformed URL/encoding/NUL input
+returns 400 and the server remains available. All fixtures remain in repo tmp/.
+No component, Gallery, CSS or token changes.
+
+- `pnpm test`: PASS, 234 Vitest cases / 18 files (15 real HTTP cases), 144
+  scaffolds and 96 generated React/Vue typechecks/bundles.
+- `pnpm test:cli:installed`: PASS, three isolated installs / 144 build scripts.
+- `pnpm typecheck` / `pnpm build`: PASS; no production-build warnings observed.
+- `pnpm test:browser`: PASS, 25 Chromium cases / four widths / both themes.
+
+NOT_RUN: human browser/visual review (360/768/1280/1536), screen readers, physical
+touch/DPI, Firefox/WebKit/other OS, native static dialog Tab/inert/Escape, full
+rendered contrast/label checks, full WCAG AA audit, full screenshots, approved
+visual baselines, npm/yarn install matrices, adversarial concurrent filesystem
+replacement. No npm publication/release/deployment/settings changes. Hosted
+CI/merge evidence remains in the PR; local results alone do not authorize merge.
