@@ -21,7 +21,7 @@
 - [x] R003 / P1：雙向元件家族契約、CSS drift、registry metadata / catalog 驗證
 - [x] R004 / P1：靜態 HTML Tabs / Modal 漸進增強與鍵盤測試
 - [x] R005 / P1：表單、Switch、Button、Progress、Pagination 行為對照測試
-- [ ] R006 / P1：語意色彩、對比、Gallery accessible names 與 axe 基線
+- [x] R006 / P1：語意色彩、對比、Gallery accessible names 與 axe 基線
 - [ ] R007 / P2：其餘元件語意測試與單元測試 typecheck
 - [ ] R008 / P2：CLI 嚴格參數解析、theme cleanup 與安裝後 build matrix
 - [ ] R009 / P2：預覽 HTML parser 與四尺寸瀏覽器 layout smoke

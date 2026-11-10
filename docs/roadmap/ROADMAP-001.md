@@ -22,8 +22,8 @@
 | R002 | P0 | 補齊 CLI 產物的型別依賴與語意 HTML 外殼；以既有 workspace toolchain 編譯全部 React / Vue 產物，Vitest 覆蓋錯誤輸入與非空目標保護 | [PR #4](https://github.com/stevenke1981/AcmeUI-Web/pull/4) 已合併 |
 | R003 | P1 | 固定 23 家族契約、雙向 export parity、static/shared CSS drift、registry metadata / preview / catalog / Gallery 資料對齊；以壞 fixture 驗證 validator 確實失敗 | 已完成（50 tests / 本機 gates PASS） |
 | R004 | P1 | 靜態 HTML Tabs / Modal 漸進增強範例與可選 JS；鍵盤、焦點、cleanup 測試；更新 framework matrix 與 Gallery 連結 | [PR #6](https://github.com/stevenke1981/AcmeUI-Web/pull/6) 已合併（native Tab 待瀏覽器） |
-| R005 | P1 | 表單／Switch／Button／Progress／Pagination 邊界行為與 React / Vue 對照測試；修正可重現 API 差異並更新 Gallery | 已完成（98 tests / 本機 gates PASS） |
-| R006 | P1 | 語意 overlay / switch tokens、亮暗色文字與 focus 對比自動計算、Gallery accessible names、axe 基線；不得以 jsdom 代替瀏覽器審查 | 待辦 |
+| R005 | P1 | 表單／Switch／Button／Progress／Pagination 邊界行為與 React / Vue 對照測試；修正可重現 API 差異並更新 Gallery | [PR #7](https://github.com/stevenke1981/AcmeUI-Web/pull/7) 已合併 |
+| R006 | P1 | 語意 overlay / switch tokens、亮暗色文字與 focus 對比自動計算、Gallery accessible names、axe 基線；不得以 jsdom 代替瀏覽器審查 | 已完成自動化（110 tests / 本機 gates PASS；瀏覽器審查 NOT_RUN） |
 | R007 | P2 | 其餘展示元件的語意、插槽、原生屬性與 export API 測試；單元測試也納入 TypeScript 檢查 | 待辦 |
 | R008 | P2 | CLI 完整參數 parser（未知／重複／缺值 flags）、產物 theme listener cleanup 與套件安裝後實際 build matrix | 待辦 |
 | R009 | P2 | 以 HTML parser 驗證 48 預覽的巢狀結構／重複 ID／連結；360/768/1280/1536 自動瀏覽器 layout smoke 與跨框架比較 | 待辦 |

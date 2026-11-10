@@ -77,3 +77,8 @@ node skills/acmeui-web/scripts/check-project.mjs .
 
 ## License
 MIT。第三方產品名稱僅用於描述設計參考來源。
+
+Gallery 的靜態 Tabs／Modal 範例位於 `/static.html`。新增表單行為對照、
+語意色彩對比與 axe DOM gate；覆蓋範圍及未驗證項目見
+[Accessibility automation scope](docs/ACCESSIBILITY.md)。自動化通過不代表真人
+瀏覽器、視覺 baseline 或完整 WCAG AA 稽核通過。

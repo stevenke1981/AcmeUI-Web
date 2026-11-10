@@ -33,7 +33,8 @@ describe("React Tabs keyboard", () => {
   });
 
   it("links tabs and panels and still switches on click", () => {
-    render(<Tabs items={items} defaultValue="b" />);
+    render(<Tabs items={items} defaultValue="b" label="Example tabs" />);
+    expect(screen.getByRole("tablist", { name: "Example tabs" })).toBeTruthy();
     const panel = screen.getByRole("tabpanel");
     const selected = screen.getByRole("tab", { selected: true });
     expect(selected.textContent).toBe("Beta");
