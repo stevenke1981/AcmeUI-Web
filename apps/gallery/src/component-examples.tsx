@@ -1,4 +1,5 @@
 import { useId, useState } from "react";
+import { DynamicTabsExample } from "./dynamic-tabs";
 import { Button, Checkbox, Field, Input, Pagination, Progress, Select, Switch, Textarea } from "@acmeui/react";
 
 export function BehaviorExamples() {
@@ -19,5 +20,6 @@ export function BehaviorExamples() {
     <p>有限值限制在 0–100；非有限值顯示 0。</p>
     <Pagination page={page} totalPages={20} onPageChange={setPage} />
     <p>目前第 {page}／20 頁；最多顯示包含目前頁的七頁；窄螢幕自動換行。</p>
+    <DynamicTabsExample />
   </div>;
 }

@@ -6,7 +6,7 @@ Date: 2026-11-11
 
 Current command/scope contract: [test.md](test.md),
 [accessibility scope](docs/ACCESSIBILITY.md) and
-[browser smoke](docs/BROWSER_SMOKE.md). R010 results follow the historical entries
+[browser smoke](docs/BROWSER_SMOKE.md). R011 results follow the historical entries
 below. Earlier counts and open-work statements describe their original slices.
 
 Baseline `79aa7d1`: `pnpm test` passed (8 Vitest cases, 144 CLI scaffolds),
@@ -218,7 +218,7 @@ rendered contrast/label checks, full family/state screenshots, full WCAG AA audi
 and human-approved visual baselines. No screenshot baselines were created or
 approved. R010 remains open; publication/releases/settings were not changed.
 
-## 2026-11-10–11 / R010 (current)
+## 2026-11-10–11 / R010
 
 Mode: review/fix. The first focused negative run reproduced five failures:
 all three workspace configs accepted a real bundler warning, and light/dark
@@ -265,3 +265,27 @@ complete rendered contrast/label checks, full family/state screenshots, full
 WCAG AA audit, human-approved visual baselines and npm/yarn installation matrices.
 No npm publication, release, deployment or repository settings change occurred.
 Hosted CI/merge evidence is in the PR; local results alone do not authorize merge.
+
+## 2026-11-11 / R011 (current)
+
+Second audit starts at d493d70; findings/acceptance are in ROADMAP-002. Focused
+regression run reproduced 8 failed cases before the fix. React/Vue Tabs now
+recover from invalid defaults, empty/refilled lists and removed selections;
+Vue keyboard refs follow reordered items. Gallery adds a dynamic example and
+API/static docs explain initial-only defaults and cleanup/reinitialize.
+Shared/static CSS and semantic tokens are unchanged across all four adapters.
+
+- `pnpm test`: PASS, 219 Vitest cases / 17 files, 144 scaffolds, 96 generated
+  React/Vue typechecks and bundles with workspace toolchains.
+- `pnpm test:cli:installed`: PASS, three isolated pnpm installs and all 144
+  unmodified build scripts (identical manifests reuse dependencies).
+- `pnpm typecheck` / `pnpm build`: PASS; no production-build warnings observed.
+- `pnpm test:browser`: PASS, 25 Chromium cases, four widths / both themes,
+  384 preview visits and representative adapter/focus/Gallery comparisons.
+
+NOT_RUN: human browser/visual review (360/768/1280/1536), screen readers,
+physical touch/DPI, Firefox/WebKit/other OS, native static dialog Tab/inert/Escape,
+complete rendered contrast/label checks, full family/state screenshots, full
+WCAG AA audit, approved visual baselines, npm/yarn install matrices. No npm
+publication, release, deployment or repository settings changes. CI and merge
+evidence are in the PR; local passing results alone do not authorize merge.

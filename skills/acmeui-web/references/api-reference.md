@@ -24,6 +24,10 @@ Notable conventions:
   `disabled` and native button attributes. It always uses `type="button"`.
 - `Tabs`: item array with `value`, `label`, and `content`; optional `label` names
   the tablist (default 分頁內容) in both frameworks.
+  Values must be unique strings (an empty string is valid). `defaultValue` is
+  initial only. Unknown defaults or removed selections fall back to the first
+  available item; an empty list clears selection, and a later refill selects
+  its first item. Reordering preserves an existing selection and keyboard order.
 - `Navbar`: optional `label` names its navigation (default 主要導覽), in both frameworks.
 - `Modal`: controlled `open`, `title`, `onClose`.
 - Modal focus in React / Vue skips hidden, inert, aria-hidden, disabled and

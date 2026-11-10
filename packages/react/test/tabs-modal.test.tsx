@@ -12,6 +12,50 @@ const items = [
 ];
 
 describe("React Tabs keyboard", () => {
+  it("falls back to the first item for an unknown default value", () => {
+    render(<Tabs items={items} defaultValue="missing" />);
+    expect(screen.getByRole("tab", { selected: true }).textContent).toBe("Alpha");
+    expect(screen.getByRole("tabpanel").textContent).toBe("Panel A");
+  });
+
+  it("supports an empty-string value", () => {
+    render(<Tabs items={[...items, { value: "", label: "Empty", content: "Empty panel" }]} defaultValue="" />);
+    expect(screen.getByRole("tab", { selected: true }).textContent).toBe("Empty");
+  });
+
+  it("recovers after loading and clearing an initially empty list", () => {
+    const view = render(<Tabs items={[]} defaultValue="b" />);
+    expect(screen.queryByRole("tab")).toBeNull();
+    view.rerender(<Tabs items={items} defaultValue="b" />);
+    expect(screen.getByRole("tab", { selected: true }).textContent).toBe("Alpha");
+    fireEvent.click(screen.getByRole("tab", { name: "Gamma" }));
+    view.rerender(<Tabs items={[]} />);
+    expect(screen.queryByRole("tabpanel")).toBeNull();
+    view.rerender(<Tabs items={items} />);
+    expect(screen.getByRole("tab", { selected: true }).textContent).toBe("Alpha");
+  });
+
+  it("replaces a removed selection and does not resurrect it when reinserted", () => {
+    const view = render(<Tabs items={items} defaultValue="b" />);
+    view.rerender(<Tabs items={[items[0], items[2]]} defaultValue="b" />);
+    expect(screen.getByRole("tab", { selected: true }).tabIndex).toBe(0);
+    expect(screen.getByRole("tabpanel").textContent).toBe("Panel A");
+    view.rerender(<Tabs items={items} defaultValue="c" />);
+    expect(screen.getByRole("tab", { selected: true }).textContent).toBe("Alpha");
+  });
+
+  it("preserves selection and keyboard targets after reorder and prepend", () => {
+    const view = render(<Tabs items={items} defaultValue="b" />);
+    view.rerender(<Tabs items={[{ value: "d", label: "Delta", content: "Panel D" }, items[2], items[1], items[0]]} />);
+    const beta = screen.getByRole("tab", { selected: true });
+    expect(beta.textContent).toBe("Beta");
+    beta.focus();
+    fireEvent.keyDown(beta, { key: "ArrowRight" });
+    expect(document.activeElement).toBe(screen.getByRole("tab", { name: "Alpha" }));
+    fireEvent.keyDown(document.activeElement!, { key: "Home" });
+    expect(document.activeElement).toBe(screen.getByRole("tab", { name: "Delta" }));
+  });
+
   it("moves selection and focus with arrows, wrapping, and Home/End", () => {
     render(<Tabs items={items} />);
     const [a, b, c] = screen.getAllByRole("tab");

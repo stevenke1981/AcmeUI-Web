@@ -29,7 +29,8 @@
 | R009 | P2 | 以 HTML parser 驗證 48 預覽的巢狀結構／重複 ID／連結；360/768/1280/1536 自動瀏覽器 layout smoke 與跨框架比較 | 已完成自動化（185 Vitest / 25 Chromium；人工審查 NOT_RUN） |
 | R010 | P2 | CI / docs 的驗證命令與結果範圍同步，build warnings 分類並設 gate；建立 Gallery 全家族覆蓋檢查 | 已完成自動化（209 Vitest / 25 Chromium；人工審查 NOT_RUN） |
 
-R001–R010 的自動化切片已實作；目前 todos 沒有其餘已授權的未勾選自動化項目。
+R001–R010 的自動化切片已實作；當時 todos 沒有其餘已授權的未勾選自動化項目。
+2026-11-11 從 d493d70 進行的第二輪稽核與後續項目見 [ROADMAP-002](ROADMAP-002.md)。
 視覺 baseline 與 npm 發布繼續維持未勾選，不將自動化通過等同於專案完成或
 人工審查通過。CI 與合併證據見各 PR；不等待額度已用盡的 Codex review。
 
