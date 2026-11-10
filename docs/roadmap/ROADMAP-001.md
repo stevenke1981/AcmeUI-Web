@@ -19,7 +19,7 @@
 | ID | 優先序 | 具體範圍與自動驗收 | 狀態 |
 |---|---|---|---|
 | R001 | P0 | 修正共用 Modal 焦點候選與容器 fallback；core 反例測試、React / Vue 隱藏內容整合測試、Gallery 範例 | 已完成（本機 gates PASS） |
-| R002 | P0 | 補齊 CLI 產物的型別依賴與語意 HTML 外殼；以既有 workspace toolchain 編譯全部 React / Vue 產物，Vitest 覆蓋錯誤輸入與非空目標保護 | 待辦 |
+| R002 | P0 | 補齊 CLI 產物的型別依賴與語意 HTML 外殼；以既有 workspace toolchain 編譯全部 React / Vue 產物，Vitest 覆蓋錯誤輸入與非空目標保護 | 已完成（30 tests / 96 bundles） |
 | R003 | P1 | 固定 23 家族契約、雙向 export parity、static/shared CSS drift、registry metadata / preview / catalog 對齊；以壞 fixture 驗證 validator 確實失敗 | 待辦 |
 | R004 | P1 | 靜態 HTML Tabs / Modal 漸進增強範例與可選 JS；鍵盤、焦點、cleanup 測試；更新 framework matrix 與 Gallery 連結 | 待辦 |
 | R005 | P1 | 表單／Switch／Button／Progress／Pagination 邊界行為與 React / Vue 對照測試；修正可重現 API 差異並更新 Gallery | 待辦 |

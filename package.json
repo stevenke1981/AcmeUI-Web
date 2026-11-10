@@ -12,7 +12,7 @@
     "build": "pnpm -r --if-present build",
     "typecheck": "pnpm -r --if-present typecheck",
     "lint": "node scripts/build-tokens.mjs --check && node scripts/validate.mjs && node scripts/validate-skill.mjs",
-    "test": "node scripts/build-tokens.mjs --check && node scripts/validate.mjs && node scripts/validate-skill.mjs && node scripts/test-cli.mjs && vitest run",
+    "test": "node scripts/build-tokens.mjs --check && node scripts/validate.mjs && node scripts/validate-skill.mjs && node scripts/test-cli.mjs --compile && vitest run",
     "tokens:build": "node scripts/build-tokens.mjs",
     "gallery": "pnpm --filter @acmeui/gallery dev",
     "create": "node packages/cli/bin/acmeui.mjs create",
