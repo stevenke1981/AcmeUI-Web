@@ -33,9 +33,24 @@ R002 / CLI generated-project validation:
 - Invalid framework/template/name/missing values and nonempty target protection
   have Vitest coverage. Fixture creation and cleanup stay inside repo `tmp/`.
 
-Current preview checks are structural string checks, **not** full HTML parser
-validation. Export checks are currently one-way.
-See [ROADMAP-001](docs/roadmap/ROADMAP-001.md) for follow-up gates.
+R003 / Repository contracts:
+
+- The initial negative-fixture suite reproduced 17 failed expectations in the
+  old validator (18 cases); the expanded suite now has 20 passing cases.
+- The gate fixes the 23-family contract for both frameworks, permits exactly
+  three React composition helpers, catches unexpected/duplicate named exports
+  and re-export aliases, and verifies Vue source paths. This validates component
+  export names, not complete TypeScript API or behavioral equivalence.
+- Shared/static component CSS and each token import path are checked for drift.
+- All 48 registry entries have schema, metadata JSON, preview-file, catalog and
+  Gallery-data checks. Invalid slugs stop before preview path resolution; missing
+  HTML and malformed JSON produce actionable failures.
+- `pnpm test`: PASS, 50 Vitest cases plus 144 scaffolds and 96 generated bundles.
+- `pnpm typecheck` and `pnpm build`: PASS; no warnings observed.
+- Current preview checks remain structural string checks, **not** full HTML
+  parser validation or browser validation. Those remain R009.
+
+See [ROADMAP-001](docs/roadmap/ROADMAP-001.md) for remaining R004–R010 work.
 
 ## NOT_RUN
 

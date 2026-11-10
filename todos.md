@@ -18,7 +18,7 @@
 
 - [x] R001 / P0：Modal 焦點候選與容器 fallback，core + React/Vue 回歸測試
 - [x] R002 / P0：CLI 語意外殼、型別依賴、產物編譯與錯誤輸入測試
-- [ ] R003 / P1：雙向元件家族契約、CSS drift、registry metadata / catalog 驗證
+- [x] R003 / P1：雙向元件家族契約、CSS drift、registry metadata / catalog 驗證
 - [ ] R004 / P1：靜態 HTML Tabs / Modal 漸進增強與鍵盤測試
 - [ ] R005 / P1：表單、Switch、Button、Progress、Pagination 行為對照測試
 - [ ] R006 / P1：語意色彩、對比、Gallery accessible names 與 axe 基線
