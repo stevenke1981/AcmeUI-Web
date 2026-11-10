@@ -93,3 +93,7 @@ CLI parsing (R008): create requires exactly one safe name; the three flags accep
 duplicate and missing/empty values fail before output creation. list/help accept
 no extra arguments. Generated React/Vue theme listeners are scoped to the app
 root and removed by the framework's unmount lifecycle.
+
+R009 layout: Pagination wraps at narrow widths. Tailwind theme imports
+Tailwind theme/utilities without preflight; load shared base.css for the reset.
+The acme-focus utility uses the same opaque semantic ring as :focus-visible.

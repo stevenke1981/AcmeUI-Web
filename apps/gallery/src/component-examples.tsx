@@ -18,6 +18,6 @@ export function BehaviorExamples() {
     <Progress value={Number(value)} label="邊界值示範進度" />
     <p>有限值限制在 0–100；非有限值顯示 0。</p>
     <Pagination page={page} totalPages={20} onPageChange={setPage} />
-    <p>目前第 {page}／20 頁；最多顯示包含目前頁的七頁。</p>
+    <p>目前第 {page}／20 頁；最多顯示包含目前頁的七頁；窄螢幕自動換行。</p>
   </div>;
 }

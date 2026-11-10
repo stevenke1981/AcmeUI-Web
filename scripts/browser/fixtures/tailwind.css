@@ -1,0 +1,4 @@
+@import "@acmeui/tailwind/theme.css";
+@import "@acmeui/tailwind/preset.css";
+@import "../../../packages/styles/src/base.css";
+@source "./tailwind.html";

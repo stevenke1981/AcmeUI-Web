@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { validatePreviewHTML } from "./validate-html.mjs";
 
 const root = process.cwd();
 const errors = [];
@@ -117,6 +118,13 @@ try {
   if (!galleryJSON || !equal(JSON.parse(galleryJSON), templates)) errors.push("Gallery template data drift");
 } catch { errors.push("Invalid Gallery template data JSON"); }
 
+// Run the parser after registry/path checks; invalid metadata never resolves paths.
+if (errors.length === 0) {
+  for (const item of valid) {
+    const file = `previews/${item.slug}/index.html`;
+    errors.push(...await validatePreviewHTML(root, file, read(file)));
+  }
+}
 if (errors.length) {
   console.error([...new Set(errors)].join("\n"));
   process.exit(1);
@@ -124,4 +132,4 @@ if (errors.length) {
 console.log(`✓ ${templates.length} templates: schema, metadata, preview files, catalog and Gallery data`);
 console.log(`✓ ${families.length} component families in both frameworks (${reactNames.length} React / ${vueNames.length} Vue exports)`);
 console.log("✓ Shared/static component CSS match; token import paths verified");
-console.log("✓ Registry and framework contract checks passed (structural checks, not browser validation)");
+console.log("✓ Registry and framework contract checks passed (HTML parser/local links checked; browser smoke is a separate command)");

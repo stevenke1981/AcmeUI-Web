@@ -24,5 +24,5 @@
 - [x] R006 / P1：語意色彩、對比、Gallery accessible names 與 axe 基線
 - [x] R007 / P2：其餘元件語意測試與單元測試 typecheck
 - [x] R008 / P2：CLI 嚴格參數解析、theme cleanup 與安裝後 build matrix
-- [ ] R009 / P2：預覽 HTML parser 與四尺寸瀏覽器 layout smoke
+- [x] R009 / P2：預覽 HTML parser 與四尺寸瀏覽器 layout smoke
 - [ ] R010 / P2：驗證文件、build warning gate 與 Gallery 全家族覆蓋
