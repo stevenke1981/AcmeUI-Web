@@ -17,8 +17,11 @@
 
 Notable conventions:
 
-- `Button`: `variant`, `loading`, native button props.
-- `Switch`: controlled `checked` or uncontrolled `defaultChecked`, `onCheckedChange`.
+- `Button`: `variant`, `loading`, native button props. Defaults to `type="button"`;
+  opt into `type="submit"` for form submission. Loading replaces children/slot text
+  with 載入中…, disables activation and sets `aria-busy`.
+- `Switch`: controlled `checked` or uncontrolled `defaultChecked`, `onCheckedChange`,
+  `disabled` and native button attributes. It always uses `type="button"`.
 - `Tabs`: item array with `value`, `label`, and `content`.
 - `Modal`: controlled `open`, `title`, `onClose`.
 - Modal focus in React / Vue skips hidden, inert, aria-hidden, disabled and
@@ -52,3 +55,21 @@ Safety behavior:
 - Names permit letters, digits, dot, underscore, and hyphen.
 - Unsupported framework/template values fail.
 - Non-empty target directories fail rather than overwrite.
+
+## Form and numeric behavior (R005)
+
+Vue Switch uses `v-model` / `update:modelValue`, or local state initialized by
+`defaultChecked` when `modelValue` is absent. Both framework Switches expose
+a boolean `aria-checked` and `data-checked`. Vue Checkbox forwards native
+attributes (`id`, `name`, `required`, `disabled`, etc.) to the actual input.
+Vue form controls retain idiomatic `v-model`; React uses native value/events.
+
+Both Progress implementations use `clampPercent`: finite values clamp to 0–100;
+NaN and infinities map to 0. Both Pagination implementations use `paginationState`:
+totals floor to nonnegative safe integers; nonfinite/empty totals display no page
+and disable both directions. Pages floor/clamp to range (nonfinite defaults to 1);
+the visible window contains the current page and at most seven consecutive pages.
+Normalization affects rendering/events, not the parent value; Pagination remains
+controlled (`onPageChange` in React, `change` in Vue). Navigation buttons have
+explicit names and `type="button"`. Static/Tailwind users apply the same classes
+and native attributes; no separate form-state runtime is provided.

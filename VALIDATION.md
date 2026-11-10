@@ -95,3 +95,20 @@ jsdom dialog methods are test doubles: native Tab trapping, inert, Escape key
 delivery and visual parity remain NOT_RUN in a real browser. Human responsive
 review at 360/768/1280/1536, screen readers, physical touch/DPI and approved
 visual baselines remain NOT_RUN. No publication or release was performed.
+
+## 2026-11-10 / R005
+
+A shared React/Vue DOM behavior suite initially reproduced 11 failed cases.
+Both frameworks now default Button to type=button (explicit submit supported),
+replace loading content and expose aria-busy, support disabled/native Switch
+attributes and controlled/uncontrolled state, and use one bounded pagination
+window. Vue Progress shares nonfinite handling; Checkbox native attrs now reach
+the input. Form labels, native attributes and model updates have parity coverage.
+Gallery adds interactive form, progress-boundary and page-10 examples; appearance
+still uses unchanged shared/static CSS and semantic tokens across all adapters.
+
+`pnpm test`: PASS (98 Vitest cases, 144 scaffolds, 96 generated bundles).
+`pnpm typecheck` / `pnpm build`: PASS; no warnings observed.
+DOM activation tests do not prove real-browser Space/Enter or native Tab behavior.
+Human browser review at 360/768/1280/1536, screenshots, screen readers, physical
+touch/DPI and approved visual baselines remain NOT_RUN. No npm/release/deployment.

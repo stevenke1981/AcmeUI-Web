@@ -42,3 +42,11 @@ export function trapTabKey(event:{key:string;shiftKey:boolean;preventDefault:()=
   if(!event.shiftKey&&(active===last||!sequential)){event.preventDefault();first.focus();return true}
   return false;
 }
+
+/** Bounded pagination window; invalid/empty totals have no current page. */
+export function paginationState(page:number,totalPages:number):{page:number;totalPages:number;pages:number[]}{
+  const total=Number.isFinite(totalPages)?Math.min(Number.MAX_SAFE_INTEGER,Math.max(0,Math.floor(totalPages))):0;
+  const current=total===0?0:Math.min(total,Math.max(1,Number.isFinite(page)?Math.floor(page):1));
+  const count=Math.min(total,7),start=Math.max(1,Math.min(current-3,total-count+1));
+  return{page:current,totalPages:total,pages:Array.from({length:count},(_,index)=>start+index)};
+}
