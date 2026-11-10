@@ -17,9 +17,18 @@ export const focusableSelector=[
   "select:not([disabled])","textarea:not([disabled])","iframe","[contenteditable=true]","[tabindex]:not([tabindex='-1'])",
 ].join(",");
 
-/** Focusable descendants of a container, in DOM order. */
+/** Visible sequential-focus descendants, in DOM order (use tabindex 0 / -1 in dialogs). */
 export function getFocusable(container:HTMLElement):HTMLElement[]{
-  return Array.from(container.querySelectorAll<HTMLElement>(focusableSelector)).filter(el=>!el.hasAttribute("disabled")&&el.getAttribute("aria-hidden")!=="true");
+  return Array.from(container.querySelectorAll<HTMLElement>(focusableSelector)).filter(el=>{
+    if(el.matches(":disabled")||el.hasAttribute("disabled")||(el.hasAttribute("tabindex")&&el.tabIndex<0))return false;
+    const view=el.ownerDocument.defaultView;
+    for(let node:HTMLElement|null=el;node;node=node.parentElement){
+      if(node.hidden||node.hasAttribute("inert")||node.getAttribute("aria-hidden")==="true")return false;
+      const style=view?.getComputedStyle(node);
+      if(style?.display==="none"||style?.visibility==="hidden"||style?.visibility==="collapse")return false;
+    }
+    return true;
+  });
 }
 
 /** Keeps Tab / Shift+Tab inside a container. Returns true when focus was moved. */
@@ -28,8 +37,8 @@ export function trapTabKey(event:{key:string;shiftKey:boolean;preventDefault:()=
   const items=getFocusable(container);
   if(items.length===0){event.preventDefault();container.focus();return true}
   const first=items[0]!,last=items[items.length-1]!,active=container.ownerDocument.activeElement;
-  const inside=active instanceof HTMLElement&&container.contains(active);
-  if(event.shiftKey&&(active===first||!inside)){event.preventDefault();last.focus();return true}
-  if(!event.shiftKey&&(active===last||!inside)){event.preventDefault();first.focus();return true}
+  const sequential=items.some(item=>item===active);
+  if(event.shiftKey&&(active===first||!sequential)){event.preventDefault();last.focus();return true}
+  if(!event.shiftKey&&(active===last||!sequential)){event.preventDefault();first.focus();return true}
   return false;
 }

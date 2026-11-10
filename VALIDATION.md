@@ -1,39 +1,52 @@
 # Validation Report
 
-Date: 2026-07-23
+Date: 2026-11-10
 
-## Passed
-- Required workspace and documentation files.
-- 48 unique template registry entries.
-- 48 standalone preview directories with HTML, CSS and JavaScript.
-- JSON parsing for all project JSON files.
-- HTML parser checks for every preview.
-- React exports: 26 functions/components (23 primary component families plus card composition helpers).
-- Vue exports: 23 component families.
-- CLI exhaustive matrix: 48 templates × 3 frameworks = 144 generated projects.
-- Generated project metadata and required framework entry files.
-- Node syntax checks for CLI and validation scripts.
-- AcmeUI Web Skill frontmatter via the standard Skill Creator validator.
-- Skill manifest, Codex `agents/openai.yaml`, relative validation snapshot, and
-  live repository health through `scripts/validate-skill.mjs`.
+## Current automated evidence
 
-## Environment limitation
-A Chromium/Playwright visual screenshot pass was attempted, but local `file://`
-and loopback navigation were blocked by the execution environment administrator
-policy (`ERR_BLOCKED_BY_ADMINISTRATOR`). Static structure, responsive CSS,
-HTML parsing and generation tests passed. Run the Gallery locally after
-`pnpm install` for final visual review.
+Baseline `79aa7d1`: `pnpm test` passed (8 Vitest cases, 144 CLI scaffolds),
+`pnpm typecheck` passed, `pnpm build` passed without warnings.
+
+R001 / Modal focus eligibility:
+
+- Before the fix, new regression cases reproduced 11 failures.
+- `pnpm test`: PASS, 20 Vitest cases, 144 CLI scaffolds, token drift,
+  registry/export checks and Skill validation.
+- `pnpm typecheck`: PASS (core, React, Vue, Gallery).
+- `pnpm build`: PASS (Gallery, React example, Vue example), no warnings observed.
+- Shared focus helpers now exclude hidden/inert/aria-hidden ancestors,
+  CSS-hidden controls, negative tabindex and disabled fieldset descendants.
+  React and Vue both exercise the boundary behavior. Gallery demonstrates it.
+- Styling is unchanged across React, Vue, Tailwind and static HTML.
+
+CLI scaffolding currently checks entry files and metadata; it does **not**
+yet install or build generated projects. Current preview checks are structural
+string checks, **not** full HTML parser validation. Export checks are currently
+one-way. See [ROADMAP-001](docs/roadmap/ROADMAP-001.md) for follow-up gates.
+
+## NOT_RUN
+
+- Human review in a real browser, including 360 / 768 / 1280 / 1536 widths.
+- Screen readers, physical touch, device DPI, full WCAG AA audit.
+- Cross-framework screenshot comparisons, human-approved visual regression baselines.
+- Generated-project dependency installation and standalone build matrix.
+- npm publication, releases and deployment (outside this session's scope).
+
+The 2026-07-23 report recorded a browser attempt blocked by administrator policy.
+That is historical context only; no browser attempt or manual pass is claimed
+for this session. Automated DOM focus tests do not establish browser Tab behavior,
+visual parity or accessibility conformance.
 
 ## Commands
+
 ```bash
-node scripts/validate.mjs
-node scripts/validate-skill.mjs
-node skills/acmeui-web/scripts/check-project.mjs .
-node scripts/test-cli.mjs
-pnpm install
-pnpm lint
 pnpm test
 pnpm typecheck
 pnpm build
-pnpm dev
 ```
+
+In this environment, Corepack's default global cache was not writable.
+Commands used `COREPACK_HOME="$PWD/.cache/corepack"` and
+`TMPDIR="$PWD/.cache/tmp"` to keep caches and generated fixtures in this repo.
+Hosted CI status and merge evidence are recorded in the PR / session report;
+local results alone do not authorize merging.

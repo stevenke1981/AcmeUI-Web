@@ -21,6 +21,10 @@ Notable conventions:
 - `Switch`: controlled `checked` or uncontrolled `defaultChecked`, `onCheckedChange`.
 - `Tabs`: item array with `value`, `label`, and `content`.
 - `Modal`: controlled `open`, `title`, `onClose`.
+- Modal focus in React / Vue skips hidden, inert, aria-hidden, disabled and
+  negative-tabindex descendants. Tab from the panel falls back to the first
+  sequential control; Shift+Tab falls back to the last. Use tabindex 0 / -1
+  within dialogs; positive tabindex ordering and nested modals are unsupported.
 - `DataTable<T>`: typed columns plus row array.
 
 ## Vue exports

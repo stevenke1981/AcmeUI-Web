@@ -7,3 +7,12 @@ The tracked `skills/acmeui-web` package is part of the repository workflow:
 `AGENTS.md` routes matching tasks to it, Codex-facing metadata makes it
 discoverable after installation, and project tests verify that the Skill stays
 aligned with the live workspace.
+
+## 2026-11-10 development / R001
+
+Audit and prioritized acceptance criteria: `docs/roadmap/ROADMAP-001.md`.
+Shared Modal focus handling now skips hidden and nonsequential descendants and
+recovers from container focus. React/Vue regression tests and the Gallery were
+updated together; CSS and tokens are unchanged. Local test/typecheck/build pass.
+This is ongoing development, not a release or production-readiness declaration.
+Manual browser, responsive, screen reader and touch/DPI checks remain NOT_RUN.
