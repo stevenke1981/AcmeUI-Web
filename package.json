@@ -12,13 +12,23 @@
     "build": "pnpm -r --if-present build",
     "typecheck": "pnpm -r --if-present typecheck",
     "lint": "node scripts/build-tokens.mjs --check && node scripts/validate.mjs && node scripts/validate-skill.mjs",
-    "test": "node scripts/build-tokens.mjs --check && node scripts/validate.mjs && node scripts/validate-skill.mjs && node scripts/test-cli.mjs",
+    "test": "node scripts/build-tokens.mjs --check && node scripts/validate.mjs && node scripts/validate-skill.mjs && node scripts/test-cli.mjs && vitest run",
     "tokens:build": "node scripts/build-tokens.mjs",
     "gallery": "pnpm --filter @acmeui/gallery dev",
     "create": "node packages/cli/bin/acmeui.mjs create",
-    "preview:static": "node scripts/serve-static.mjs"
+    "preview:static": "node scripts/serve-static.mjs",
+    "test:unit": "vitest run"
   },
   "devDependencies": {
-    "typescript": "^5.9.2"
+    "@testing-library/dom": "^10.4.2",
+    "@testing-library/react": "^16.3.3",
+    "@vitejs/plugin-vue": "^6.0.8",
+    "@vue/test-utils": "^2.5.1",
+    "jsdom": "^26.1.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.7",
+    "vue": "^3.5.40"
   }
 }
