@@ -16,3 +16,11 @@ recovers from container focus. React/Vue regression tests and the Gallery were
 updated together; CSS and tokens are unchanged. Local test/typecheck/build pass.
 This is ongoing development, not a release or production-readiness declaration.
 Manual browser, responsive, screen reader and touch/DPI checks remain NOT_RUN.
+
+## 2026-11-10 development / R002
+
+CLI outputs include semantic HTML documents and React type dependencies.
+The default test gate validates 144 scaffolds, typechecks/bundles all 96 React/Vue
+outputs using workspace example toolchains, and runs 30 Vitest cases.
+Independent dependency installation remains unverified. Typecheck/build pass;
+no token or component styling changes were introduced.

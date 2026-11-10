@@ -19,17 +19,31 @@ R001 / Modal focus eligibility:
   React and Vue both exercise the boundary behavior. Gallery demonstrates it.
 - Styling is unchanged across React, Vue, Tailwind and static HTML.
 
-CLI scaffolding currently checks entry files and metadata; it does **not**
-yet install or build generated projects. Current preview checks are structural
-string checks, **not** full HTML parser validation. Export checks are currently
-one-way. See [ROADMAP-001](docs/roadmap/ROADMAP-001.md) for follow-up gates.
+R002 / CLI generated-project validation:
+
+- Before the fix, React and Vue HTML-shell regression cases both failed.
+- `pnpm test`: PASS, 30 Vitest cases; 144 CLI scaffolds checked for semantic
+  document shell / metadata, all 48 static scripts syntax checked.
+- All 96 React / Vue generated source trees typechecked (one program per
+  framework, identical compiler settings verified) and individually bundled
+  with Vite using installed example toolchains. Build warnings fail this gate.
+- `pnpm typecheck` and `pnpm build`: PASS; no warnings observed.
+- React outputs now declare React type dependencies. Both framework outputs
+  include language, viewport, description and title. Shared CSS is unchanged.
+- Invalid framework/template/name/missing values and nonempty target protection
+  have Vitest coverage. Fixture creation and cleanup stay inside repo `tmp/`.
+
+Current preview checks are structural string checks, **not** full HTML parser
+validation. Export checks are currently one-way.
+See [ROADMAP-001](docs/roadmap/ROADMAP-001.md) for follow-up gates.
 
 ## NOT_RUN
 
 - Human review in a real browser, including 360 / 768 / 1280 / 1536 widths.
 - Screen readers, physical touch, device DPI, full WCAG AA audit.
 - Cross-framework screenshot comparisons, human-approved visual regression baselines.
-- Generated-project dependency installation and standalone build matrix.
+- Independent generated-project dependency installation / package-script build
+  matrix (workspace-toolchain typechecking and bundling did run).
 - npm publication, releases and deployment (outside this session's scope).
 
 The 2026-07-23 report recorded a browser attempt blocked by administrator policy.

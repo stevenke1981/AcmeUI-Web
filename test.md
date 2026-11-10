@@ -2,6 +2,8 @@
 - `node scripts/validate.mjs`: files, registry, previews, component parity.
 - `node scripts/validate-skill.mjs`: Skill structure, metadata, manifest and live project health.
 - `node scripts/test-cli.mjs`: React, Vue and static scaffolding smoke tests.
+- `node scripts/test-cli.mjs --compile`: full 144 scaffolds plus 96 generated
+  React/Vue source typechecks and individual Vite bundles, using example toolchains.
 - After install: `pnpm typecheck && pnpm build`.
 
 ## 2026-11-10 / R001
@@ -12,3 +14,10 @@
 - `pnpm typecheck` and `pnpm build`: passed; no build warnings observed.
 - jsdom only; manual browser, four responsive widths, screen reader, touch/DPI
   and approved visual baselines remain NOT_RUN. See `VALIDATION.md`.
+
+## 2026-11-10 / R002
+
+`pnpm test` now includes the compiler/bundler matrix and 30 Vitest cases,
+including CLI error paths, semantic HTML and nonempty-target preservation.
+`pnpm typecheck` / `pnpm build` pass. Independent installation and generated
+package-script builds remain NOT_RUN; shared workspace dependencies are used.
