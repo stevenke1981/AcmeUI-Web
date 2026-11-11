@@ -1,4 +1,4 @@
-# Automated HTML and browser smoke (R009–R017)
+# Automated HTML and browser smoke (R009–R019)
 
 The parser gate runs in `pnpm lint` / `pnpm test`. It uses HTML-validate 9's HTML5
 content models for close order, implicit closes, allowed parents/children,
@@ -27,7 +27,7 @@ CI upload path. A Vitest guard checks both resolved paths against that directory
 See the official [Playwright browser installation](https://playwright.dev/docs/browsers)
 and [HTML-validate rules](https://html-validate.org/rules/index.html).
 
-The current 51 Chromium headless cases cover:
+The current 59 Chromium headless cases cover:
 
 - 48 previews × 360/768/1280/1536 × light/dark: no document horizontal overflow
   beyond 1px rounding, visible h1/nonempty main, working theme toggle where
@@ -112,3 +112,12 @@ panel and Modal lifecycle stay mounted. The pre-fix 360/light case failed on
 reverse entry to the checked radio; the final full gate passes all 51 cases.
 Unchecked radio focus history/platform differences remain browser-owned. This is
 Chromium evidence, not cross-engine or human keyboard/visual approval.
+
+R019 adds eight four-width/theme cases with real Escape key presses in React/Vue
+fixtures and Gallery. A child consumes the first Escape: the Modal stays open,
+focus stays on the child and background inert remains in the adapter fixtures.
+The next uncancelled Escape closes and restores opener focus. Gallery notes end
+editing without losing text before allowing dismissal. One initial 360/light
+case failed before the shared handler fix. Cancelled Tab/Shift+Tab and synthetic
+isComposing events are covered by Vitest; these browser cases do not exercise a
+real OS IME or certify human keyboard/visual behavior.

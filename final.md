@@ -5,7 +5,27 @@ This is an ongoing development record, not a published release or a statement of
 production readiness. Current evidence is in VALIDATION.md and test.md. Entries
 below are historical snapshots; later slices supersede earlier open-work notes.
 
-## Current development / R018
+## Current development / R019
+
+Review/fix from master 23392f9 after R018 / PR #20 merged. React/Vue share a Modal
+keydown guard for defaultPrevented and isComposing; ordinary Escape/Tab behavior
+remains covered. Gallery notes consume one Escape and retain edited text before
+allowing dismissal. Thirteen new Vitest cases and eight four-width/theme browser
+cases cover both adapters and Gallery. Static/Tailwind native dialog delegation,
+shared CSS and semantic tokens are unchanged.
+
+All five local gates PASS: 304 Vitest / 23 files, existing 144-scaffold / 96-bundle
+and three-install / 144-build matrices, typecheck/build and final 59 Chromium
+cases (zero unexpected/flaky/skipped or global errors in that run). An initial
+browser run had two native-focus timeouts with simultaneous ~349-second trace
+gaps; affected cases and the full suite passed again without code/timeout/retry
+changes. Details are in VALIDATION.md. ROADMAP-004's implementation items are
+checked; hosted CI/merge evidence remains in the PR. Next work starts with a new
+audit/ROADMAP. Human browser/visual review, OS IME, screen readers, physical
+touch/DPI, full WCAG AA and approved visual baselines remain NOT_RUN. No npm
+publication, release, deployment or settings change.
+
+## R018
 
 Review/fix from master 06ef00a, preserving the existing R018 branch work. A shared
 Tabs value guard rejects duplicates during React/Vue initialization and updates

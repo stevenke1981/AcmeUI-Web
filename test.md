@@ -1,6 +1,6 @@
 # Test Strategy
 
-## Current required gates (R018)
+## Current required gates (R019)
 
 After `pnpm install --frozen-lockfile`, run the same five commands as
 `.github/workflows/ci.yml`:
@@ -26,7 +26,7 @@ Use repo-local `COREPACK_HOME="$PWD/.cache/corepack"` and
 | `pnpm test:cli:installed` | Three isolated pnpm manifest installations; all 144 unmodified generated build scripts, including 96 React/Vue typechecks and dist outputs; identical manifests reuse each isolated install |
 | `pnpm typecheck` | Core/React/Vue/Gallery plus unit-test and browser TypeScript fixtures |
 | `pnpm build` | Gallery (including static example) and React/Vue examples, with build-warning gate |
-| `pnpm test:browser` | 51 headless Chromium cases; all 48 previews at four widths/two themes, representative four-adapter style/geometry comparison, focus ring, Gallery Tabs/Modal and native static dialog; see docs/BROWSER_SMOKE.md |
+| `pnpm test:browser` | 59 headless Chromium cases; all 48 previews at four widths/two themes, representative four-adapter style/geometry comparison, focus ring, Gallery Tabs/Modal, child keyboard cancellation and native static dialog; see docs/BROWSER_SMOKE.md |
 
 Vitest imports the actual Gallery App, visits every tab and opens its Modal in
 both themes. All 23 families must render using their real class/semantic
@@ -168,6 +168,18 @@ input requirement; shared/static CSS and semantic tokens are unchanged.
 
 These checks do not test independent/hydrated root ID prefixes or human browser,
 screen-reader, touch/DPI or visual baseline behavior. R019 remains in ROADMAP-004.
+
+## R019 / Modal keyboard event ownership
+
+The initial 12-case focused run reproduced ten failures across React/Vue:
+cancelled Escape/Tab and synthetic composing Escape/Tab were still handled.
+One 360/light Chromium case also failed when a real Escape closed the Modal
+after a child prevented default. The shared document listener now returns for
+defaultPrevented or isComposing before Escape dismissal or Tab trapping.
+Thirteen new Vitest cases include normal-key controls, both Tab directions and
+the Gallery notes consumer. Eight new Chromium cases operate both adapters and
+Gallery in all four widths/themes. Synthetic composition flags do not validate
+OS IME. Static/Tailwind native-dialog delegation, CSS and tokens are unchanged.
 
 ## Historical evidence
 

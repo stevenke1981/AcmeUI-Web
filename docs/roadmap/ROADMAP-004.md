@@ -14,15 +14,16 @@
   R018 修正前的初始／動態輸入案例共重現六個失敗（含重複空字串）。
 - Modal 的 document keydown 未檢查 defaultPrevented / isComposing；
   子控制項取消 Escape 或 IME 組字中的 Escape 仍會要求關閉，Tab 也可能
-  覆蓋子控制項自己的鍵盤處理。這是原始碼與測試缺口，實際事件回歸待 R019。
+  覆蓋子控制項自己的鍵盤處理。R019 初次 Vitest 重現十個失敗，360/light
+  Chromium 也重現子控制項取消 Escape 後仍被關閉。
   不把合成組字事件當作真人／OS IME 驗證。
 
 ## 可驗收切片
 
 | ID | 優先序 | 範圍與自動驗收 | 狀態 |
 |---|---|---|---|
-| R018 | P2 | 共用 Tabs value 唯一性驗證，React/Vue 初始與動態無效輸入報錯，有效空字串／特殊字元／同一 app 多實例保持有效；Gallery/API/驗證文件更新 | 已實作，本機五項 gate PASS；hosted/merge 證據見 PR |
-| R019 | P2 | 共用 Modal 尊重 defaultPrevented / isComposing；兩框架 Vitest 驗證被取消的 Escape/Tab 與組字旗標、一般 Escape 仍可關閉；Chromium 以真實鍵盤驗證子控制項取消後 Modal 仍開啟，下一次未取消可關閉；Gallery/API 與 OS IME 未驗證範圍更新 | 待後續 |
+| R018 | P2 | 共用 Tabs value 唯一性驗證，React/Vue 初始與動態無效輸入報錯，有效空字串／特殊字元／同一 app 多實例保持有效；Gallery/API/驗證文件更新 | 已合併 [PR #20](https://github.com/stevenke1981/AcmeUI-Web/pull/20)，merge commit 23392f9；兩組 CI 成功且 MERGEABLE |
+| R019 | P2 | 共用 Modal 尊重 defaultPrevented / isComposing；兩框架 Vitest 驗證被取消的 Escape/Tab 與組字旗標、一般 Escape 仍可關閉；Chromium 以真實鍵盤驗證子控制項取消後 Modal 仍開啟，下一次未取消可關閉；Gallery/API 與 OS IME 未驗證範圍更新 | 已實作，本機五項 gate PASS；hosted/merge 證據見 PR |
 
 每片均跑 `pnpm test`、`pnpm test:cli:installed`、`pnpm typecheck`、
 `pnpm build`、`pnpm test:browser`。本機 PASS、hosted CI 全成功且 MERGEABLE
@@ -33,6 +34,13 @@ R018 本機證據：291 Vitest / 22 files、144 scaffolds / 96 workspace bundles
 八個新增 Vitest 案例覆蓋兩框架初始／更新、有效值及同一 app 多實例；
 Vue 驗證錯誤經 errorHandler 回報後修復輸入。獨立／hydrated root 的 ID prefix
 由框架設定負責，本片不另行驗證。
+
+R019 本機證據：304 Vitest / 23 files、既有 CLI 矩陣／隔離安裝、
+typecheck/build 與最終 59 Chromium cases 全通過。新增 13 個 Vitest 及
+8 個跨框架／Gallery 瀏覽器案例；備註修改後先處理 Escape 並保留文字，再次
+Escape 關閉。首次完整 browser gate 有兩個既有 native-focus 案例逾時，
+trace 同時出現約 349 秒空檔；原設定下兩個針對性案例及完整 59 案例重跑
+通過。未為此修改程式、timeout、retries 或豁免；詳細證據見 VALIDATION。
 
 ## 人工與授權邊界
 
