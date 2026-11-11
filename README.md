@@ -78,7 +78,8 @@ script；這不是 144 次獨立安裝。Chromium 安裝只需在尚未安裝時
 React/Vue 來源型別檢查與 Vite 打包（沿用 example toolchain）。驗證器也會
 拒絕元件家族、shared/static CSS、registry metadata、catalog 與 Gallery 資料
 漂移。尚待實作與未驗證範圍見 [ROADMAP-001](docs/roadmap/ROADMAP-001.md)、
-第二輪 [ROADMAP-002](docs/roadmap/ROADMAP-002.md)
+第二輪 [ROADMAP-002](docs/roadmap/ROADMAP-002.md)、
+第三輪 [ROADMAP-003](docs/roadmap/ROADMAP-003.md)
 及 [VALIDATION.md](VALIDATION.md)。
 
 ## Agent Skill
@@ -119,3 +120,8 @@ R015 加入 React/Vue Modal 共用背景 native inert、程式焦點外移防護
 每份 document 同時只支援一個開啟的 Modal。八個四尺寸/亮暗色跨框架案例使
 Chromium gate 擴充為 43 案例；契約、原有 inert 還原及未支援情境見
 [framework matrix](docs/FRAMEWORK_MATRIX.md) 與 [browser smoke](docs/BROWSER_SMOKE.md)。
+
+R016 讓 React 與 Vue/static 一樣保留所有 Tabs panel，未選取內容隱藏，
+每個 aria-controls 都有對應目標，切換/重排保留內容狀態。Gallery 動態分頁
+展示草稿保留，家族 gate 僅計算可見且未被 inert/aria-hidden 排除的範例。
+內容生命週期契約見 [API reference](skills/acmeui-web/references/api-reference.md)。

@@ -28,6 +28,11 @@ Notable conventions:
   initial only. Unknown defaults or removed selections fall back to the first
   available item; an empty list clears selection, and a later refill selects
   its first item. Reordering preserves an existing selection and keyboard order.
+  All panels remain mounted so every tab's aria-controls resolves. Inactive panels
+  use hidden (React) / display:none via v-show (Vue), preserving content across
+  selection/reorder; React child state, effects and uncontrolled values remain
+  mounted. Removing an item or clearing the list unmounts its content. Consumers
+  should pause effects that depend on active visibility themselves.
 - `Navbar`: optional `label` names its navigation (default 主要導覽), in both frameworks.
 - `Modal`: controlled `open`, `title`, `onClose`.
 - Modal focus in React / Vue skips hidden, inert, aria-hidden, disabled and

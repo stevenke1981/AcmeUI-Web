@@ -6,7 +6,7 @@ Date: 2026-11-11
 
 Current command/scope contract: [test.md](test.md),
 [accessibility scope](docs/ACCESSIBILITY.md) and
-[browser smoke](docs/BROWSER_SMOKE.md). R015 results follow the historical entries
+[browser smoke](docs/BROWSER_SMOKE.md). R016 results follow the historical entries
 below. Earlier counts and open-work statements describe their original slices.
 
 Baseline `79aa7d1`: `pnpm test` passed (8 Vitest cases, 144 CLI scaffolds),
@@ -371,7 +371,7 @@ checks, full family/state screenshots, full WCAG AA audit, human-approved visual
 baselines and npm/yarn installation matrices. No publication, release, deployment
 or settings changes. R015 remains open; hosted CI/merge evidence is in the PR.
 
-## 2026-11-11 / R015 (current)
+## 2026-11-11 / R015
 
 R014 merged in PR #16 after both hosted validate checks passed. This slice starts
 from master 43f1420. The first focused DOM run reproduced seven failed cases.
@@ -403,3 +403,31 @@ physical touch/DPI, Firefox/WebKit/other OS, complete rendered contrast/label
 checks, full family/state screenshots, full WCAG AA audit, human-approved visual
 baselines and npm/yarn install matrices. No npm publication, release, deployment
 or repository settings changes. Hosted CI/merge evidence is in the PR.
+
+## 2026-11-11 / R016 (current)
+
+R015 merged in PR #17 after both hosted validate checks passed. The third audit
+starts at master 2058a04 and is recorded in ROADMAP-003. Two initial React cases
+reproduced missing inactive panel targets and lost uncontrolled input values.
+React now retains each panel with hidden visibility; Vue/static already retained
+panels. Selection/reorder keeps content nodes and values; deletion/clear unmounts.
+React child effects also stay mounted; visibility-dependent effects are app-owned.
+Gallery shows a draft input and family coverage excludes hidden/aria-hidden/inert/
+CSS-hidden examples. Four new Vitest cases cover these contracts. Existing eight
+Gallery browser scenarios now check all tab IDREFs and nested/outer-tab draft
+retention. Shared/static CSS and semantic tokens are unchanged across adapters.
+
+- `pnpm test`: PASS, 273 Vitest / 20 files, 144 scaffolds and 96 generated
+  React/Vue typechecks/bundles with workspace toolchains.
+- `pnpm test:cli:installed`: PASS, three isolated installs / 144 build scripts.
+- `pnpm typecheck` / `pnpm build`: PASS; no production-build warnings observed.
+- `pnpm test:browser`: PASS, 43 Chromium cases at 360/768/1280/1536 in both
+  themes, zero unexpected/flaky/skipped or global errors. Existing Gallery cases
+  now verify complete IDREFs and draft retention across nested/outer tab switches.
+
+NOT_RUN: human browser/visual/keyboard review at 360/768/1280/1536, screen readers,
+physical touch/DPI, Firefox/WebKit/other OS, complete rendered contrast/label
+checks, full family/state screenshots, full WCAG AA, human-approved visual
+baselines and npm/yarn install matrices. R017 remains for native radio/editable
+focus candidates and real Tab evidence. No publication, release, deployment or
+repository settings changes. Hosted CI/merge evidence remains in the PR.

@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
+import { isInaccessible } from '@testing-library/dom';
 import * as components from '../../packages/react/src/index';
 import { App } from '../../apps/gallery/src/App';
 
@@ -16,8 +17,16 @@ const selectors = {
   FeatureGrid: '.acme-feature-grid', PricingTable: '.acme-pricing', Footer: 'footer.acme-footer',
 };
 afterEach(cleanup);
+function visibleFamilies(root: ParentNode = document) {
+  return Object.entries(selectors).filter(([, selector]) => Array.from(root.querySelectorAll<HTMLElement>(selector))
+    .some(node => !node.closest('[inert]') && !isInaccessible(node))).map(([family]) => family);
+}
 
 describe('Gallery rendered family coverage', () => {
+  it('does not count hidden, aria-hidden, inert or CSS-hidden content as reachable examples', () => {
+    const view = render(<main><div hidden><button className="acme-button"/></div><div aria-hidden="true"><span className="acme-badge"/></div><div inert><aside className="acme-sidebar"/></div><div style={{display:'none'}}><div className="acme-card"/></div><footer className="acme-footer"/></main>);
+    expect(visibleFamilies(view.container)).toEqual(['Footer']);
+  });
   it('tracks every public family while excluding the three documented Card composition helpers', () => {
     const helpers = ['CardHeader', 'CardContent', 'CardFooter'];
     expect(Object.keys(selectors).sort()).toEqual(Object.keys(components).filter(name => !helpers.includes(name)).sort());
@@ -27,9 +36,7 @@ describe('Gallery rendered family coverage', () => {
     if (theme === 'dark') fireEvent.click(screen.getByRole('switch', { name: '深色模式' }));
     const seen = new Set<string>();
     const record = () => {
-      for (const [family, selector] of Object.entries(selectors)) {
-        if (document.querySelector(selector)) seen.add(family);
-      }
+      visibleFamilies().forEach(family => seen.add(family));
     };
     record();
     for (const tab of screen.getAllByRole('tab')) { fireEvent.click(tab); record(); }

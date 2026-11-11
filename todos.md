@@ -36,3 +36,10 @@
 - [x] R013 / P1：原生 static dialog 四尺寸/亮暗色 Chromium 鍵盤驗證
 - [x] R014 / P2：Static Tabs 重複 ID / 歧義關聯初始化驗證
 - [x] R015 / P1：React/Vue Modal 背景互動隔離與焦點外移防護
+
+## ROADMAP-003（2026-11-11 第三輪互動契約稽核）
+
+詳見 [稽核與驗收條件](docs/roadmap/ROADMAP-003.md)。
+
+- [x] R016 / P1：Tabs 完整 panel 關聯、內容保留與 Gallery 可見家族 gate
+- [ ] R017 / P2：原生 radio group／contenteditable 循序焦點候選與鍵盤邊界
