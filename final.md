@@ -5,7 +5,22 @@ This is an ongoing development record, not a published release or a statement of
 production readiness. Current evidence is in VALIDATION.md and test.md. Entries
 below are historical snapshots; later slices supersede earlier open-work notes.
 
-## Current development / R016
+## Current development / R017
+
+Review/fix from master 1e84826. Shared React/Vue Modal focus now respects native
+radio selection/group ownership and empty/plaintext-only contenteditable hosts,
+with nested tabindex opt-in and browser-owned ordinary/Arrow/Space navigation.
+Ten new Vitest cases and eight dual-adapter Chromium scenarios cover regressions.
+Gallery and public docs are updated; shared/static CSS and tokens are unchanged.
+
+All five local gates PASS: 283 Vitest / 21 files, 144 scaffolds / 96 bundles,
+three isolated installs / 144 build scripts, typecheck/build without production
+warnings, and 51 Chromium cases at all four widths/two themes. Human browser,
+screen-reader, touch/DPI, full WCAG AA and approved visual baselines remain
+NOT_RUN. ROADMAP-003 R016/R017 are implemented; hosted CI/merge evidence is in
+the PR. No npm/release/deployment/settings actions or readiness claim.
+
+## Historical development / R016
 
 R014 / PR #16 and R015 / PR #17 are merged after both hosted validate checks passed.
 ROADMAP-003 audits Tabs relations and native focus-candidate coverage. R016 retains

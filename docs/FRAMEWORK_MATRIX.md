@@ -37,3 +37,10 @@ Hero、段落、表格等原生預設樣式，導致跨框架差異。`acme-focu
 比較 React/Vue/static/Tailwind 的代表元件幾何與 computed styles（容許 1px
 捨入差異），也檢查原生鍵盤 focus-visible。這是自動 smoke，不是截圖 baseline
 或人工視覺核准。完整範圍見 [browser smoke](BROWSER_SMOKE.md)。
+
+R017 對齊 React/Vue Modal 的原生 radio 群組與 contenteditable editing host 焦點。
+群組依 name、form owner、DOM tree 區分；未具名 radio 獨立。一般 Tab 與
+方向鍵仍由瀏覽器處理，邊界以當下可聚焦的已選項為準；空值/plaintext-only
+編輯區納入候選，巢狀編輯區須 tabindex=0。Static/Tailwind 保留原生 dialog
+委派，所有 adapter 共用樣式/token 未變。正 tabindex、iframe 內部與 shadow
+DOM 循序焦點不在契約內；未選取 radio 的瀏覽器歷史行為不保證跨引擎相同。
