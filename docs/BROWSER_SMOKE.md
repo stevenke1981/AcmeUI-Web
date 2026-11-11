@@ -1,4 +1,4 @@
-# Automated HTML and browser smoke (R009–R013)
+# Automated HTML and browser smoke (R009–R015)
 
 The parser gate runs in `pnpm lint` / `pnpm test`. It uses HTML-validate 9's HTML5
 content models for close order, implicit closes, allowed parents/children,
@@ -27,7 +27,7 @@ CI upload path. A Vitest guard checks both resolved paths against that directory
 See the official [Playwright browser installation](https://playwright.dev/docs/browsers)
 and [HTML-validate rules](https://html-validate.org/rules/index.html).
 
-The current 35 Chromium headless cases cover:
+The current 43 Chromium headless cases cover:
 
 - 48 previews × 360/768/1280/1536 × light/dark: no document horizontal overflow
   beyond 1px rounding, visible h1/nonempty main, working theme toggle where
@@ -59,6 +59,22 @@ The current 35 Chromium headless cases cover:
   disabled at 360px, and an injected non-modal `show()` implementation: it must
   fail the `:modal` predicate and permit background focus, proving that the
   native-modality checks distinguish a merely visible dialog.
+
+R015 adds eight scenarios (four widths / both themes), each operating both React
+and Vue Modal fixtures. They verify initial focus, native inert on ancestor sibling
+branches, Tab/Shift+Tab wrapping, programmatic focus blocking, newly inserted
+background nodes, Escape/close/unmount/opener restoration and repeated openings.
+A deliberate removal of inert from an inserted button exercises the independent
+focusin guard. A real pointer click with the overlay temporarily pointer-transparent
+must not activate the inert background button; after close the same button works.
+Existing inert/aria-hidden attributes survive cleanup. Panel geometry (1px) and
+computed foreground/background agree across both adapters; JSON measurements are
+attached. These are current-run comparisons, not approved screenshot baselines.
+Native inert support is required; no polyfill, nested/overlapping modals, shadow
+roots or dialog content portaled outside the panel are covered/supported. Vitest
+also covers exact prior inert values, nodes moved inside, disconnected openers,
+StrictMode replay, Vue quick close/unmount, sequential instances and owner-document
+boundaries. The first focused DOM run reproduced seven failures before the fix.
 
 The first focused R013 run failed eight expectations because it assumed native
 boundary traversal always wraps in one keypress. Instrumentation observed the

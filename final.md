@@ -5,7 +5,30 @@ This is an ongoing development record, not a published release or a statement of
 production readiness. Current evidence is in VALIDATION.md and test.md. Entries
 below are historical snapshots; later slices supersede earlier open-work notes.
 
-## Current development / R014
+## Current development / R015
+
+R014 / PR #16 is merged after both hosted validate checks passed. R015 shares
+React/Vue Modal background native inert, focusin protection and cleanup, with
+nineteen new DOM regressions and eight four-size/theme browser scenarios running
+both adapters. Existing inert values and connected opener focus are restored;
+inserted background branches are observed. Gallery and public docs describe the
+single-open-Modal, light-DOM/native-inert contract. CSS and tokens are unchanged.
+
+- `pnpm test`: PASS, 269 Vitest / 20 files, 144 scaffolds and 96 generated
+  React/Vue typechecks/bundles using workspace toolchains.
+- `pnpm test:cli:installed`: PASS, three isolated installs / 144 build scripts.
+- `pnpm typecheck` / `pnpm build`: PASS; no production-build warnings observed.
+- `pnpm test:browser`: PASS, 43 Chromium cases at four widths / both themes,
+  zero unexpected/flaky/skipped or global errors. Eight new scenarios each run
+  both adapters, including pointer/focus isolation, Tab/Escape, inserted nodes,
+  cleanup/unmount/reopen and panel style/geometry comparison (1px tolerance).
+
+ROADMAP-002 R011–R015 are implemented; a further audit follows in ROADMAP-003.
+Human browser/visual/keyboard review, screen readers, touch/DPI, full WCAG AA
+and approved visual baselines remain NOT_RUN. No publication, release,
+deployment or settings changes; no production-readiness claim is made.
+
+## Historical development / R014
 
 R013 / PR #15 is merged after both hosted validate checks passed. R014 rejects
 ambiguous Static Tabs IDs and panel structures before enhancement, with thirteen

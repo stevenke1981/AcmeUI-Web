@@ -1,6 +1,6 @@
 # Test Strategy
 
-## Current required gates (R014)
+## Current required gates (R015)
 
 After `pnpm install --frozen-lockfile`, run the same five commands as
 `.github/workflows/ci.yml`:
@@ -26,7 +26,7 @@ Use repo-local `COREPACK_HOME="$PWD/.cache/corepack"` and
 | `pnpm test:cli:installed` | Three isolated pnpm manifest installations; all 144 unmodified generated build scripts, including 96 React/Vue typechecks and dist outputs; identical manifests reuse each isolated install |
 | `pnpm typecheck` | Core/React/Vue/Gallery plus unit-test and browser TypeScript fixtures |
 | `pnpm build` | Gallery (including static example) and React/Vue examples, with build-warning gate |
-| `pnpm test:browser` | 35 headless Chromium cases; all 48 previews at four widths/two themes, representative four-adapter style/geometry comparison, focus ring, Gallery Tabs/Modal and native static dialog; see docs/BROWSER_SMOKE.md |
+| `pnpm test:browser` | 43 headless Chromium cases; all 48 previews at four widths/two themes, representative four-adapter style/geometry comparison, focus ring, Gallery Tabs/Modal and native static dialog; see docs/BROWSER_SMOKE.md |
 
 Vitest imports the actual Gallery App, visits every tab and opens its Modal in
 both themes. All 23 families must render using their real class/semantic
@@ -129,6 +129,19 @@ CSS-punctuation IDs. The initial focused run reproduced nine failures. Validatio
 runs before all mutations/listeners. Gallery/static docs reflect the contract;
 shared CSS and tokens are unchanged. Gate evidence is in VALIDATION.md; human
 checks and approved visual baselines remain NOT_RUN.
+
+## R015 / React and Vue Modal isolation
+
+Nineteen new Vitest cases cover shared ancestor-sibling inert, background focusin
+redirection, inserted/moved nodes, exact attribute restoration, disconnected
+openers, close/unmount/reopen, React StrictMode, Vue quick transitions, owner-document
+scope and rejected concurrent activation. The first focused run reproduced seven
+failures. Eight new browser scenarios operate both frameworks at all four widths
+and themes (43 total Chromium cases), including real keyboard/pointer attempts,
+lifecycle cleanup and panel style/geometry comparison. Gallery and API/static docs
+explain the single-open-Modal, native-inert, light-DOM contract. Shared/static CSS
+and tokens remain unchanged. Results are in VALIDATION.md; human checks remain
+NOT_RUN.
 
 ## Historical evidence
 

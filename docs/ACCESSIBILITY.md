@@ -12,6 +12,15 @@ document-focus boundary allowance and injected non-modal counterexample are in
 [BROWSER_SMOKE.md](BROWSER_SMOKE.md). This does not convert human keyboard review,
 screen-reader, touch or full WCAG checks into passing results.
 
+R015 adds shared React/Vue background inert and a document focusin guard. Nineteen
+new Vitest cases cover isolation and lifecycle; eight Chromium scenarios operate
+both adapters at four widths/both themes, including real pointer/focus attempts,
+inserted backgrounds and close/unmount/reopen. Native inert support is required;
+no polyfill or nested/overlapping Modal support is provided. See the exact runtime
+contract in [framework matrix](FRAMEWORK_MATRIX.md) and automated comparison scope
+in [browser smoke](BROWSER_SMOKE.md). Human/assistive-technology checks remain
+NOT_RUN; this does not establish full WCAG AA conformance.
+
 ## Color contract (R006)
 
 `packages/tokens/src/tokens.json` remains the source of truth. Run
