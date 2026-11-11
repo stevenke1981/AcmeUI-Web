@@ -42,4 +42,4 @@
 詳見 [稽核與驗收條件](docs/roadmap/ROADMAP-003.md)。
 
 - [x] R016 / P1：Tabs 完整 panel 關聯、內容保留與 Gallery 可見家族 gate
-- [ ] R017 / P2：原生 radio group／contenteditable 循序焦點候選與鍵盤邊界
+- [x] R017 / P2：原生 radio group／contenteditable 循序焦點候選與鍵盤邊界

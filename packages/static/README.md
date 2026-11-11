@@ -79,3 +79,7 @@ Tailwind adapter 也使用同一份 class contract。
 ```
 
 方案按鈕使用 `type="button"`，放入表單時不隱式送出。
+
+R017：React/Vue Modal 的 radio 與空值/plaintext-only contenteditable 焦點候選
+已對齊；static/Tailwind 仍將循序焦點委派原生 dialog。巢狀編輯區需明確
+tabindex="0" 才加入 Tab 順序；不使用正 tabindex。詳見 framework matrix。

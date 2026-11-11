@@ -73,3 +73,47 @@ describe("Modal sequential focus candidates", () => {
     expect(event.defaultPrevented).toBe(false);
   });
 });
+
+it('collapses checked radio groups by form owner and treats unnamed radios independently', () => {
+  const panel = fixture(`<form id="one"><input id="a" type="radio" name="choice"><input id="b" type="radio" name="choice" checked></form>
+    <form id="two"><input id="c" type="radio" name="choice" checked></form>
+    <input id="d" type="radio" name="choice"><input id="e" type="radio" name="choice" checked>
+    <input id="f" type="radio"><input id="g" type="radio" name="">
+    <input id="h" type="radio" name="choice" form="one">`);
+  expect(getFocusable(panel).map(el => el.id)).toEqual(['b', 'c', 'e', 'f', 'g']);
+});
+it.each(['hidden', 'disabled', 'tabindex="-1"'])('ignores a %s checked member when choosing a radio fallback', attr => {
+  const panel = fixture(`<input id="a" type="radio" name="choice"><input type="radio" name="choice" checked ${attr}><input id="b" type="radio" name="choice">`);
+  expect(getFocusable(panel).map(el => el.id)).toEqual(['a']);
+  panel.focus(); tab(panel, true); expect(document.activeElement?.id).toBe('b');
+});
+it('recomputes checked radio boundaries after selection changes without intercepting arrow keys', () => {
+  const panel = fixture('<button id="first">First</button><input id="a" type="radio" name="a" checked><input id="b" type="radio" name="a">');
+  const a = panel.querySelector<HTMLInputElement>('#a')!, b = panel.querySelector<HTMLInputElement>('#b')!;
+  a.focus(); expect(tab(panel).prevented).toBe(true); expect(document.activeElement?.id).toBe('first');
+  b.checked = true; b.focus(); expect(tab(panel).prevented).toBe(true); expect(document.activeElement?.id).toBe('first');
+  a.focus(); expect(tab(panel)).toEqual({ moved: false, prevented: false });
+});
+it('wraps an unchecked group from either focused member but preserves middle navigation', () => {
+  const panel = fixture('<button id="first">First</button><input id="a" type="radio" name="a"><input id="b" type="radio" name="a">');
+  for (const id of ['a', 'b']) {
+    panel.querySelector<HTMLElement>(`#${id}`)!.focus(); expect(tab(panel).prevented).toBe(true); expect(document.activeElement?.id).toBe('first');
+  }
+  panel.querySelector<HTMLElement>('#first')!.focus(); tab(panel, true); expect(document.activeElement?.id).toBe('b');
+  panel.querySelector<HTMLElement>('#a')!.focus(); expect(tab(panel, true).prevented).toBe(false);
+});
+it('includes editing hosts for empty/plaintext/mixed-case values, with nested tabindex opt-in', () => {
+  const panel = fixture(`<div id="empty" contenteditable><span contenteditable="true">Nested</span>
+    <span id="opt" contenteditable="true" tabindex="0">Opt in</span>
+    <div contenteditable="false"><div id="inner" contenteditable="plaintext-only">Inner host</div></div></div>
+    <div id="plain" contenteditable="plaintext-only">Plain</div><div id="upper" contenteditable="TRUE">Upper</div>
+    <div contenteditable="false">False</div><div contenteditable="invalid">Invalid</div>
+    <div contenteditable="true" tabindex="-1">Excluded</div>`);
+  expect(getFocusable(panel).map(el => el.id)).toEqual(['empty', 'opt', 'inner', 'plain', 'upper']);
+});
+
+it('leaves entry into an interleaved unchecked group to the browser', () => {
+  const panel = fixture('<input id="a" type="radio" name="a"><button id="middle">Middle</button><input id="b" type="radio" name="a">');
+  panel.querySelector<HTMLElement>('#middle')!.focus();
+  expect(tab(panel).prevented).toBe(false); expect(tab(panel, true).prevented).toBe(false);
+});

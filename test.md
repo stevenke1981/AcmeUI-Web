@@ -1,6 +1,6 @@
 # Test Strategy
 
-## Current required gates (R016)
+## Current required gates (R017)
 
 After `pnpm install --frozen-lockfile`, run the same five commands as
 `.github/workflows/ci.yml`:
@@ -26,7 +26,7 @@ Use repo-local `COREPACK_HOME="$PWD/.cache/corepack"` and
 | `pnpm test:cli:installed` | Three isolated pnpm manifest installations; all 144 unmodified generated build scripts, including 96 React/Vue typechecks and dist outputs; identical manifests reuse each isolated install |
 | `pnpm typecheck` | Core/React/Vue/Gallery plus unit-test and browser TypeScript fixtures |
 | `pnpm build` | Gallery (including static example) and React/Vue examples, with build-warning gate |
-| `pnpm test:browser` | 43 headless Chromium cases; all 48 previews at four widths/two themes, representative four-adapter style/geometry comparison, focus ring, Gallery Tabs/Modal and native static dialog; see docs/BROWSER_SMOKE.md |
+| `pnpm test:browser` | 51 headless Chromium cases; all 48 previews at four widths/two themes, representative four-adapter style/geometry comparison, focus ring, Gallery Tabs/Modal and native static dialog; see docs/BROWSER_SMOKE.md |
 
 Vitest imports the actual Gallery App, visits every tab and opens its Modal in
 both themes. All 23 families must render using their real class/semantic
@@ -322,3 +322,15 @@ touch/DPI, Firefox/WebKit/other OS, complete
 rendered contrast/label checks, full family/state screenshots, full WCAG AA audit
 and human-approved visual baselines. No screenshot baselines were created or
 approved. R010 remains open; publication/releases/settings were not changed.
+
+## R017 / native radio and editable focus
+
+Ten new Vitest regressions cover form-owned/unnamed radio groups, noneligible
+checked members, changing selections, unchecked/interleaved controls and editing
+host inheritance/nesting, with both real adapters. The initial focused run had
+nine failures; a 360/light Chromium regression also failed before the fix. Eight
+new browser scenarios cover both adapters at four widths/two themes (51 total).
+Gallery includes plaintext notes and a native radio group with unique IDs; an
+initial axe incomplete result was fixed without relaxing rules. The final full
+Vitest gate has 283 passing cases. No CSS/token changes; human checks remain
+NOT_RUN. Exact results and scope are in VALIDATION.md / BROWSER_SMOKE.md.

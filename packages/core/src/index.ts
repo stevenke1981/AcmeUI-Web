@@ -12,15 +12,25 @@ export function tabKeyTarget(key:string,current:number,count:number):number|null
   }
 }
 
-export const focusableSelector=[
+const nativeFocusableSelector=[
   "a[href]","area[href]","button:not([disabled])","input:not([disabled]):not([type=hidden])",
-  "select:not([disabled])","textarea:not([disabled])","iframe","[contenteditable=true]","[tabindex]:not([tabindex='-1'])",
+  "select:not([disabled])","textarea:not([disabled])","iframe",
 ].join(",");
+export const focusableSelector=[nativeFocusableSelector,"[contenteditable]","[tabindex]"].join(",");
 
-/** Visible sequential-focus descendants, in DOM order (use tabindex 0 / -1 in dialogs). */
-export function getFocusable(container:HTMLElement):HTMLElement[]{
+function editable(node:HTMLElement|null):boolean{
+  for(;node;node=node.parentElement){
+    const value=node.getAttribute("contenteditable")?.toLowerCase();
+    if(value==="false")return false;
+    if(value===""||value==="true"||value==="plaintext-only")return true;
+  }
+  return false;
+}
+function focusCandidates(container:HTMLElement):HTMLElement[]{
   return Array.from(container.querySelectorAll<HTMLElement>(focusableSelector)).filter(el=>{
     if(el.matches(":disabled")||el.hasAttribute("disabled")||(el.hasAttribute("tabindex")&&el.tabIndex<0))return false;
+    // Only editing hosts join the sequence implicitly; nested editors need tabindex.
+    if(!el.matches(nativeFocusableSelector)&&!el.hasAttribute("tabindex")&&(!editable(el)||editable(el.parentElement)))return false;
     const view=el.ownerDocument.defaultView;
     for(let node:HTMLElement|null=el;node;node=node.parentElement){
       if(node.hidden||node.hasAttribute("inert")||node.getAttribute("aria-hidden")==="true")return false;
@@ -30,16 +40,35 @@ export function getFocusable(container:HTMLElement):HTMLElement[]{
     return true;
   });
 }
+const radio=(el:HTMLElement):el is HTMLInputElement=>el.localName==="input"&&(el as HTMLInputElement).type==="radio";
+const sameRadioGroup=(a:HTMLElement,b:HTMLElement):boolean=>radio(a)&&radio(b)&&!!a.name&&a.name===b.name&&a.form===b.form&&a.getRootNode()===b.getRootNode();
+function sequentialCandidates(items:HTMLElement[],retainUnchecked=false):HTMLElement[]{
+  return items.filter(el=>{
+    if(!radio(el)||!el.name)return true;
+    const group=items.filter(item=>sameRadioGroup(el,item));
+    const selected=group.find(item=>(item as HTMLInputElement).checked);
+    return (!selected&&retainUnchecked)||el===(selected??group[0]);
+  });
+}
 
-/** Keeps Tab / Shift+Tab inside a container. Returns true when focus was moved. */
+/** Visible sequential-focus descendants in DOM order; unchecked radio fallback is the first eligible member. Use tabindex 0 / -1. */
+export function getFocusable(container:HTMLElement):HTMLElement[]{
+  return sequentialCandidates(focusCandidates(container));
+}
+
+/** Keeps Tab / Shift+Tab inside a container; native radio movement and ordinary traversal remain browser-owned. */
 export function trapTabKey(event:{key:string;shiftKey:boolean;preventDefault:()=>void},container:HTMLElement):boolean{
   if(event.key!=="Tab")return false;
-  const items=getFocusable(container);
+  const candidates=focusCandidates(container),items=sequentialCandidates(candidates,true);
   if(items.length===0){event.preventDefault();container.focus();return true}
-  const first=items[0]!,last=items[items.length-1]!,active=container.ownerDocument.activeElement;
-  const sequential=items.some(item=>item===active);
-  if(event.shiftKey&&(active===first||!sequential)){event.preventDefault();last.focus();return true}
-  if(!event.shiftKey&&(active===last||!sequential)){event.preventDefault();first.focus();return true}
+  const active=container.ownerDocument.activeElement as HTMLElement|null,index=active?candidates.indexOf(active):-1;
+  const uncheckedGroup=active&&radio(active)&&!candidates.some(item=>sameRadioGroup(active,item)&&(item as HTMLInputElement).checked);
+  const hasNext=index>=0&&items.some(item=>{
+    if(uncheckedGroup&&sameRadioGroup(active!,item))return false;
+    const position=candidates.indexOf(item);
+    return event.shiftKey?position<index:position>index;
+  });
+  if(!hasNext){event.preventDefault();(event.shiftKey?items[items.length-1]:items[0])!.focus();return true}
   return false;
 }
 

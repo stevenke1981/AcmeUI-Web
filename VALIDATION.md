@@ -6,7 +6,7 @@ Date: 2026-11-11
 
 Current command/scope contract: [test.md](test.md),
 [accessibility scope](docs/ACCESSIBILITY.md) and
-[browser smoke](docs/BROWSER_SMOKE.md). R016 results follow the historical entries
+[browser smoke](docs/BROWSER_SMOKE.md). R017 results follow the historical entries
 below. Earlier counts and open-work statements describe their original slices.
 
 Baseline `79aa7d1`: `pnpm test` passed (8 Vitest cases, 144 CLI scaffolds),
@@ -404,7 +404,7 @@ checks, full family/state screenshots, full WCAG AA audit, human-approved visual
 baselines and npm/yarn install matrices. No npm publication, release, deployment
 or repository settings changes. Hosted CI/merge evidence is in the PR.
 
-## 2026-11-11 / R016 (current)
+## 2026-11-11 / R016
 
 R015 merged in PR #17 after both hosted validate checks passed. The third audit
 starts at master 2058a04 and is recorded in ROADMAP-003. Two initial React cases
@@ -431,3 +431,32 @@ checks, full family/state screenshots, full WCAG AA, human-approved visual
 baselines and npm/yarn install matrices. R017 remains for native radio/editable
 focus candidates and real Tab evidence. No publication, release, deployment or
 repository settings changes. Hosted CI/merge evidence remains in the PR.
+
+## 2026-11-11 / R017 (current)
+
+Starts at master 1e84826 after R016 / PR #18. Nine focused Vitest cases and one
+360/light Chromium case failed before the fix. Shared helpers now recognize
+empty/true/plaintext-only editing hosts, nested tabindex opt-in and eligible
+native radio groups by name/form/tree. Unnamed radios stay independent. Initial
+fallback chooses the first eligible unchecked member; reverse wrapping chooses
+the last. Ordinary traversal (including interleaved groups), Arrow/Space and
+unchecked-group history stay browser-owned. Live checked changes are recomputed.
+Ten new Vitest cases cover core and both adapters; eight new browser scenarios
+exercise both adapters in all four widths/themes. Gallery/API/framework/static
+docs are updated. An initial full test found an axe incomplete multiple-label
+result for the new Gallery radios; unique useId-derived IDs fixed it without
+rule exemptions. Shared/static CSS and semantic tokens remain unchanged.
+
+- `pnpm test`: PASS, 283 Vitest / 21 files, 144 scaffolds and 96 generated
+  React/Vue typechecks/bundles. Full test rerun includes the final interleaved case.
+- `pnpm test:cli:installed`: PASS, three isolated installs / 144 build scripts.
+- `pnpm typecheck` / `pnpm build`: PASS; no production-build warnings observed.
+- `pnpm test:browser`: PASS, 51 Chromium cases at 360/768/1280/1536 in both
+  themes, zero unexpected/flaky/skipped or global errors.
+
+NOT_RUN: human browser/visual/keyboard review at all four widths, screen readers,
+physical touch/DPI, Firefox/WebKit/other OS, full rendered contrast/label and
+family/state screenshots, full WCAG AA, human-approved visual baselines and
+npm/yarn install matrices. Positive tabindex, shadow DOM and iframe-internal
+traversal remain outside the focus contract. No publication, release, deployment
+or settings changes. Hosted CI/merge evidence remains in the PR.

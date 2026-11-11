@@ -25,7 +25,7 @@ R015 / PR #17 已合併；各自五項本機 gates、兩組 hosted CI PASS）。
 | ID | 優先序 | 範圍與自動驗收 | 狀態 |
 |---|---|---|---|
 | R016 | P1 | React 保留每個 panel，hidden 控制選取可見性；所有 tab/panel IDREF 在切換/重排後有效，內容值保留；Vue 對照測試、Gallery 草稿範例與可見家族 gate，四尺寸/亮暗色 Chromium 驗證 | 已實作；本機五 gates PASS（273 Vitest / 43 Chromium），CI/合併見本切片 PR |
-| R017 | P2 | 先以 Vitest/Chromium 重現 radio group 與空值/plaintext-only contenteditable 的 sequential focus；修正共用候選/Tab 邊界並保留 React/Vue 對照，更新 Gallery/API 與未支援情境 | 待後續 |
+| R017 | P2 | 先以 Vitest/Chromium 重現 radio group 與空值/plaintext-only contenteditable 的 sequential focus；修正共用候選/Tab 邊界並保留 React/Vue 對照，更新 Gallery/API 與未支援情境 | 已實作；本機五 gates PASS（283 Vitest / 51 Chromium），CI/合併見本切片 PR |
 
 每個切片仍須 `pnpm test`、`pnpm test:cli:installed`、`pnpm typecheck`、
 `pnpm build`、`pnpm test:browser` PASS；hosted CI 全綠且 MERGEABLE 才用
