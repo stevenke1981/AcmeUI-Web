@@ -17,6 +17,48 @@ function tabs() {
 }
 
 describe("static progressive Tabs", () => {
+  it.each([
+    ["duplicate tab ids", (root: HTMLElement) => { root.querySelectorAll("a")[1].id = "overview-tab"; }],
+    ["tab id duplicated outside the component", () => { document.body.insertAdjacentHTML("beforeend", '<span id="overview-tab"></span>'); }],
+    ["duplicate panel ids inside the component", (root: HTMLElement) => { root.insertAdjacentHTML("beforeend", '<section id="overview"></section>'); }],
+    ["panel id duplicated before the component", () => { document.body.insertAdjacentHTML("afterbegin", '<section id="overview"></section>'); }],
+    ["panel id duplicated after the component", () => { document.body.insertAdjacentHTML("beforeend", '<section id="overview"></section>'); }],
+    ["tab and panel sharing an id", (root: HTMLElement) => { root.querySelector("a")!.id = "usage"; }],
+    ["whitespace in a tab id", (root: HTMLElement) => { root.querySelector("a")!.id = "overview tab"; }],
+    ["whitespace in a panel id", (root: HTMLElement) => { root.querySelector("#overview")!.id = "overview panel"; root.querySelector("a")!.setAttribute("href", "#overview panel"); }],
+    ["two links to one panel", (root: HTMLElement) => { root.querySelectorAll("a")[1].setAttribute("href", "#overview"); }],
+    ["a tab linked to itself", (root: HTMLElement) => { root.querySelector("a")!.setAttribute("href", "#overview-tab"); }],
+    ["a panel containing the tablist", (root: HTMLElement) => { root.id = "tabs-root"; root.querySelector("a")!.setAttribute("href", "#tabs-root"); }],
+    ["overlapping panels", (root: HTMLElement) => { root.querySelector("#overview")!.append(root.querySelector("#usage")!); }],
+  ] as const)("rejects %s before mutating markup or attaching listeners", (_name, breakMarkup) => {
+    const root = fixture(); breakMarkup(root);
+    const original = document.body.innerHTML;
+    expect(() => enhanceTabs(root)).toThrow(/unique|distinct|panel/i);
+    expect(document.body.innerHTML).toBe(original);
+    const link = root.querySelector("a")!;
+    expect(fireEvent.click(link)).toBe(true);
+    expect(fireEvent.keyDown(link, { key: "ArrowRight" })).toBe(true);
+    expect(document.body.innerHTML).toBe(original);
+  });
+
+  it("can retry after invalid ids are repaired, then cleanup and rebuild", () => {
+    const root = fixture(), links = root.querySelectorAll("a");
+    links[1].id = links[0].id;
+    expect(() => enhanceTabs(root)).toThrow(/unique/i);
+    links[1].id = "usage-tab";
+    const original = root.innerHTML, cleanup = enhanceTabs(root);
+    expect(getAllByRole(root, "tab")).toHaveLength(3);
+    cleanup(); expect(root.innerHTML).toBe(original);
+    // IDs need not be CSS identifiers; compare IDs without interpolating selectors.
+    links[0].id = "tab:1";
+    root.querySelector("#overview")!.id = "panel:1";
+    links[0].setAttribute("href", "#panel:1");
+    const rebuilt = root.innerHTML, dispose = enhanceTabs(root);
+    fireEvent.keyDown(links[0], { key: "End" });
+    expect(getByRole(root, "tabpanel").id).toBe("keyboard");
+    dispose(); dispose(); expect(root.innerHTML).toBe(rebuilt);
+  });
+
   it("keeps all linked sections readable before enhancement and restores markup on cleanup", () => {
     const root = fixture(), original = root.innerHTML;
     expect(getAllByRole(root, "link")).toHaveLength(3);

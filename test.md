@@ -1,6 +1,6 @@
 # Test Strategy
 
-## Current required gates (R013)
+## Current required gates (R014)
 
 After `pnpm install --frozen-lockfile`, run the same five commands as
 `.github/workflows/ci.yml`:
@@ -119,6 +119,16 @@ All five local gates PASS: 237 Vitest / 18 files, existing scaffold/install/buil
 matrices, typecheck/build and 35 Chromium cases (zero unexpected/flaky/skipped).
 These remain automated Chromium results; human keyboard/visual review and full
 WCAG AA remain NOT_RUN. R014/R015 remain in ROADMAP-002.
+
+## R014 / static Tabs initialization
+
+Thirteen new Vitest cases cover document-wide duplicate tab/panel IDs, whitespace
+IDREF ambiguity, shared/self/overlapping panel targets, unchanged markup and
+unhandled native events after rejection, repair/retry and cleanup/rebuild with
+CSS-punctuation IDs. The initial focused run reproduced nine failures. Validation
+runs before all mutations/listeners. Gallery/static docs reflect the contract;
+shared CSS and tokens are unchanged. Gate evidence is in VALIDATION.md; human
+checks and approved visual baselines remain NOT_RUN.
 
 ## Historical evidence
 

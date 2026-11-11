@@ -31,7 +31,10 @@ cleanupTabs();
 ```
 
 Tabs 容器需有 `[data-acme-tablist]`，其下每個 `[data-acme-tab]` 是具唯一 id、
-`href="#panel-id"` 的連結；panel 必須在同一容器。初始化前驗證關聯，成功後
+`href="#panel-id"` 的連結；panel 必須在同一容器。tab 與 panel 的 id 在整份
+document 中都必須唯一且不含空白，每個 tab 指向不同 panel；panel 不得互相
+包含，也須與 tablist 分開。初始化在變更
+markup 或掛上 listener 前拒絕重複 id／歧義關聯；修正後可重試。成功後
 設定 tablist/tab/tabpanel、aria 關聯、roving tabindex 與 hidden。水平方向鍵、
 Home/End 會自動選取並移動焦點；點擊保留 Ctrl/Meta 等修飾鍵的原生連結行為。
 目前支援固定、單層、由左至右的水平 Tabs；cleanup 前請保持該元件 markup 穩定。
