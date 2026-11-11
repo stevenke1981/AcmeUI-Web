@@ -6,7 +6,7 @@ Date: 2026-11-11
 
 Current command/scope contract: [test.md](test.md),
 [accessibility scope](docs/ACCESSIBILITY.md) and
-[browser smoke](docs/BROWSER_SMOKE.md). R018 results follow the historical entries
+[browser smoke](docs/BROWSER_SMOKE.md). R019 results follow the historical entries
 below. Earlier counts and open-work statements describe their original slices.
 
 Baseline `79aa7d1`: `pnpm test` passed (8 Vitest cases, 144 CLI scaffolds),
@@ -461,7 +461,7 @@ npm/yarn install matrices. Positive tabindex, shadow DOM and iframe-internal
 traversal remain outside the focus contract. No publication, release, deployment
 or settings changes. Hosted CI/merge evidence remains in the PR.
 
-## 2026-11-11 / R018 (current)
+## 2026-11-11 / R018
 
 Starts at master 06ef00a with the existing uncommitted R018 changes preserved.
 The shared Tabs guard rejects duplicate values before React/Vue render ambiguous
@@ -483,3 +483,35 @@ and family/state screenshots, full WCAG AA, human-approved visual baselines,
 independent/hydrated root ID-prefix tests and npm/yarn install matrices. R019
 remains in ROADMAP-004. No npm publication, release, deployment or settings change.
 Hosted CI and merge evidence remain in the PR.
+
+## 2026-11-11 / R019 (current)
+
+Starts at master 23392f9 after R018 / PR #20 merged. The initial 12-case focused
+Vitest run reproduced ten failures; one initial 360/light Chromium case also
+failed when a child cancelled Escape but the shared document handler still
+closed Modal. React/Vue now share an early return for defaultPrevented or
+isComposing. Thirteen added Vitest cases cover both cancelled Tab boundaries,
+cancelled Escape, synthetic composing flags, ordinary-key controls and Gallery
+notes. Eight new browser cases operate both adapters plus Gallery at four
+widths/themes with real Escape keys, edited-text retention and opener restoration.
+Static/Tailwind native-dialog delegation, shared CSS and tokens are unchanged.
+
+- `pnpm test`: PASS, 304 Vitest / 23 files, 144 scaffolds / 96 generated bundles.
+  The strengthened edited-note unit assertion also passed in a focused 13-case run.
+- `pnpm test:cli:installed`: PASS, three isolated installs / 144 build scripts.
+- `pnpm typecheck` / `pnpm build`: PASS; no production-build warnings observed.
+- `pnpm test:browser`: final PASS, 59 Chromium cases, zero unexpected/flaky/skipped
+  or global errors in the final run. The first full run had two existing
+  native-focus test timeouts (768/dark and 1280/light). Both traces show a
+  simultaneous ~349-second execution gap during otherwise ordinary operations;
+  one navigation was aborted by timeout cleanup. This suggests a runtime pause,
+  but does not establish its cause. Both affected cases passed under the original
+  settings, then the full suite passed without code, timeout, retry or exemption
+  changes. Initial logs/traces were preserved under ignored .cache/validation/.
+
+NOT_RUN: real OS IME, human browser/visual/keyboard review at 360/768/1280/1536,
+screen readers, physical touch/DPI, Firefox/WebKit/other OS, full rendered
+contrast/labels and family/state screenshots, full WCAG AA, approved visual
+baselines and npm/yarn installation matrices. Synthetic isComposing events are
+only flag-level regression coverage. No npm publication, release, deployment or
+repository settings change. Hosted CI and merge evidence remain in the PR.

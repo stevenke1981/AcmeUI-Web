@@ -107,6 +107,7 @@ export function activateModal(panel: HTMLElement, onClose: () => void): () => vo
   const focusInside = () => (getFocusable(panel)[0] ?? panel).focus();
   const onFocus = (event: FocusEvent) => { if (!panel.contains(event.target as Node)) focusInside(); };
   const onKey = (event: KeyboardEvent) => {
+    if (event.defaultPrevented || event.isComposing) return;
     if (event.key === 'Escape') { event.preventDefault(); onClose(); } else trapTabKey(event, panel);
   };
   isolate();

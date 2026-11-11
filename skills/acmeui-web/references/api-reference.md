@@ -41,6 +41,14 @@ Notable conventions:
   should pause effects that depend on active visibility themselves.
 - `Navbar`: optional `label` names its navigation (default 主要導覽), in both frameworks.
 - `Modal`: controlled `open`, `title`, `onClose`.
+- React/Vue Modal's document keydown handler ignores events already cancelled
+  by consumers (`defaultPrevented`) and events with `isComposing`. The keydown
+  handler does not prevent default, move focus or request close for these events;
+  focus isolation remains active while open.
+  Ordinary Escape still prevents default and requests close; unhandled Tab and
+  Shift+Tab retain the focus-boundary behavior below. Consumer handlers must run
+  before the document bubble listener. Synthetic composition coverage is not OS
+  IME verification. Static/Tailwind continues to use native dialog events.
 - Modal focus in React / Vue skips hidden, inert, aria-hidden, disabled and
   negative-tabindex descendants. Tab from the panel falls back to the first
   sequential control; Shift+Tab falls back to the last. Use tabindex 0 / -1

@@ -21,6 +21,13 @@ contract in [framework matrix](FRAMEWORK_MATRIX.md) and automated comparison sco
 in [browser smoke](BROWSER_SMOKE.md). Human/assistive-technology checks remain
 NOT_RUN; this does not establish full WCAG AA conformance.
 
+R019 adds child keyboard ownership in React/Vue Modal: pre-cancelled and
+isComposing keydown events are left to consumers. Thirteen Vitest cases cover
+cancelled Escape/Tab, synthetic composing flags, ordinary controls and Gallery
+notes. Eight additional Chromium cases exercise actual Escape cancellation and
+later dismissal in both adapters and Gallery at four widths/two themes. These
+checks do not exercise a real OS IME, screen reader or human keyboard review.
+
 ## Color contract (R006)
 
 `packages/tokens/src/tokens.json` remains the source of truth. Run

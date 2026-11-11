@@ -49,4 +49,4 @@
 詳見 [稽核與驗收條件](docs/roadmap/ROADMAP-004.md)。
 
 - [x] R018 / P2：React/Vue Tabs 重複 value 初始化／更新驗證
-- [ ] R019 / P2：Modal 尊重已取消鍵盤事件與 IME 組字旗標
+- [x] R019 / P2：Modal 尊重已取消鍵盤事件與 IME 組字旗標

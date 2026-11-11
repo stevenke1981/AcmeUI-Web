@@ -44,3 +44,9 @@ R017 對齊 React/Vue Modal 的原生 radio 群組與 contenteditable editing ho
 編輯區納入候選，巢狀編輯區須 tabindex=0。Static/Tailwind 保留原生 dialog
 委派，所有 adapter 共用樣式/token 未變。正 tabindex、iframe 內部與 shadow
 DOM 循序焦點不在契約內；未選取 radio 的瀏覽器歷史行為不保證跨引擎相同。
+
+R019 讓 React/Vue 共用 Modal handler 尊重先行取消的鍵盤事件與 isComposing；
+子控制項可以先處理 Escape，之後未取消的 Escape 仍關閉。Gallery 備註展示
+先結束編輯、再次 Escape 關閉。Tab/Shift+Tab 的取消與組字旗標由 Vitest
+對照，Chromium 用真實 Escape 操作兩框架及 Gallery；OS IME 不在自動驗證內。
+Static/Tailwind 仍由原生 dialog 事件負責互動，共用樣式與 tokens 未變。

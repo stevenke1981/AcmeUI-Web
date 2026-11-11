@@ -130,3 +130,7 @@ R016 讓 React 與 Vue/static 一樣保留所有 Tabs panel，未選取內容隱
 R018 在 React/Vue Tabs 的初始化與更新時拒絕重複 value，避免多個選取項目
 及重複內容 key；單一空字串、特殊字元和同一 app 的獨立實例仍有效。
 無效輸入透過各框架的錯誤處理回報；修復方式與 ID scope 見 API reference。
+
+R019 讓 React/Vue Modal 尊重已取消的鍵盤事件與 isComposing。Gallery 備註
+示範先處理一次 Escape，再讓 Modal 關閉；13 個新增 Vitest 與 8 個跨框架／
+Gallery Chromium 案例覆蓋事件交接。合成組字旗標不代表 OS IME 已驗證。
