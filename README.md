@@ -114,3 +114,8 @@ Sidebar／Footer 範例。Gallery 與 React／Vue example 的正式 build、CLI 
 R013 擴充為 35 個 Chromium 案例，加入原生 static dialog 四尺寸/亮暗色的
 鍵盤、背景焦點阻擋與焦點還原，以及無 JavaScript fallback / 非模態反例。
 Tab 邊界的 document-focus 行為與限制見 [browser smoke](docs/BROWSER_SMOKE.md)。
+
+R015 加入 React/Vue Modal 共用背景 native inert、程式焦點外移防護與 cleanup，
+每份 document 同時只支援一個開啟的 Modal。八個四尺寸/亮暗色跨框架案例使
+Chromium gate 擴充為 43 案例；契約、原有 inert 還原及未支援情境見
+[framework matrix](docs/FRAMEWORK_MATRIX.md) 與 [browser smoke](docs/BROWSER_SMOKE.md)。

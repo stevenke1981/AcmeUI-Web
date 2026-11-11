@@ -33,7 +33,17 @@ Notable conventions:
 - Modal focus in React / Vue skips hidden, inert, aria-hidden, disabled and
   negative-tabindex descendants. Tab from the panel falls back to the first
   sequential control; Shift+Tab falls back to the last. Use tabindex 0 / -1
-  within dialogs; positive tabindex ordering and nested modals are unsupported.
+  within dialogs; positive tabindex ordering is unsupported.
+- React/Vue Modal applies native `inert` to background sibling branches up to body,
+  including newly inserted siblings. A document `focusin` guard redirects outside
+  focus to the first eligible control (or panel fallback). Close/unmount removes
+  listeners/observer, restores prior inert values, then focuses a connected opener.
+  Existing aria-hidden values are untouched. Requires browser native inert support;
+  no inert polyfill is bundled. Only one open Modal per document is supported:
+  nested/overlapping activations throw before changing the existing isolation.
+  Multiple closed instances and sequential openings are supported. Use connected
+  light DOM; shadow-root/portaled dialog content and app changes to inert while
+  open are outside the contract. Static/Tailwind dialog uses native showModal.
 - `DataTable<T>`: typed columns plus row array.
 
 ## Vue exports

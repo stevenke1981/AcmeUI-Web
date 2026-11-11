@@ -21,8 +21,8 @@
 | R011 | P1 | React/Vue Tabs 正規化無效選取、空清單、移除/重排；Vitest 對照測試、Gallery 動態範例與 API/static 說明；不改 CSS/tokens | [PR #13](https://github.com/stevenke1981/AcmeUI-Web/pull/13) 已合併；本機五 gates、兩組 hosted CI PASS |
 | R012 | P1 | Static preview server 使用目錄邊界與實際路徑限制，安全處理畸形 URL；Vitest 真實 HTTP 測試含同前綴目錄、symlink、錯誤後服務存活、正常 HTML/CSS/JS | [PR #14](https://github.com/stevenke1981/AcmeUI-Web/pull/14) 已合併；本機五 gates、兩組 hosted CI PASS |
 | R013 | P1 | Chromium 操作真實 static dialog：四尺寸/亮暗色、鍵盤開啟、Tab/Shift+Tab、背景 focus 阻擋、Escape/close 焦點還原；保留 Vitest 委派/cleanup 回歸，記錄瀏覽器範圍 | [PR #15](https://github.com/stevenke1981/AcmeUI-Web/pull/15) 已合併；本機五 gates、兩組 hosted CI PASS |
-| R014 | P2 | Static Tabs 初始化前拒絕重複 tab id / 歧義關聯，錯誤後 markup 不變；Vitest 反例與重建測試 | 已實作；驗證結果見 VALIDATION.md，CI/合併見本切片 PR |
-| R015 | P1 | React/Vue Modal 背景互動隔離契約與焦點外移防護；Vitest/browser 跨框架測試、Gallery 及 cleanup 邊界；先定義巢狀/多實例限制 | 後續 |
+| R014 | P2 | Static Tabs 初始化前拒絕重複 tab id / 歧義關聯，錯誤後 markup 不變；Vitest 反例與重建測試 | [PR #16](https://github.com/stevenke1981/AcmeUI-Web/pull/16) 已合併；本機五 gates、兩組 hosted CI PASS |
+| R015 | P1 | React/Vue Modal 背景互動隔離契約與焦點外移防護；Vitest/browser 跨框架測試、Gallery 及 cleanup 邊界；先定義巢狀/多實例限制 | 已實作；驗證結果見 VALIDATION.md，CI/合併見本切片 PR |
 
 每個切片都須先重現缺口，再執行 `pnpm test`、`pnpm test:cli:installed`、
 `pnpm typecheck`、`pnpm build`、`pnpm test:browser`。CI 全部通過且 GitHub
@@ -46,4 +46,4 @@ repo settings 變更皆不在本次範圍；不得宣稱專案完成或 producti
 的狀態，背景控制項或仍有焦點的 body 都會失敗；反例以 show() 取代 showModal()
 證明可區分非模態 dialog。完整附件與範圍見 docs/BROWSER_SMOKE.md。
 
-R011–R014 已實作；R015 待後續，不因此宣稱專案完成或 production-ready。
+R011–R015 已實作；後續稽核將記入 ROADMAP-003，不因此宣稱專案完成或 production-ready。

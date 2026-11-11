@@ -35,4 +35,4 @@
 - [x] R012 / P1：Static preview server 路徑限制與錯誤復原 HTTP 測試
 - [x] R013 / P1：原生 static dialog 四尺寸/亮暗色 Chromium 鍵盤驗證
 - [x] R014 / P2：Static Tabs 重複 ID / 歧義關聯初始化驗證
-- [ ] R015 / P1：React/Vue Modal 背景互動隔離與焦點外移防護
+- [x] R015 / P1：React/Vue Modal 背景互動隔離與焦點外移防護

@@ -46,6 +46,9 @@ Modal 使用具 `aria-labelledby` 的 `<dialog class="acme-dialog">`，內含
 `.acme-modal__panel` 與 `[data-acme-modal-close]` 按鈕。`showModal()` 讓瀏覽器
 管理背景 inert 與焦點循環；cancel/close 事件及 cleanup 會處理關閉與焦點還原。
 沒有原生 API 時不接管按鈕，應保留範例中的可閱讀 fallback。暫不支援巢狀 Modal。
+React/Vue Modal 則共用背景 native inert 與焦點外移防護，關閉/卸載時還原；
+每份 document 僅允許一個開啟的 Modal，巢狀/同時多實例不受支援。
+Tailwind 仍沿用此處的原生 dialog，不提供另一套互動 runtime。
 
 Vitest 使用 jsdom，native dialog API 以 test doubles 驗證委派與 cleanup，
 不證明瀏覽器行為。R013 另以 Chromium 在四尺寸與亮暗色驗證原生 modality、

@@ -16,7 +16,15 @@ Card composition helpers，也檢查 static/shared CSS 漂移。新增公開家�
 
 靜態 HTML 的 [Tabs／Modal 範例](../apps/gallery/static.html) 由 Gallery 一起打包。
 Tailwind 只提供樣式；可搭配相同的 HTML 與互動 module。原生 dialog 的 Tab、
-inert、Escape 實際瀏覽器行為尚未驗證；jsdom 測試僅驗證 native API 委派。
+inert、Escape 已在 R013 以 Chromium 自動驗證；jsdom 測試僅驗證 native API
+委派，真人審查仍為 NOT_RUN。
+
+React/Vue Modal 共用背景 sibling branches 的 native inert 與 focusin 防護，
+包含新增節點；關閉/卸載會還原原有 inert 與開啟者焦點。不附 inert polyfill。
+每份 document 同時只支援一個開啟的 Modal；巢狀/重疊開啟會拋出錯誤，
+多個關閉實例與依序開啟可用。使用 connected light DOM，不支援 shadow root、
+portal 到面板外的內容，也不支援開啟期間由應用程式修改 inert。
+完整契約見 [API reference](../skills/acmeui-web/references/api-reference.md)。
 
 ## Tailwind reset 與自動化版面比較
 

@@ -43,6 +43,49 @@ export function trapTabKey(event:{key:string;shiftKey:boolean;preventDefault:()=
   return false;
 }
 
+const activeModals = new WeakMap<Document, HTMLElement>();
+
+/** One open light-DOM modal per document. Caller owns rendering and backdrop dismissal. */
+export function activateModal(panel: HTMLElement, onClose: () => void): () => void {
+  const doc = panel.ownerDocument, view = doc.defaultView;
+  if (!view || !doc.body.contains(panel)) throw new Error('Modal requires a connected light-DOM panel');
+  if (activeModals.has(doc)) throw new Error('Only one open Modal per document is supported; nested/overlapping Modals are unsupported');
+  activeModals.set(doc, panel);
+  const opener = doc.activeElement as HTMLElement | null;
+  const isolated = new Map<Element, string | null>();
+  const restore = (node: Element, value: string | null) => {
+    if (value === null) node.removeAttribute('inert'); else node.setAttribute('inert', value);
+  };
+  const isolate = () => {
+    const background = new Set<Element>();
+    for (let branch: Element = panel; branch !== doc.body && branch.parentElement; branch = branch.parentElement) {
+      for (const sibling of branch.parentElement.children) if (sibling !== branch) background.add(sibling);
+    }
+    for (const [node, value] of isolated) if (!background.has(node)) { restore(node, value); isolated.delete(node); }
+    for (const node of background) if (!isolated.has(node)) {
+      isolated.set(node, node.getAttribute('inert')); if (!node.hasAttribute('inert')) node.setAttribute('inert', '');
+    }
+  };
+  const focusInside = () => (getFocusable(panel)[0] ?? panel).focus();
+  const onFocus = (event: FocusEvent) => { if (!panel.contains(event.target as Node)) focusInside(); };
+  const onKey = (event: KeyboardEvent) => {
+    if (event.key === 'Escape') { event.preventDefault(); onClose(); } else trapTabKey(event, panel);
+  };
+  isolate();
+  const observer = new view.MutationObserver(isolate);
+  observer.observe(doc.body, { childList: true, subtree: true });
+  doc.addEventListener('focusin', onFocus, true); doc.addEventListener('keydown', onKey);
+  focusInside();
+  let disposed = false;
+  return () => {
+    if (disposed) return; disposed = true;
+    observer.disconnect(); doc.removeEventListener('focusin', onFocus, true); doc.removeEventListener('keydown', onKey);
+    for (const [node, value] of isolated) restore(node, value);
+    isolated.clear(); activeModals.delete(doc);
+    if (opener?.isConnected) opener.focus?.();
+  };
+}
+
 /** Bounded pagination window; invalid/empty totals have no current page. */
 export function paginationState(page:number,totalPages:number):{page:number;totalPages:number;pages:number[]}{
   const total=Number.isFinite(totalPages)?Math.min(Number.MAX_SAFE_INTEGER,Math.max(0,Math.floor(totalPages))):0;

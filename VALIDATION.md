@@ -6,7 +6,7 @@ Date: 2026-11-11
 
 Current command/scope contract: [test.md](test.md),
 [accessibility scope](docs/ACCESSIBILITY.md) and
-[browser smoke](docs/BROWSER_SMOKE.md). R014 results follow the historical entries
+[browser smoke](docs/BROWSER_SMOKE.md). R015 results follow the historical entries
 below. Earlier counts and open-work statements describe their original slices.
 
 Baseline `79aa7d1`: `pnpm test` passed (8 Vitest cases, 144 CLI scaffolds),
@@ -345,7 +345,7 @@ visual baselines and npm/yarn install matrices. No publication, release,
 deployment or settings changes. R014/R015 remain open. Hosted CI and merge
 status are in the PR; local results alone do not authorize merge.
 
-## 2026-11-11 / R014 (current)
+## 2026-11-11 / R014
 
 R013 merged in PR #15 after both hosted validate checks passed. This slice starts
 at synced master 8672e4d. The first focused run reproduced nine failures for
@@ -370,3 +370,36 @@ physical touch/DPI, Firefox/WebKit/other OS, complete rendered contrast/label
 checks, full family/state screenshots, full WCAG AA audit, human-approved visual
 baselines and npm/yarn installation matrices. No publication, release, deployment
 or settings changes. R015 remains open; hosted CI/merge evidence is in the PR.
+
+## 2026-11-11 / R015 (current)
+
+R014 merged in PR #16 after both hosted validate checks passed. This slice starts
+from master 43f1420. The first focused DOM run reproduced seven failed cases.
+React/Vue now share ancestor-sibling native inert, an independent focusin guard,
+Tab/Escape handling and lifecycle cleanup. A child-list observer covers inserted
+background branches and restores nodes moved inside the panel. Cleanup restores
+exact prior inert values before opener focus and leaves aria-hidden untouched.
+Vue uses the post-render panel-ref lifecycle instead of deferred open watchers;
+React retains the latest onClose callback without reactivating on rerenders.
+
+Only one open Modal per document is supported; concurrent/nested activation throws
+before altering existing isolation. Multiple closed instances and sequential
+openings work. Requires native inert and connected light DOM; no polyfill, shadow
+root, outside-panel portal content or concurrent app inert mutations are covered.
+Gallery and API/static/framework docs are updated. Shared/static CSS and semantic
+tokens remain aligned across React/Vue/Tailwind/static without value changes.
+
+- `pnpm test`: PASS, 269 Vitest / 20 files, 144 scaffolds and 96 generated
+  React/Vue typechecks/bundles using workspace toolchains.
+- `pnpm test:cli:installed`: PASS, three isolated installs / 144 build scripts.
+- `pnpm typecheck` / `pnpm build`: PASS; no production-build warnings observed.
+- `pnpm test:browser`: PASS, 43 Chromium cases at four widths / both themes,
+  zero unexpected/flaky/skipped or global errors. Eight new scenarios each run
+  both adapters, including pointer/focus isolation, Tab/Escape, inserted nodes,
+  cleanup/unmount/reopen and panel style/geometry comparison (1px tolerance).
+
+NOT_RUN: human browser/visual/keyboard review at 360/768/1280/1536, screen readers,
+physical touch/DPI, Firefox/WebKit/other OS, complete rendered contrast/label
+checks, full family/state screenshots, full WCAG AA audit, human-approved visual
+baselines and npm/yarn install matrices. No npm publication, release, deployment
+or repository settings changes. Hosted CI/merge evidence is in the PR.
