@@ -5,7 +5,27 @@ This is an ongoing development record, not a published release or a statement of
 production readiness. Current evidence is in VALIDATION.md and test.md. Entries
 below are historical snapshots; later slices supersede earlier open-work notes.
 
-## Current development / R013
+## Current development / R014
+
+R013 / PR #15 is merged after both hosted validate checks passed. R014 rejects
+ambiguous Static Tabs IDs and panel structures before enhancement, with thirteen
+Vitest regressions plus Gallery/static documentation. Rejected markup remains
+readable and can be repaired/reinitialized; cleanup restores original attributes.
+Shared CSS/tokens and React/Vue/Tailwind visuals are unchanged.
+
+- `pnpm test`: PASS, 250 Vitest / 18 files, 144 scaffolds and 96 workspace bundles.
+- `pnpm test:cli:installed`: PASS, three isolated installs / 144 build scripts.
+- `pnpm typecheck` / `pnpm build`: PASS; no production-build warnings observed.
+- `pnpm test:browser`: final full rerun PASS, 35 Chromium cases at four widths /
+  both themes, zero unexpected/flaky/skipped. The first run recorded two timeouts
+  during an approximately 22-minute execution interruption (33 passed); it is not
+  counted as passing. No assertions or timeouts were relaxed.
+
+R015 remains in ROADMAP-002. Human browser/visual/keyboard review, screen readers,
+physical touch/DPI, full WCAG AA and approved visual baselines remain NOT_RUN.
+No npm publication, release, deployment or settings changes were performed.
+
+## Historical development / R013
 
 R011 / PR #13 and R012 / PR #14 are merged after both hosted validate checks
 passed. R013 adds real Chromium coverage for the existing native static dialog,

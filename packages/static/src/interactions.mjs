@@ -7,13 +7,22 @@ export function enhanceTabs(root) {
   if (tabsInstances.has(root)) return tabsInstances.get(root);
   const list = root.querySelector("[data-acme-tablist]");
   const tabs = Array.from(list?.querySelectorAll("[data-acme-tab]") ?? []);
+  // ARIA IDREFs resolve document-wide. Reject ambiguity even outside this root,
+  // without treating user-supplied IDs as CSS selectors.
+  const ids = new Map();
+  root.ownerDocument.querySelectorAll("[id]").forEach(node => {
+    const matches = ids.get(node.id) ?? [];
+    matches.push(node); ids.set(node.id, matches);
+  });
+  const uniqueId = node => Boolean(node.id) && !/[\t\n\f\r ]/.test(node.id) && ids.get(node.id)?.length === 1;
   const panels = tabs.map(tab => {
     const href = tab.getAttribute("href");
     const panel = href?.startsWith("#") ? root.ownerDocument.getElementById(href.slice(1)) : null;
-    if (!tab.id || !panel || !root.contains(panel)) throw new Error("Static Tabs require unique tab ids and local panel links");
+    if (!uniqueId(tab) || !panel || !uniqueId(panel) || !root.contains(panel) || panel.contains(list) || list.contains(panel)) throw new Error("Static Tabs require document-unique tab/panel ids without whitespace and separate local panels");
     return panel;
   });
   if (!list || !tabs.length || new Set(panels).size !== tabs.length) throw new Error("Static Tabs require a tablist and distinct panels");
+  if (panels.some(panel => panels.some(other => panel !== other && panel.contains(other)))) throw new Error("Static Tabs require non-overlapping panels");
   const snapshots = [list, ...tabs, ...panels].map(node => [node, Array.from(node.attributes, attr => [attr.name, attr.value])]);
   const select = index => {
     tabs.forEach((tab, n) => {

@@ -6,7 +6,7 @@ Date: 2026-11-11
 
 Current command/scope contract: [test.md](test.md),
 [accessibility scope](docs/ACCESSIBILITY.md) and
-[browser smoke](docs/BROWSER_SMOKE.md). R013 results follow the historical entries
+[browser smoke](docs/BROWSER_SMOKE.md). R014 results follow the historical entries
 below. Earlier counts and open-work statements describe their original slices.
 
 Baseline `79aa7d1`: `pnpm test` passed (8 Vitest cases, 144 CLI scaffolds),
@@ -312,7 +312,7 @@ visual baselines, npm/yarn install matrices, adversarial concurrent filesystem
 replacement. No npm publication/release/deployment/settings changes. Hosted
 CI/merge evidence remains in the PR; local results alone do not authorize merge.
 
-## 2026-11-11 / R013 (current)
+## 2026-11-11 / R013
 
 R012 merged in PR #14 after both hosted validate checks passed. This slice starts
 at synced master 5284adf and adds browser coverage for the existing native static
@@ -344,3 +344,29 @@ label checks, full family/state screenshots, full WCAG AA audit, human-approved
 visual baselines and npm/yarn install matrices. No publication, release,
 deployment or settings changes. R014/R015 remain open. Hosted CI and merge
 status are in the PR; local results alone do not authorize merge.
+
+## 2026-11-11 / R014 (current)
+
+R013 merged in PR #15 after both hosted validate checks passed. This slice starts
+at synced master 8672e4d. The first focused run reproduced nine failures for
+ambiguous IDs and retry. Static Tabs now validates document-wide tab/panel ID
+uniqueness, whitespace-free ARIA IDREFs, distinct non-overlapping local panels and
+separation from the tablist before any mutation or listener registration.
+Thirteen new Vitest cases also check unchanged markup/listeners on rejection,
+repair/retry, cleanup/rebuild and IDs containing CSS punctuation.
+Gallery's static usage panel and static docs explain the public contract.
+React/Vue/Tailwind/static CSS and semantic tokens are unchanged.
+
+- `pnpm test`: PASS, 250 Vitest / 18 files, 144 scaffolds and 96 workspace bundles.
+- `pnpm test:cli:installed`: PASS, three isolated installs / 144 build scripts.
+- `pnpm typecheck` / `pnpm build`: PASS; no production-build warnings observed.
+- `pnpm test:browser`: final full rerun PASS, 35 Chromium cases at four widths /
+  both themes, zero unexpected/flaky/skipped. The first run recorded two timeouts
+  during an approximately 22-minute execution interruption (33 passed); it is not
+  counted as passing. No assertions or timeouts were relaxed.
+
+NOT_RUN: human browser/visual/keyboard review (360/768/1280/1536), screen readers,
+physical touch/DPI, Firefox/WebKit/other OS, complete rendered contrast/label
+checks, full family/state screenshots, full WCAG AA audit, human-approved visual
+baselines and npm/yarn installation matrices. No publication, release, deployment
+or settings changes. R015 remains open; hosted CI/merge evidence is in the PR.
