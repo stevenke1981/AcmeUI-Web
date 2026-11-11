@@ -39,6 +39,13 @@ Notable conventions:
   selection/reorder; React child state, effects and uncontrolled values remain
   mounted. Removing an item or clearing the list unmounts its content. Consumers
   should pause effects that depend on active visibility themselves.
+- React/Vue/static Tabs ignore keydown events already cancelled by a consumer
+  (`defaultPrevented`) or marked `isComposing`: no selection/focus change and no
+  additional preventDefault. Ordinary ArrowLeft/Right/Home/End remain automatic;
+  static anchor tabs also handle ordinary Enter/Space. Consumers must cancel
+  before the component bubble handler (for example, an ancestor capture handler).
+  A later ancestor bubble handler cannot undo a selection already made. This is
+  synthetic composition-flag coverage, not verification of a real OS IME.
 - `Navbar`: optional `label` names its navigation (default 主要導覽), in both frameworks.
 - `Modal`: controlled `open`, `title`, `onClose`.
 - React/Vue Modal's document keydown handler ignores events already cancelled

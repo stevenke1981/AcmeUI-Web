@@ -47,6 +47,7 @@ export function enhanceTabs(root) {
     event.preventDefault(); select(index);
   };
   const keydown = event => {
+    if (event.defaultPrevented || event.isComposing) return;
     const current = tabs.indexOf(event.target);
     if (current < 0) return;
     const next = new Map([["ArrowRight", (current + 1) % tabs.length], ["ArrowLeft", (current - 1 + tabs.length) % tabs.length], ["Home", 0], ["End", tabs.length - 1], ["Enter", current], [" ", current]]).get(event.key);

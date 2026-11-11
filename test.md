@@ -1,6 +1,6 @@
 # Test Strategy
 
-## Current required gates (R019)
+## Current required gates (R020)
 
 After `pnpm install --frozen-lockfile`, run the same five commands as
 `.github/workflows/ci.yml`:
@@ -26,7 +26,7 @@ Use repo-local `COREPACK_HOME="$PWD/.cache/corepack"` and
 | `pnpm test:cli:installed` | Three isolated pnpm manifest installations; all 144 unmodified generated build scripts, including 96 React/Vue typechecks and dist outputs; identical manifests reuse each isolated install |
 | `pnpm typecheck` | Core/React/Vue/Gallery plus unit-test and browser TypeScript fixtures |
 | `pnpm build` | Gallery (including static example) and React/Vue examples, with build-warning gate |
-| `pnpm test:browser` | 59 headless Chromium cases; all 48 previews at four widths/two themes, representative four-adapter style/geometry comparison, focus ring, Gallery Tabs/Modal, child keyboard cancellation and native static dialog; see docs/BROWSER_SMOKE.md |
+| `pnpm test:browser` | 67 headless Chromium cases; all 48 previews at four widths/two themes, representative four-adapter style/geometry comparison, focus ring, Gallery Tabs/Modal, child keyboard cancellation and native static dialog; see docs/BROWSER_SMOKE.md |
 
 Vitest imports the actual Gallery App, visits every tab and opens its Modal in
 both themes. All 23 families must render using their real class/semantic
@@ -368,3 +368,12 @@ gate: cancelled/composing Tabs in three adapters, cancelled static Modal cancel,
 and closed-details focus candidates. R020–R022 will add permanent regression
 coverage separately. This temporary jsdom audit is not native browser or OS IME
 verification; human checks and visual baselines remain NOT_RUN.
+
+## R020 / Tabs keyboard ownership
+
+Six new three-adapter cases first failed before the guard. Each checks cancelled
+capture and synthetic composing events across ArrowLeft/Right/Home/End (plus
+static Enter/Space), selection/focus/roving tabindex and ordinary-key controls.
+Eight browser scenarios add actual capture cancellation, normal movement and the
+Gallery pause checkbox at four widths/two themes; composing coverage is synthetic.
+Human browser/visual/OS IME checks and approved baselines remain NOT_RUN.

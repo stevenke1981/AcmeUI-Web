@@ -527,3 +527,16 @@ native details keyboard behavior remains to be checked in R022 Chromium tests.
 Full local gates and hosted CI/merge evidence for this docs PR are recorded in
 the PR. Human browser/visual review, OS IME, screen readers, physical touch/DPI,
 full WCAG AA and approved visual baselines remain NOT_RUN.
+
+## 2026-11-12 / R020
+
+From master ed5bf0c (roadmap PR #22). Six permanent Vitest cases reproduced the
+Tabs event-ownership failures in React/Vue/static; the first 360/light Chromium
+case also failed on real capture cancellation. Logs/traces are archived in
+.cache/validation/r020-r022. Each adapter now returns for defaultPrevented or
+isComposing before its keyboard model. Six cases exercise all supported keys
+with ordinary controls; eight new Chromium scenarios cover four widths/themes,
+three adapters and Gallery's pause checkbox. Browser composing events remain
+synthetic. Shared/static CSS and tokens are unchanged. Full local and hosted
+results/HEAD/merge evidence are in the R020 PR. Human review, real OS IME,
+screen readers, physical touch/DPI and approved visual baselines remain NOT_RUN.

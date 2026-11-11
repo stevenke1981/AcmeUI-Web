@@ -37,6 +37,10 @@ document 中都必須唯一且不含空白，每個 tab 指向不同 panel；pan
 markup 或掛上 listener 前拒絕重複 id／歧義關聯；修正後可重試。成功後
 設定 tablist/tab/tabpanel、aria 關聯、roving tabindex 與 hidden。水平方向鍵、
 Home/End 會自動選取並移動焦點；點擊保留 Ctrl/Meta 等修飾鍵的原生連結行為。
+三種 Tabs 都忽略先行取消（defaultPrevented）或 isComposing 的鍵盤事件，
+不變更選取／焦點；一般方向鍵與 Home/End、static Enter/Space 仍正常處理。
+消費端須在元件 bubble handler 前取消，例如祖先的 capture listener。
+合成組字旗標不代表真實 OS IME 已驗證。
 目前支援固定、單層、由左至右的水平 Tabs；cleanup 前請保持該元件 markup 穩定。
 React/Vue Tabs 支援動態清單：無效 defaultValue 或已移除的選取會回到第一項，
 清空後重新載入也選取第一項；重排保留有效選取。靜態/Tailwind HTML 若需要
