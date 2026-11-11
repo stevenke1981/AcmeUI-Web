@@ -1,6 +1,6 @@
 # Test Strategy
 
-## Current required gates (R017)
+## Current required gates (R018)
 
 After `pnpm install --frozen-lockfile`, run the same five commands as
 `.github/workflows/ci.yml`:
@@ -155,6 +155,19 @@ cases now check relations plus nested/outer-tab draft retention in all viewport/
 theme scenarios (43 total Chromium cases). Gallery/API/static docs and ROADMAP-003
 record the contract, evidence and remaining R017 native focus-candidate work.
 Shared/static CSS and tokens are unchanged; human checks remain NOT_RUN.
+
+## R018 / unique Tabs values
+
+Eight new Vitest cases exercise React/Vue initialization and items updates with
+duplicate values (including the empty string), valid empty/special strings and
+independent instances in one app. Both adapters call the shared uniqueness guard
+before rendering ambiguous selections/keys. Vue error-handler recovery is tested;
+React invalid renders use its normal error boundary handling. Valid-list content
+preservation remains the R016 contract. Gallery and API reference state this
+input requirement; shared/static CSS and semantic tokens are unchanged.
+
+These checks do not test independent/hydrated root ID prefixes or human browser,
+screen-reader, touch/DPI or visual baseline behavior. R019 remains in ROADMAP-004.
 
 ## Historical evidence
 

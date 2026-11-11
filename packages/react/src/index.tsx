@@ -1,5 +1,5 @@
 import{type ButtonHTMLAttributes,type HTMLAttributes,type InputHTMLAttributes,type ReactNode,type SelectHTMLAttributes,type TextareaHTMLAttributes,useEffect,useId,useRef,useState,type KeyboardEvent}from"react";
-import{activateModal,clampPercent,cx,initials,paginationState,tabKeyTarget,type AcmeTone,type AcmeVariant}from"@acmeui/core";
+import{assertUniqueTabValues,activateModal,clampPercent,cx,initials,paginationState,tabKeyTarget,type AcmeTone,type AcmeVariant}from"@acmeui/core";
 export type ButtonProps=ButtonHTMLAttributes<HTMLButtonElement>&{variant?:AcmeVariant;loading?:boolean};
 export function Button({variant="primary",loading=false,type="button",className,children,disabled,...props}:ButtonProps){return <button className={cx("acme-button",`acme-button--${variant}`,className)} type={type} disabled={disabled||loading} aria-busy={loading||undefined}{...props}>{loading?"載入中…":children}</button>}
 export function Card({className,...props}:HTMLAttributes<HTMLDivElement>){return <section className={cx("acme-card",className)}{...props}/>}
@@ -21,6 +21,7 @@ export function Alert({tone="info",title,children}:{tone?:AcmeTone;title:string;
 export function Progress({value,label="進度"}:{value:number;label?:string}){const safe=clampPercent(value);return <div className="acme-progress" role="progressbar" aria-label={label} aria-valuemin={0} aria-valuemax={100} aria-valuenow={safe}><div className="acme-progress__bar" style={{width:`${safe}%`}}/></div>}
 export function Avatar({src,name,className}:{src?:string;name:string;className?:string}){return <span className={cx("acme-avatar",className)}>{src?<img src={src} alt={name}/>:<span role="img" aria-label={name}>{initials(name)}</span>}</span>}
 export function Tabs({items,defaultValue,label="分頁內容"}:{label?:string;items:Array<{value:string;label:string;content:ReactNode}>;defaultValue?:string}){
+  assertUniqueTabValues(items);
   const[active,setActive]=useState(defaultValue??items[0]?.value);const base=useId();const triggers=useRef<Array<HTMLButtonElement|null>>([]);
   const selected=items.some(item=>item.value===active)?active:items[0]?.value;
   if(active!==selected)setActive(selected);

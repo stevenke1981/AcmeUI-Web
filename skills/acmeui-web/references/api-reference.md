@@ -28,6 +28,12 @@ Notable conventions:
   initial only. Unknown defaults or removed selections fall back to the first
   available item; an empty list clears selection, and a later refill selects
   its first item. Reordering preserves an existing selection and keyboard order.
+  Duplicate values within an instance throw an actionable error with the index
+  before rendering ambiguous selection; invalid updates follow each framework's
+  error handling. Repair inputs through your app/error boundary; content
+  preservation applies to valid lists. Framework useId scopes apply: configure
+  distinct Vue app.config.idPrefix / React identifierPrefix when composing
+  independent or hydrated roots.
   All panels remain mounted so every tab's aria-controls resolves. Inactive panels
   use hidden (React) / display:none via v-show (Vue), preserving content across
   selection/reorder; React child state, effects and uncontrolled values remain
