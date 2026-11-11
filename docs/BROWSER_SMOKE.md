@@ -1,4 +1,4 @@
-# Automated HTML and browser smoke (R009–R015)
+# Automated HTML and browser smoke (R009–R016)
 
 The parser gate runs in `pnpm lint` / `pnpm test`. It uses HTML-validate 9's HTML5
 content models for close order, implicit closes, allowed parents/children,
@@ -75,6 +75,14 @@ roots or dialog content portaled outside the panel are covered/supported. Vitest
 also covers exact prior inert values, nodes moved inside, disconnected openers,
 StrictMode replay, Vue quick close/unmount, sequential instances and owner-document
 boundaries. The first focused DOM run reproduced seven failures before the fix.
+
+R016 extends the existing eight Gallery viewport/theme cases without adding test
+cases: every rendered tab must reference a mounted panel with the matching label;
+a real input draft survives switching nested tabs and leaving/re-entering its
+outer tab. Inactive input content must disappear from accessible role queries.
+React now retains inactive panels like Vue/static; shared CSS/tokens are unchanged.
+Vitest separately checks panel identity through reorder and rejects hidden,
+aria-hidden, inert and CSS-hidden examples from Gallery family coverage.
 
 The first focused R013 run failed eight expectations because it assumed native
 boundary traversal always wraps in one keypress. Instrumentation observed the

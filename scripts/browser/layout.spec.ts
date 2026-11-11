@@ -70,11 +70,26 @@ for (const width of widths) for (const theme of ['light', 'dark']) {
   test(`${width}/${theme}: Gallery tabs/modal stay in the viewport`, async ({ page }) => {
     await page.setViewportSize({ width, height: 900 }); const errors = errorsFor(page);
     await page.goto('http://127.0.0.1:4174/'); await stable(page);
+    const brokenRelations = await page.evaluate(() => [...document.querySelectorAll('[role=tab]')].filter(tab => {
+      const panel = document.getElementById(tab.getAttribute('aria-controls') ?? '');
+      return !panel || panel.getAttribute('aria-labelledby') !== tab.id;
+    }).map(tab => tab.textContent));
+    expect(brokenRelations).toEqual([]);
     if (theme === 'dark') await page.getByRole('switch', { name: '深色模式' }).click();
     for (const name of ['Buttons', '表單與邊界行為', '內容與資料', 'Pricing']) {
       await page.getByRole('tab', { name, exact: true }).click();
+      if (name === '表單與邊界行為') {
+        await page.getByRole('tab', { name: '動態詳細', exact: true }).click();
+        await page.getByRole('textbox', { name: '分頁草稿', exact: true }).fill('Keep this draft');
+        await page.getByRole('tab', { name: '動態總覽', exact: true }).click();
+        await expect(page.getByRole('textbox', { name: '分頁草稿', exact: true })).toHaveCount(0);
+        await page.getByRole('tab', { name: '動態詳細', exact: true }).click();
+        await expect(page.getByRole('textbox', { name: '分頁草稿', exact: true })).toHaveValue('Keep this draft');
+      }
       assertNoOverflow(await overflow(page), `Gallery/${name}/${width}/${theme}`);
     }
+    await page.getByRole('tab', { name: '表單與邊界行為', exact: true }).click();
+    await expect(page.getByRole('textbox', { name: '分頁草稿', exact: true })).toHaveValue('Keep this draft');
     await page.getByRole('button', { name: '建立專案', exact: true }).click();
     await expect(page.getByRole('dialog')).toBeVisible(); assertNoOverflow(await overflow(page), `Gallery/modal/${width}/${theme}`);
     await page.keyboard.press('Escape'); await expect(page.getByRole('dialog')).toHaveCount(0);

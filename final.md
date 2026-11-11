@@ -5,7 +5,30 @@ This is an ongoing development record, not a published release or a statement of
 production readiness. Current evidence is in VALIDATION.md and test.md. Entries
 below are historical snapshots; later slices supersede earlier open-work notes.
 
-## Current development / R015
+## Current development / R016
+
+R014 / PR #16 and R015 / PR #17 are merged after both hosted validate checks passed.
+ROADMAP-003 audits Tabs relations and native focus-candidate coverage. R016 retains
+all React Tabs panels to keep every aria-controls valid and preserve content
+through selection/reorder, with Vue parity tests, a Gallery draft example and a
+visible-only family coverage gate. Removing items unmounts content; inactive
+React child effects remain mounted as documented. Shared CSS/tokens are unchanged.
+
+- `pnpm test`: PASS, 273 Vitest / 20 files, 144 scaffolds and 96 generated
+  React/Vue typechecks/bundles with workspace toolchains.
+- `pnpm test:cli:installed`: PASS, three isolated installs / 144 build scripts.
+- `pnpm typecheck` / `pnpm build`: PASS; no production-build warnings observed.
+- `pnpm test:browser`: PASS, 43 Chromium cases at 360/768/1280/1536 in both
+  themes, zero unexpected/flaky/skipped or global errors. Existing Gallery cases
+  now verify complete IDREFs and draft retention across nested/outer tab switches.
+
+ROADMAP-002 R011–R015 and R016 are implemented. R017 (native radio/editable focus
+candidates) remains open. Human browser/visual/keyboard review, screen readers,
+physical touch/DPI, full WCAG AA and approved visual baselines remain NOT_RUN.
+No npm publication, release, deployment or settings changes were performed;
+no project-completion or production-readiness claim is made.
+
+## Historical development / R015
 
 R014 / PR #16 is merged after both hosted validate checks passed. R015 shares
 React/Vue Modal background native inert, focusin protection and cleanup, with

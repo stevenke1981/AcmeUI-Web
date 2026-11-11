@@ -12,6 +12,33 @@ const items = [
 ];
 
 describe("React Tabs keyboard", () => {
+  it("keeps every tab linked to a mounted panel through selection and reorder", () => {
+    const view = render(<Tabs items={items} />);
+    const check = () => {
+      expect(screen.getAllByRole('tabpanel', { hidden: true })).toHaveLength(3);
+      for (const tab of screen.getAllByRole('tab')) {
+        const panel = document.getElementById(tab.getAttribute('aria-controls')!);
+        expect(panel).not.toBeNull(); expect(panel!.getAttribute('aria-labelledby')).toBe(tab.id);
+        expect(panel!.hidden).toBe(tab.getAttribute('aria-selected') !== 'true');
+      }
+      expect(screen.getAllByRole('tabpanel')).toHaveLength(1);
+    };
+    check(); fireEvent.click(screen.getByRole('tab', { name: 'Beta' })); check();
+    view.rerender(<Tabs items={[...items].reverse()} />); check();
+  });
+
+  it("preserves panel nodes and uncontrolled form values through switching and reorder", () => {
+    const draftItems = [{ value: 'draft', label: 'Draft', content: <input aria-label="Draft text" defaultValue=""/> }, items[0]];
+    const view = render(<Tabs items={draftItems} />);
+    const input = screen.getByRole('textbox', { name: 'Draft text' }) as HTMLInputElement;
+    const panel = screen.getByRole('tabpanel'); fireEvent.change(input, { target: { value: 'Keep this draft' } });
+    fireEvent.click(screen.getByRole('tab', { name: 'Alpha' }));
+    expect(input.isConnected).toBe(true); expect(panel.hidden).toBe(true); expect(screen.queryByRole('textbox')).toBeNull();
+    fireEvent.click(screen.getByRole('tab', { name: 'Draft' }));
+    view.rerender(<Tabs items={[...draftItems].reverse()} />);
+    expect(screen.getByRole('tabpanel')).toBe(panel); expect(screen.getByRole('textbox')).toBe(input); expect(input.value).toBe('Keep this draft');
+  });
+
   it("falls back to the first item for an unknown default value", () => {
     render(<Tabs items={items} defaultValue="missing" />);
     expect(screen.getByRole("tab", { selected: true }).textContent).toBe("Alpha");

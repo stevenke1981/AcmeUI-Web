@@ -1,6 +1,6 @@
 # Test Strategy
 
-## Current required gates (R015)
+## Current required gates (R016)
 
 After `pnpm install --frozen-lockfile`, run the same five commands as
 `.github/workflows/ci.yml`:
@@ -31,7 +31,7 @@ Use repo-local `COREPACK_HOME="$PWD/.cache/corepack"` and
 Vitest imports the actual Gallery App, visits every tab and opens its Modal in
 both themes. All 23 families must render using their real class/semantic
 selectors. The selector contract is compared to runtime public exports, with
-only the three documented Card helpers excluded. This checks reachable examples,
+only the three documented Card helpers excluded. Hidden/inert/aria-hidden/CSS-hidden examples do not count. This checks reachable examples,
 not all props/states or full visual parity. Axe scans all four tabs and open Modal
 states, with the explicit jsdom exclusions in docs/ACCESSIBILITY.md.
 
@@ -142,6 +142,19 @@ lifecycle cleanup and panel style/geometry comparison. Gallery and API/static do
 explain the single-open-Modal, native-inert, light-DOM contract. Shared/static CSS
 and tokens remain unchanged. Results are in VALIDATION.md; human checks remain
 NOT_RUN.
+
+## R016 / complete Tabs panel relations and lifecycle
+
+Two initial React regressions failed for missing inactive panels and discarded
+uncontrolled values. React now retains all panel nodes, matching Vue/static
+visibility intent; selection/reorder preserves content, while item removal or
+clearing unmounts it. React child effects remain mounted; consumers own any pause
+based on visibility. Four new Vitest cases cover all IDREFs, node/value retention,
+Vue reorder parity and hidden-family exclusion. The eight existing Gallery browser
+cases now check relations plus nested/outer-tab draft retention in all viewport/
+theme scenarios (43 total Chromium cases). Gallery/API/static docs and ROADMAP-003
+record the contract, evidence and remaining R017 native focus-candidate work.
+Shared/static CSS and tokens are unchanged; human checks remain NOT_RUN.
 
 ## Historical evidence
 

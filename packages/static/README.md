@@ -41,6 +41,9 @@ Home/End 會自動選取並移動焦點；點擊保留 Ctrl/Meta 等修飾鍵的
 React/Vue Tabs 支援動態清單：無效 defaultValue 或已移除的選取會回到第一項，
 清空後重新載入也選取第一項；重排保留有效選取。靜態/Tailwind HTML 若需要
 重建分頁，先 cleanup、更新連結/section，再呼叫 enhanceTabs；不監聽 DOM 變動。
+三種 Tabs 都保留未選取的 panel，讓每個 aria-controls 持續有效；inactive
+內容以 hidden 或 v-show 隱藏。React 內容狀態、effects 與未受控表單值會保留，
+移除項目/清空才會卸載；依可見性運作的 effects 須由應用程式自行暫停。
 
 Modal 使用具 `aria-labelledby` 的 `<dialog class="acme-dialog">`，內含
 `.acme-modal__panel` 與 `[data-acme-modal-close]` 按鈕。`showModal()` 讓瀏覽器

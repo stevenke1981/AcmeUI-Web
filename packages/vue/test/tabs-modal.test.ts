@@ -17,6 +17,22 @@ const items = [
 const visiblePanel = () => Array.from(document.querySelectorAll<HTMLElement>("[role=tabpanel]")).find(p => p.style.display !== "none");
 
 describe("Vue Tabs keyboard", () => {
+  it('keeps every linked panel mounted through selection and reorder', async () => {
+    const view = attach(mount(Tabs, { props: { items }, attachTo: document.body }));
+    const panels = Array.from(document.querySelectorAll<HTMLElement>('[role=tabpanel]'));
+    const check = () => {
+      expect(document.querySelectorAll('[role=tabpanel]')).toHaveLength(3);
+      for (const tab of document.querySelectorAll('[role=tab]')) {
+        const panel = document.getElementById(tab.getAttribute('aria-controls')!)!;
+        expect(panel.getAttribute('aria-labelledby')).toBe(tab.id);
+        expect(panel.style.display === 'none').toBe(tab.getAttribute('aria-selected') !== 'true');
+      }
+    };
+    check(); await view.findAll('[role=tab]')[1].trigger('click'); check();
+    await view.setProps({ items: [...items].reverse() }); check();
+    Array.from(document.querySelectorAll('[role=tabpanel]')).forEach((panel, index) => expect(panel).toBe(panels[panels.length - 1 - index]));
+  });
+
   it("falls back to the first item for an unknown default value", () => {
     attach(mount(Tabs, { props: { items, defaultValue: "missing" }, attachTo: document.body }));
     expect(document.querySelector('[role=tab][aria-selected=true]')?.textContent).toBe("Alpha");
