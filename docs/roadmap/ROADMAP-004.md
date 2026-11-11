@@ -23,7 +23,7 @@
 | ID | 優先序 | 範圍與自動驗收 | 狀態 |
 |---|---|---|---|
 | R018 | P2 | 共用 Tabs value 唯一性驗證，React/Vue 初始與動態無效輸入報錯，有效空字串／特殊字元／同一 app 多實例保持有效；Gallery/API/驗證文件更新 | 已合併 [PR #20](https://github.com/stevenke1981/AcmeUI-Web/pull/20)，merge commit 23392f9；兩組 CI 成功且 MERGEABLE |
-| R019 | P2 | 共用 Modal 尊重 defaultPrevented / isComposing；兩框架 Vitest 驗證被取消的 Escape/Tab 與組字旗標、一般 Escape 仍可關閉；Chromium 以真實鍵盤驗證子控制項取消後 Modal 仍開啟，下一次未取消可關閉；Gallery/API 與 OS IME 未驗證範圍更新 | 已實作，本機五項 gate PASS；hosted/merge 證據見 PR |
+| R019 | P2 | 共用 Modal 尊重 defaultPrevented / isComposing；兩框架 Vitest 驗證被取消的 Escape/Tab 與組字旗標、一般 Escape 仍可關閉；Chromium 以真實鍵盤驗證子控制項取消後 Modal 仍開啟，下一次未取消可關閉；Gallery/API 與 OS IME 未驗證範圍更新 | 已合併 [PR #21](https://github.com/stevenke1981/AcmeUI-Web/pull/21)，merge commit 6588f79；兩組 CI 成功且 MERGEABLE |
 
 每片均跑 `pnpm test`、`pnpm test:cli:installed`、`pnpm typecheck`、
 `pnpm build`、`pnpm test:browser`。本機 PASS、hosted CI 全成功且 MERGEABLE

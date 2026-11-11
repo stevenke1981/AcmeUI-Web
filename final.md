@@ -5,7 +5,18 @@ This is an ongoing development record, not a published release or a statement of
 production readiness. Current evidence is in VALIDATION.md and test.md. Entries
 below are historical snapshots; later slices supersede earlier open-work notes.
 
-## Current development / R019
+## Current audit / ROADMAP-005
+
+Review/fix from master 6588f79 after R019 / PR #21 merged. The fifth audit
+reproduced eight failures in an isolated temporary Vitest fixture: six cancelled /
+composing Tabs cases across React/Vue/static, one cancelled native Modal cancel,
+and one closed-details focus-candidate case. ROADMAP-005 contains the complete
+fixture, reproduction steps and R020–R022 acceptance criteria. Implementation is
+pending; baseline full-gate and hosted evidence belong to the roadmap PR.
+Human review, OS IME, screen readers, physical touch/DPI and approved visual
+baselines remain NOT_RUN. No publication, release, deployment or settings change.
+
+## R019
 
 Review/fix from master 23392f9 after R018 / PR #20 merged. React/Vue share a Modal
 keydown guard for defaultPrevented and isComposing; ordinary Escape/Tab behavior

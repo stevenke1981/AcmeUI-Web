@@ -50,3 +50,11 @@
 
 - [x] R018 / P2：React/Vue Tabs 重複 value 初始化／更新驗證
 - [x] R019 / P2：Modal 尊重已取消鍵盤事件與 IME 組字旗標
+
+## ROADMAP-005（2026-11-12 第五輪事件／原生焦點稽核）
+
+詳見 [稽核證據、重現與驗收條件](docs/roadmap/ROADMAP-005.md)。
+
+- [ ] R020 / P2：React/Vue/static Tabs 尊重已取消與組字中的鍵盤事件
+- [ ] R021 / P2：Static Modal 尊重消費端取消的原生 cancel／開關 click
+- [ ] R022 / P2：Modal 原生 details/summary 循序焦點候選與動態邊界

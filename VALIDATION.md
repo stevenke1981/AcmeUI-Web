@@ -515,3 +515,15 @@ contrast/labels and family/state screenshots, full WCAG AA, approved visual
 baselines and npm/yarn installation matrices. Synthetic isComposing events are
 only flag-level regression coverage. No npm publication, release, deployment or
 repository settings change. Hosted CI and merge evidence remain in the PR.
+
+## 2026-11-12 / ROADMAP-005 audit
+
+At master 6588f79, the minimal fixture in ROADMAP-005 reproduced eight expected
+failures (six Tabs, one static Modal cancel, one closed-details candidate list).
+The temporary source/log were archived under ignored .cache/validation/r020-r022;
+no failing audit fixture was added to the ordinary test gate. The roadmap contains
+the full fixture and exact regeneration command. This is source/jsdom evidence;
+native details keyboard behavior remains to be checked in R022 Chromium tests.
+Full local gates and hosted CI/merge evidence for this docs PR are recorded in
+the PR. Human browser/visual review, OS IME, screen readers, physical touch/DPI,
+full WCAG AA and approved visual baselines remain NOT_RUN.
