@@ -12,6 +12,15 @@ export function tabKeyTarget(key:string,current:number,count:number):number|null
   }
 }
 
+/** Values also key retained content: duplicates cannot represent one selected tab. */
+export function assertUniqueTabValues(items:ReadonlyArray<{value:string}>):void{
+  const seen=new Set<string>();
+  items.forEach((item,index)=>{
+    if(seen.has(item.value))throw new Error(`Tabs item values must be unique (duplicate at index ${index}: ${JSON.stringify(item.value)})`);
+    seen.add(item.value);
+  });
+}
+
 const nativeFocusableSelector=[
   "a[href]","area[href]","button:not([disabled])","input:not([disabled]):not([type=hidden])",
   "select:not([disabled])","textarea:not([disabled])","iframe",

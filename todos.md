@@ -43,3 +43,10 @@
 
 - [x] R016 / P1：Tabs 完整 panel 關聯、內容保留與 Gallery 可見家族 gate
 - [x] R017 / P2：原生 radio group／contenteditable 循序焦點候選與鍵盤邊界
+
+## ROADMAP-004（2026-11-11 第四輪輸入／鍵盤契約稽核）
+
+詳見 [稽核與驗收條件](docs/roadmap/ROADMAP-004.md)。
+
+- [x] R018 / P2：React/Vue Tabs 重複 value 初始化／更新驗證
+- [ ] R019 / P2：Modal 尊重已取消鍵盤事件與 IME 組字旗標

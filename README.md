@@ -79,7 +79,8 @@ React/Vue 來源型別檢查與 Vite 打包（沿用 example toolchain）。驗�
 拒絕元件家族、shared/static CSS、registry metadata、catalog 與 Gallery 資料
 漂移。尚待實作與未驗證範圍見 [ROADMAP-001](docs/roadmap/ROADMAP-001.md)、
 第二輪 [ROADMAP-002](docs/roadmap/ROADMAP-002.md)、
-第三輪 [ROADMAP-003](docs/roadmap/ROADMAP-003.md)
+第三輪 [ROADMAP-003](docs/roadmap/ROADMAP-003.md)、
+第四輪 [ROADMAP-004](docs/roadmap/ROADMAP-004.md)
 及 [VALIDATION.md](VALIDATION.md)。
 
 ## Agent Skill
@@ -125,3 +126,7 @@ R016 讓 React 與 Vue/static 一樣保留所有 Tabs panel，未選取內容隱
 每個 aria-controls 都有對應目標，切換/重排保留內容狀態。Gallery 動態分頁
 展示草稿保留，家族 gate 僅計算可見且未被 inert/aria-hidden 排除的範例。
 內容生命週期契約見 [API reference](skills/acmeui-web/references/api-reference.md)。
+
+R018 在 React/Vue Tabs 的初始化與更新時拒絕重複 value，避免多個選取項目
+及重複內容 key；單一空字串、特殊字元和同一 app 的獨立實例仍有效。
+無效輸入透過各框架的錯誤處理回報；修復方式與 ID scope 見 API reference。

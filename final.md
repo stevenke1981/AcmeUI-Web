@@ -5,7 +5,23 @@ This is an ongoing development record, not a published release or a statement of
 production readiness. Current evidence is in VALIDATION.md and test.md. Entries
 below are historical snapshots; later slices supersede earlier open-work notes.
 
-## Current development / R017
+## Current development / R018
+
+Review/fix from master 06ef00a, preserving the existing R018 branch work. A shared
+Tabs value guard rejects duplicates during React/Vue initialization and updates
+before ambiguous selection/key rendering. Eight new tests cover empty/special
+values, independent instances and Vue error-handler recovery. Gallery and API
+docs state the requirement. Shared/static CSS and tokens are unchanged.
+
+All five local gates PASS: 291 Vitest / 22 files, 144 scaffolds / 96 bundles,
+three isolated installs / 144 build scripts, typecheck/build and 51 headless
+Chromium cases at all four widths/two themes, with zero unexpected/flaky/skipped
+or global browser errors. R019 remains in ROADMAP-004. Hosted CI and merge
+evidence belong to the PR. Human browser, screen-reader, touch/DPI, full WCAG AA
+and approved visual baselines remain NOT_RUN; no publication/release/settings
+changes are included.
+
+## R017
 
 Review/fix from master 1e84826. Shared React/Vue Modal focus now respects native
 radio selection/group ownership and empty/plaintext-only contenteditable hosts,
