@@ -359,3 +359,12 @@ Gallery includes plaintext notes and a native radio group with unique IDs; an
 initial axe incomplete result was fixed without relaxing rules. The final full
 Vitest gate has 283 passing cases. No CSS/token changes; human checks remain
 NOT_RUN. Exact results and scope are in VALIDATION.md / BROWSER_SMOKE.md.
+
+## ROADMAP-005 / audit reproduction
+
+The next audit starts at master 6588f79. ROADMAP-005 includes an exact temporary
+fixture and regeneration command for eight baseline failures outside the normal
+gate: cancelled/composing Tabs in three adapters, cancelled static Modal cancel,
+and closed-details focus candidates. R020–R022 will add permanent regression
+coverage separately. This temporary jsdom audit is not native browser or OS IME
+verification; human checks and visual baselines remain NOT_RUN.
