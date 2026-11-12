@@ -1,4 +1,4 @@
-# Automated HTML and browser smoke (R009–R022)
+# Automated HTML and browser smoke (R009–R024)
 
 The parser gate runs in `pnpm lint` / `pnpm test`. It uses HTML-validate 9's HTML5
 content models for close order, implicit closes, allowed parents/children,
@@ -27,7 +27,7 @@ CI upload path. A Vitest guard checks both resolved paths against that directory
 See the official [Playwright browser installation](https://playwright.dev/docs/browsers)
 and [HTML-validate rules](https://html-validate.org/rules/index.html).
 
-The current 83 Chromium headless cases cover:
+The current 91 Chromium headless cases cover:
 
 - 48 previews × 360/768/1280/1536 × light/dark: no document horizontal overflow
   beyond 1px rounding, visible h1/nonempty main, working theme toggle where
@@ -151,3 +151,8 @@ runtime native-dialog workaround was added. The original static-dialog scenarios
 now include the additional collapsed Gallery summary in their actual tab order.
 Explicit summary is required; browser-generated fallback summary, other engines,
 human visual/keyboard review and approved visual baselines remain NOT_RUN.
+
+R024 adds eight four-width/theme React/Vue Modal cases: a `visibility:visible`
+control inside a `visibility:hidden|collapse` wrapper is reached by real Shift+Tab
+and Tab boundaries, while an inherited-hidden sibling and a `display:none` subtree
+are skipped. They failed before the core fix.

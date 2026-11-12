@@ -6,7 +6,7 @@
 | ID | 優先序 | 稽核定位與驗收條件 | 狀態 |
 |---|---|---|---|
 | R023 | P2 | Vue Switch 在 capture consumer 已取消 click 後仍切換／emit；toggle 接收事件並先檢查 defaultPrevented，保留 disabled guard、一般與受控 modelValue 行為。React/Vue Vitest 覆蓋取消、一般、受控與 disabled；另確認 React onClick 先執行並可取消切換 | 已實作；修正前 4 個 Vue 案例失敗，修正後 12 個 targeted Vitest 通過 |
-| R024 | P2 | core focusCandidates 排除 visibility:hidden 祖先內明確 visibility:visible 的控制項，造成 Modal Tab trap 遺漏；只檢查 el 自身 computed visibility，祖先仍依 display:none／hidden／inert／aria-hidden 排除；補 core 與 adapter 焦點回歸驗證 | 待實作 |
+| R024 | P2 | core focusCandidates 排除 visibility:hidden 祖先內明確 visibility:visible 的控制項，造成 Modal Tab trap 遺漏；只檢查 el 自身 computed visibility，祖先仍依 display:none／hidden／inert／aria-hidden 排除；補 core 與 adapter 焦點回歸驗證 | 已實作；修正前 6 failed / 8 passed，修正後 14 個 targeted Vitest 通過 |
 | R025 | P2 | static enhanceTabs click 尚未尊重 defaultPrevented；先取消的 click 應保留選取／焦點，一般 click 維持既有行為，補事件交接測試 | 待實作 |
 
 ## R023 驗證證據
@@ -31,3 +31,11 @@ NOT_RUN：真人瀏覽器／視覺／鍵盤審查（360/768/1280/1536）、真�
 合成事件與 jsdom 僅代表列出的 DOM 自動化範圍，不宣稱原生鍵盤或視覺驗證。
 不 npm publish、不發 release、不部署、不改 repo settings、不破壞性刪除或
 force-push，不宣稱專案完成或可上線。
+
+## R024 驗證證據
+
+`packages/core/test/visibility-focus.test.ts` 與 `scripts/test/visibility-focus.test.tsx`：
+移除修正後 6 failed / 8 passed（ignored `.cache/r024-before.log`），套回後 14 passed。
+`scripts/browser/visibility-focus.spec.ts` 以四尺寸／雙主題 Chromium 真實 Tab／Shift+Tab
+驗證 React/Vue Modal：修正前 8 個全數失敗，修正後通過。jsdom 已斷言 hidden/collapse 繼承。
+完整 gates 與 hosted CI 記錄於 R024 PR；R025 待實作。
