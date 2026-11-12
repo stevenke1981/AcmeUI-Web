@@ -1,5 +1,5 @@
 import { useId, useState } from "react";
-import { Button, Checkbox, Field, Input, Tabs } from "@acmeui/react";
+import { Button, Field, Input, Tabs } from "@acmeui/react";
 
 export function DynamicTabsExample() {
   const id = useId();
@@ -17,7 +17,7 @@ export function DynamicTabsExample() {
       <Button variant="outline" aria-pressed={empty} onClick={() => setEmpty(value => !value)}>清空／載入分頁</Button>
       <Button variant="outline" aria-pressed={reverse} onClick={() => setReverse(value => !value)}>反轉分頁順序</Button>
     </div>
-    <Checkbox label="暫停分頁快捷鍵" checked={paused} onChange={event => setPaused(event.target.checked)}/>
+    <label className="acme-checkbox" htmlFor={`${id}-paused`}><input id={`${id}-paused`} type="checkbox" checked={paused} onChange={event => setPaused(event.target.checked)}/><span>暫停分頁快捷鍵</span></label>
     <p>勾選後先行取消方向鍵、Home 與 End；分頁保留目前選取及焦點。組字中的按鍵由輸入法處理。</p>
     <div onKeyDownCapture={event => { if (paused && !event.nativeEvent.isComposing && ["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) event.preventDefault(); }}>
       <Tabs label="動態分頁" items={empty ? [] : reverse ? [...items].reverse() : items} />

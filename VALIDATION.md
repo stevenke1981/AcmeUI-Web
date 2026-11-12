@@ -540,3 +540,9 @@ three adapters and Gallery's pause checkbox. Browser composing events remain
 synthetic. Shared/static CSS and tokens are unchanged. Full local and hosted
 results/HEAD/merge evidence are in the R020 PR. Human review, real OS IME,
 screen readers, physical touch/DPI and approved visual baselines remain NOT_RUN.
+
+The first full R020 test gate had two Gallery axe incomplete results for multiple
+implicit labels. A minimal jsdom query matched missing for attributes with the
+literal selector label[for="null"]. The new pause example now uses an explicit
+for/id association; no axe exclusions or test relaxations were added. The initial
+log remains in .cache/validation/r020-initial. Final full-gate evidence is in PR.
