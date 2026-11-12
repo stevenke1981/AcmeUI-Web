@@ -1,6 +1,6 @@
 # Test Strategy
 
-## Current required gates (R021)
+## Current required gates (R022)
 
 After `pnpm install --frozen-lockfile`, run the same five commands as
 `.github/workflows/ci.yml`:
@@ -26,7 +26,7 @@ Use repo-local `COREPACK_HOME="$PWD/.cache/corepack"` and
 | `pnpm test:cli:installed` | Three isolated pnpm manifest installations; all 144 unmodified generated build scripts, including 96 React/Vue typechecks and dist outputs; identical manifests reuse each isolated install |
 | `pnpm typecheck` | Core/React/Vue/Gallery plus unit-test and browser TypeScript fixtures |
 | `pnpm build` | Gallery (including static example) and React/Vue examples, with build-warning gate |
-| `pnpm test:browser` | 75 headless Chromium cases; all 48 previews at four widths/two themes, representative four-adapter style/geometry comparison, focus ring, Gallery Tabs/Modal, child keyboard cancellation and native static dialog; see docs/BROWSER_SMOKE.md |
+| `pnpm test:browser` | 83 headless Chromium cases; all 48 previews at four widths/two themes, representative four-adapter style/geometry comparison, focus ring, Gallery Tabs/Modal, child keyboard cancellation and native static dialog; see docs/BROWSER_SMOKE.md |
 
 Vitest imports the actual Gallery App, visits every tab and opens its Modal in
 both themes. All 23 families must render using their real class/semantic
@@ -386,3 +386,14 @@ cancellation before open/close. Cleanup remains unconditional and idempotent;
 normal close restores the opener. Eight four-width/theme Chromium cases use real
 clicks and Escape against the static Gallery confirmation example. Native dialog
 methods remain real in Chromium and explicit doubles in jsdom.
+
+## R022 / explicit summary and closed-details focus
+
+Nine core and two adapter tests cover first summaries, closed subtrees, nested
+open/close, opt-in secondary summaries, existing visibility/disabled rules,
+explicit details tabindex, initial focus and live boundaries. Ten of eleven
+failed before the fix. Eight Chromium cases compare actual React/Vue/static
+keyboard behavior and Gallery at four widths/themes. Static native boundaries
+retain only R013's single unfocused-document transition and attach measured
+states; they never permit a background control or focused body. Human review,
+screen readers, touch/DPI and approved visual baselines remain NOT_RUN.

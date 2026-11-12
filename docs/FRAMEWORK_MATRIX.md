@@ -55,3 +55,10 @@ R021 的 static/Tailwind enhancement 尊重已取消的開啟 click、關閉 cli
 cancel；消費端須在 enhancer listener 前處理（例如 capture）。Gallery 可先
 取消一次 Escape／關閉按鈕並保留內容；cleanup 仍明確關閉與解除 listener。
 這是原生 dialog 委派的事件取消契約；React/Vue 維持 R019 鍵盤契約。
+
+R022：React/Vue Modal 的循序焦點候選納入 details 的第一個明確 summary，
+closed details 只保留該 summary 子樹；巢狀與動態 open/close 每次重新計算。
+static/Tailwind 的同一 details HTML 由原生 dialog 處理。Gallery 與八個新增
+四尺寸/亮暗色 Chromium 案例展示展開、收合、Tab/Shift+Tab 與草稿保留；
+沒有額外 CSS/token 或人工視覺 baseline。請提供明確 summary，瀏覽器自動
+生成的 fallback summary、shadow DOM 與正 tabindex 不在 helper 契約內。

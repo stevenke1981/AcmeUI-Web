@@ -135,3 +135,7 @@ R018 在 React/Vue Tabs 的初始化與更新時拒絕重複 value，避免多�
 R019 讓 React/Vue Modal 尊重已取消的鍵盤事件與 isComposing。Gallery 備註
 示範先處理一次 Escape，再讓 Modal 關閉；13 個新增 Vitest 與 8 個跨框架／
 Gallery Chromium 案例覆蓋事件交接。合成組字旗標不代表 OS IME 已驗證。
+
+ROADMAP-005 的 R020–R022 補上三種 Tabs 的鍵盤事件交接、static Modal 取消
+事件與 details/summary 焦點契約。Gallery 提供暫停快捷鍵、一次關閉確認及
+進階選項草稿範例；自動驗證範圍與人工 NOT_RUN 項目見 VALIDATION。

@@ -5,7 +5,24 @@ This is an ongoing development record, not a published release or a statement of
 production readiness. Current evidence is in VALIDATION.md and test.md. Entries
 below are historical snapshots; later slices supersede earlier open-work notes.
 
-## Current development / R021
+## Current development / R022
+
+From master 229059a after R021 / PR #24 merged. Core Modal focus candidates now
+recognize the first explicit details summary and exclude closed body content,
+including nested disclosures. React/Vue consume the shared fix; static/Tailwind
+retain native traversal. Gallery shows retained advanced-option drafts. Eleven
+permanent Vitest cases and eight browser scenarios cover candidate rules, live
+open/close and keyboard boundaries; ten Vitest cases and the first browser case
+failed before the fix. An intermediate static reverse-boundary fixture required
+the existing R013 unfocused-document allowance; see VALIDATION.md.
+
+Full local gate and hosted CI/merge evidence is recorded in the R022 PR. Shared
+CSS/tokens are unchanged. R020–R022 implementation checkboxes are recorded in
+ROADMAP-005; this is an ongoing development record. Human browser/visual/keyboard,
+OS IME, screen readers, physical touch/DPI, full WCAG AA and approved visual
+baselines remain NOT_RUN. No publication, release, deployment or settings change.
+
+## R021
 
 From master bb72b87 after R020 / PR #23 merged. Static Modal now respects cancelled
 opener clicks, close-button clicks and native cancel events while preserving

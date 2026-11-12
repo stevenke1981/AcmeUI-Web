@@ -93,3 +93,10 @@ Tailwind adapter 也使用同一份 class contract。
 R017：React/Vue Modal 的 radio 與空值/plaintext-only contenteditable 焦點候選
 已對齊；static/Tailwind 仍將循序焦點委派原生 dialog。巢狀編輯區需明確
 tabindex="0" 才加入 Tab 順序；不使用正 tabindex。詳見 framework matrix。
+
+R022：Modal 內可使用原生 details 與明確的第一個 summary；收合後略過內容、
+展開後以 Tab 到輸入欄位，收合／展開保留草稿。React/Vue 共用 helper 對齊此
+light-DOM 行為，次要／非 details 的 summary 要用 tabindex=0 才加入順序；
+不支援瀏覽器自動產生的 fallback summary。Static/Tailwind 仍由原生 dialog
+處理，Gallery 的進階選項展示同一 HTML 與共用樣式。原生鍵盤僅經 Chromium
+自動驗證；真人／螢幕閱讀器／觸控與視覺 baseline 仍為 NOT_RUN。
