@@ -23,7 +23,7 @@ export function assertUniqueTabValues(items:ReadonlyArray<{value:string}>):void{
 
 const nativeFocusableSelector=[
   "a[href]","area[href]","button:not([disabled])","input:not([disabled]):not([type=hidden])",
-  "select:not([disabled])","textarea:not([disabled])","iframe",
+  "select:not([disabled])","textarea:not([disabled])","iframe","details > summary:first-of-type",
 ].join(",");
 export const focusableSelector=[nativeFocusableSelector,"[contenteditable]","[tabindex]"].join(",");
 
@@ -42,6 +42,12 @@ function focusCandidates(container:HTMLElement):HTMLElement[]{
     if(!el.matches(nativeFocusableSelector)&&!el.hasAttribute("tabindex")&&(!editable(el)||editable(el.parentElement)))return false;
     const view=el.ownerDocument.defaultView;
     for(let node:HTMLElement|null=el;node;node=node.parentElement){
+      // Closed details exposes only its first summary subtree. The details node
+      // itself may still opt in through tabindex; nested disclosures obey each ancestor.
+      if(node!==el&&node.localName==="details"&&!node.hasAttribute("open")){
+        const summary=Array.from(node.children).find(child=>child.localName==="summary");
+        if(!summary?.contains(el))return false;
+      }
       if(node.hidden||node.hasAttribute("inert")||node.getAttribute("aria-hidden")==="true")return false;
       const style=view?.getComputedStyle(node);
       if(style?.display==="none"||style?.visibility==="hidden"||style?.visibility==="collapse")return false;

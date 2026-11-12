@@ -24,6 +24,7 @@ for (const width of [360, 768, 1280, 1536]) for (const theme of ['light', 'dark'
     await page.goto('http://127.0.0.1:4174/static.html');
     await page.evaluate(theme => { document.documentElement.dataset.theme = theme; }, theme);
     const dialog = page.locator('dialog'), opener = page.getByRole('button', { name: '開啟對話框' });
+    const summary = dialog.locator("summary");
     const input = dialog.getByRole('textbox', { name: '姓名' }), close = dialog.getByRole('button', { name: '關閉', exact: true });
     await expect(page.getByRole('tab', { name: '總覽' })).toBeVisible(); // Module initialization finished.
     await expect(dialog).not.toBeVisible();
@@ -31,8 +32,10 @@ for (const width of [360, 768, 1280, 1536]) for (const theme of ['light', 'dark'
     await expect(dialog).toBeVisible(); expect(await isNativeModal(page)).toBe(true);
     await expect(input).toBeFocused();
     await page.keyboard.press('Tab'); await expect(close).toBeFocused();
+    await page.keyboard.press('Tab'); await expect(summary).toBeFocused();
     const forward = await crossBoundary(page, 'Tab', input);
-    const backward = await crossBoundary(page, 'Shift+Tab', close);
+    const backward = await crossBoundary(page, 'Shift+Tab', summary);
+    await page.keyboard.press('Shift+Tab'); await expect(close).toBeFocused();
     await info.attach('native-tab-boundaries', { body: JSON.stringify({ forward, backward }), contentType: 'application/json' });
     await page.keyboard.press('Shift+Tab'); await expect(input).toBeFocused();
     // Native inert background must reject programmatic focus as well as Tab.

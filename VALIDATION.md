@@ -566,3 +566,34 @@ Full five-gate and hosted CI/HEAD/merge results are recorded in the R021 PR.
 Shared/static CSS, tokens and React/Vue Modal are unchanged. NOT_RUN: human
 browser/visual/keyboard/OS IME, screen readers, physical touch/DPI, full WCAG AA,
 Firefox/WebKit and human-approved visual regression baselines.
+
+R021 final verification at 79cdf67: all five gates PASS (315 Vitest / 25 files,
+75 Chromium, existing CLI matrices, typecheck/build). Both hosted checks were
+SUCCESS and GitHub MERGEABLE before PR #24 merge commit 229059a.
+
+## 2026-11-12 / R022
+
+From master 229059a. Eleven new core/adapter Vitest cases reproduced ten failures;
+one filtering control already passed. The first 360/light Chromium case also
+failed on reverse Tab to the closed summary. Core now includes the first explicit
+summary and filters each closed details ancestor, reading open state on each
+calculation. React/Vue share this implementation; native static/Tailwind keeps
+browser traversal. Gallery exposes advanced-options drafts using shared styles.
+
+Focused core/adapter/axe checks passed after the fix. An intermediate browser
+case completed React/Vue then failed on static reverse wrapping. Trace navigation
+confirmed static.html; the native unfocused-document transition is the existing
+R013 behavior. All static wrap assertions now use that same single-transition
+predicate, with body-active/document-focus state attached as JSON. No runtime
+native workaround, timeout/retry/expectation relaxation for background focus or
+visual baseline was introduced. Initial and intermediate traces remain under
+.cache/validation/r022. The existing static-dialog suite follows the new Gallery
+summary's actual tab order. Full local/hosted results and merge evidence belong
+to the R022 PR. Explicit summary is required; browser-generated fallback summary
+is outside the helper's light-DOM scope.
+
+NOT_RUN: human browser/visual/keyboard at 360/768/1280/1536, OS IME, screen readers,
+physical touch/DPI, Firefox/WebKit/other OS, complete rendered contrast/labels,
+full family/state screenshots, full WCAG AA, approved visual baselines and
+npm/yarn install matrices. No npm publication, release, deployment or settings
+changes; no claim of project completion or production readiness.

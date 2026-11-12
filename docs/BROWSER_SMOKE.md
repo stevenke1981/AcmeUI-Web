@@ -1,4 +1,4 @@
-# Automated HTML and browser smoke (R009–R021)
+# Automated HTML and browser smoke (R009–R022)
 
 The parser gate runs in `pnpm lint` / `pnpm test`. It uses HTML-validate 9's HTML5
 content models for close order, implicit closes, allowed parents/children,
@@ -27,7 +27,7 @@ CI upload path. A Vitest guard checks both resolved paths against that directory
 See the official [Playwright browser installation](https://playwright.dev/docs/browsers)
 and [HTML-validate rules](https://html-validate.org/rules/index.html).
 
-The current 75 Chromium headless cases cover:
+The current 83 Chromium headless cases cover:
 
 - 48 previews × 360/768/1280/1536 × light/dark: no document horizontal overflow
   beyond 1px rounding, visible h1/nonempty main, working theme toggle where
@@ -136,3 +136,18 @@ The next uncancelled attempt closes and restores opener focus. The initial
 360/light case failed on cancelled opening. Five Vitest double-based cases also
 cover cancellation, idempotence, cleanup and reinitialization. These do not
 establish human browser/visual or screen-reader results.
+
+R022 adds eight four-width/theme cases comparing React/Vue/static Modal traversal
+with explicit first summaries, nested closed/open details, Enter/Space toggling,
+Tab/Shift+Tab boundaries, retained drafts and opener restoration. Gallery's real
+advanced-options example is also operated. Eleven Vitest cases cover candidate
+rules and both adapters; ten failed before the fix. The first 360/light browser
+case failed before the helper correction. An intermediate post-fix case passed
+React/Vue then exposed the existing R013 unfocused-document native-dialog
+transition on a reverse boundary. Its trace is retained; every static boundary
+now uses the same single-transition predicate (never a focused body/background
+control), with details-tab-boundaries JSON attachments. No timeout/retry or
+runtime native-dialog workaround was added. The original static-dialog scenarios
+now include the additional collapsed Gallery summary in their actual tab order.
+Explicit summary is required; browser-generated fallback summary, other engines,
+human visual/keyboard review and approved visual baselines remain NOT_RUN.

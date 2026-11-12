@@ -61,6 +61,15 @@ Notable conventions:
   sequential control; Shift+Tab falls back to the last. Use tabindex 0 / -1
   within dialogs; positive tabindex ordering is unsupported.
 - Modal recognizes empty/true/plaintext-only contenteditable editing hosts (ASCII case-insensitive); nested editable regions need explicit tabindex=0 to join the sequence. Native named radio groups use the eligible checked member, grouped by form owner and tree; unnamed radios remain independent. Unchecked groups use the first eligible member for initial/fallback focus and the last for reverse wrapping. Ordinary traversal and Arrow/Space selection remain browser-owned; unchecked-group entry/history may vary by browser. Positive tabindex, shadow DOM and iframe-internal traversal remain unsupported.
+- React/Vue Modal recognizes the first explicit direct `summary` child of a
+  `details` element as a native sequential focus stop. Closed details exposes only
+  that summary subtree; nested details obey every closed ancestor. Open/close is
+  read at each focus/boundary calculation, preserving native Enter/Space toggling
+  and retained input values. Secondary/unrelated summary elements require explicit
+  tabindex=0 to opt in; hidden/inert/disabled/negative-tabindex rules still apply.
+  Provide an explicit summary: the browser-generated fallback summary lives
+  outside this light-DOM candidate contract. Static/Tailwind uses native dialog
+  traversal with the same HTML/CSS, without a separate focus-candidate helper.
 - React/Vue Modal applies native `inert` to background sibling branches up to body,
   including newly inserted siblings. A document `focusin` guard redirects outside
   focus to the first eligible control (or panel fallback). Close/unmount removes

@@ -57,4 +57,4 @@
 
 - [x] R020 / P2：React/Vue/static Tabs 尊重已取消與組字中的鍵盤事件
 - [x] R021 / P2：Static Modal 尊重消費端取消的原生 cancel／開關 click
-- [ ] R022 / P2：Modal 原生 details/summary 循序焦點候選與動態邊界
+- [x] R022 / P2：Modal 原生 details/summary 循序焦點候選與動態邊界
