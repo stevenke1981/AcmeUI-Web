@@ -80,13 +80,13 @@ export function enhanceModal(dialog, openers = []) {
     opener = null;
   };
   const open = event => {
-    if (dialog.open) return;
+    if (event.defaultPrevented || dialog.open) return;
     opener = event.currentTarget;
     dialog.showModal();
   };
   const close = () => { if (dialog.open) dialog.close(); };
-  const cancel = event => { event.preventDefault(); close(); };
-  const click = event => { if (event.target.closest("[data-acme-modal-close]")) close(); };
+  const cancel = event => { if (event.defaultPrevented) return; event.preventDefault(); close(); };
+  const click = event => { if (!event.defaultPrevented && event.target.closest("[data-acme-modal-close]")) close(); };
   const triggers = Array.from(openers);
   triggers.forEach(node => node.addEventListener("click", open));
   dialog.addEventListener("click", click); dialog.addEventListener("cancel", cancel); dialog.addEventListener("close", restore);

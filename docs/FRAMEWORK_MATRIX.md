@@ -50,3 +50,8 @@ R019 讓 React/Vue 共用 Modal handler 尊重先行取消的鍵盤事件與 isC
 先結束編輯、再次 Escape 關閉。Tab/Shift+Tab 的取消與組字旗標由 Vitest
 對照，Chromium 用真實 Escape 操作兩框架及 Gallery；OS IME 不在自動驗證內。
 Static/Tailwind 仍由原生 dialog 事件負責互動，共用樣式與 tokens 未變。
+
+R021 的 static/Tailwind enhancement 尊重已取消的開啟 click、關閉 click 與原生
+cancel；消費端須在 enhancer listener 前處理（例如 capture）。Gallery 可先
+取消一次 Escape／關閉按鈕並保留內容；cleanup 仍明確關閉與解除 listener。
+這是原生 dialog 委派的事件取消契約；React/Vue 維持 R019 鍵盤契約。

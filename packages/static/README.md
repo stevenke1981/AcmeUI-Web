@@ -52,6 +52,12 @@ React/Vue Tabs 支援動態清單：無效 defaultValue 或已移除的選取會
 Modal 使用具 `aria-labelledby` 的 `<dialog class="acme-dialog">`，內含
 `.acme-modal__panel` 與 `[data-acme-modal-close]` 按鈕。`showModal()` 讓瀏覽器
 管理背景 inert 與焦點循環；cancel/close 事件及 cleanup 會處理關閉與焦點還原。
+若消費端先行 preventDefault，enhancement 不處理 opener click、close-button
+click 或原生 cancel；可在 dialog/opener 的 capture listener 中取消。
+cancel 不冒泡，請直接在 dialog 或祖先 capture 階段處理；較晚的 bubble handler
+不能撤銷已完成的開／關。Gallery 可勾選「下次關閉先確認一次」體驗保留內容。
+正常未取消的 cancel 仍會 preventDefault 並關閉一次；native close 事件還原
+開啟者。cleanup 是明確釋放操作，仍會關閉並解除 listener，不受取消影響。
 沒有原生 API 時不接管按鈕，應保留範例中的可閱讀 fallback。暫不支援巢狀 Modal。
 React/Vue Modal 則共用背景 native inert 與焦點外移防護，關閉/卸載時還原；
 每份 document 僅允許一個開啟的 Modal，巢狀/同時多實例不受支援。
