@@ -5,7 +5,17 @@ This is an ongoing development record, not a published release or a statement of
 production readiness. Current evidence is in VALIDATION.md and test.md. Entries
 below are historical snapshots; later slices supersede earlier open-work notes.
 
-## Current audit / ROADMAP-005
+## Current development / R020
+
+From master ed5bf0c after roadmap PR #22 merged. React/Vue/static Tabs now ignore
+cancelled/composing keydown events. Permanent Vitest and Chromium regressions
+failed before the fix; Gallery demonstrates an ancestor capture consumer with a
+pause checkbox. API/static docs describe handler ordering and synthetic IME
+limits. Shared/static CSS and semantic tokens are unchanged. Full local gates,
+hosted CI and merge evidence are in the R020 PR; R021/R022 remain in ROADMAP-005.
+Human review, OS IME, screen readers, touch/DPI and visual baselines are NOT_RUN.
+
+## ROADMAP-005 audit
 
 Review/fix from master 6588f79 after R019 / PR #21 merged. The fifth audit
 reproduced eight failures in an isolated temporary Vitest fixture: six cancelled /

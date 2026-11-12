@@ -27,7 +27,7 @@ R019 的 `defaultPrevented` / `isComposing` guard 僅套用於共用 Modal keydo
 
 | ID | 優先序 | 範圍與驗收條件 | 狀態 |
 |---|---|---|---|
-| R020 | P2 | React/Vue/static Tabs 忽略先行取消或 isComposing 的鍵盤事件；ArrowLeft/Right/Home/End 與 static Enter/Space 的選取、焦點、defaultPrevented 保持；一般鍵仍依既有模型工作，包含真實 capture consumer；Vitest 三 adapter 對照、四尺寸/亮暗色 Chromium、Gallery/API/static 文件同步 | 待實作 |
+| R020 | P2 | React/Vue/static Tabs 忽略先行取消或 isComposing 的鍵盤事件；ArrowLeft/Right/Home/End 與 static Enter/Space 的選取、焦點、defaultPrevented 保持；一般鍵仍依既有模型工作，包含真實 capture consumer；Vitest 三 adapter 對照、四尺寸/亮暗色 Chromium、Gallery/API/static 文件同步 | 已實作；六個永久 Vitest 與首個 Chromium 反例先失敗，完整 gates/CI 證據見 R020 PR |
 | R021 | P2 | static Modal 尊重先行取消的 cancel、開啟 click、關閉 click；未取消時仍只開／關一次、還原 opener；cleanup 可關閉並移除 listener、重複初始化與重新初始化保留契約；Vitest doubles 與四尺寸/亮暗色 Chromium 真實 Escape/按鈕驗證、static Gallery/文件同步；React/Vue 保留既有 R019 契約 | 待實作 |
 | R022 | P2 | core 與 React/Vue Modal 納入 details 第一個直接 summary；排除 closed details 非 summary 子樹、次要 summary 與無關 summary（除非有效明確 tabindex），處理巢狀及動態 open/close、原有 hidden/inert/disabled/tabindex 規則；Vitest + 四尺寸/亮暗色 Chromium 真實 Tab/Shift+Tab/Enter，Gallery/API/static 範圍同步 | 待實作 |
 

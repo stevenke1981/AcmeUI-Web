@@ -1,4 +1,4 @@
-# Automated HTML and browser smoke (R009–R019)
+# Automated HTML and browser smoke (R009–R020)
 
 The parser gate runs in `pnpm lint` / `pnpm test`. It uses HTML-validate 9's HTML5
 content models for close order, implicit closes, allowed parents/children,
@@ -27,7 +27,7 @@ CI upload path. A Vitest guard checks both resolved paths against that directory
 See the official [Playwright browser installation](https://playwright.dev/docs/browsers)
 and [HTML-validate rules](https://html-validate.org/rules/index.html).
 
-The current 59 Chromium headless cases cover:
+The current 67 Chromium headless cases cover:
 
 - 48 previews × 360/768/1280/1536 × light/dark: no document horizontal overflow
   beyond 1px rounding, visible h1/nonempty main, working theme toggle where
@@ -121,3 +121,10 @@ editing without losing text before allowing dismissal. One initial 360/light
 case failed before the shared handler fix. Cancelled Tab/Shift+Tab and synthetic
 isComposing events are covered by Vitest; these browser cases do not exercise a
 real OS IME or certify human keyboard/visual behavior.
+
+R020 adds eight four-width/theme scenarios across React/Vue/static Tabs and the
+Gallery capture-consumer example. A real ArrowRight cancelled during capture
+preserves selection/focus; ordinary End/Home/wrapping still works. A synthetic
+composing End must remain uncancelled and preserve selection/focus. The initial
+360/light case failed before the guard. Synthetic browser events are not OS IME
+or human keyboard review. No style/token or screenshot baseline changes.
