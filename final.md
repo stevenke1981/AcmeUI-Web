@@ -5,7 +5,18 @@ This is an ongoing development record, not a published release or a statement of
 production readiness. Current evidence is in VALIDATION.md and test.md. Entries
 below are historical snapshots; later slices supersede earlier open-work notes.
 
-## Current development / R020
+## Current development / R021
+
+From master bb72b87 after R020 / PR #23 merged. Static Modal now respects cancelled
+opener clicks, close-button clicks and native cancel events while preserving
+explicit cleanup and opener restoration. Gallery demonstrates a one-attempt
+confirmation consumer without changing the native dialog focus sequence.
+Five Vitest regressions and the first Chromium case failed before the fix.
+Full local gates and hosted merge evidence are recorded in the R021 PR. Shared
+CSS/tokens and React/Vue's R019 contract remain aligned; human checks are NOT_RUN.
+R022 remains in ROADMAP-005.
+
+## R020
 
 From master ed5bf0c after roadmap PR #22 merged. React/Vue/static Tabs now ignore
 cancelled/composing keydown events. Permanent Vitest and Chromium regressions

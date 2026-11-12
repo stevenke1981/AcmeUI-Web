@@ -138,3 +138,14 @@ root and removed by the framework's unmount lifecycle.
 R009 layout: Pagination wraps at narrow widths. Tailwind theme imports
 Tailwind theme/utilities without preflight; load shared base.css for the reset.
 The acme-focus utility uses the same opaque semantic ring as :focus-visible.
+
+## Static Modal consumer cancellation (R021)
+
+`enhanceModal` ignores opener click, delegated close-button click and native
+cancel events already defaultPrevented. Cancel before the enhancement listener,
+for example with a capture listener; native cancel does not bubble. A later
+bubble handler cannot undo a completed open/close. An ordinary cancel is still
+prevented and delegates one close to the native dialog. Native close restores a
+connected opener; explicit cleanup closes and releases listeners even when a
+consumer previously blocked dismissal. React/Vue retain R019 keydown ownership;
+Tailwind uses this same optional static module, without a separate runtime.

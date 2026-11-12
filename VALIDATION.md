@@ -546,3 +546,23 @@ implicit labels. A minimal jsdom query matched missing for attributes with the
 literal selector label[for="null"]. The new pause example now uses an explicit
 for/id association; no axe exclusions or test relaxations were added. The initial
 log remains in .cache/validation/r020-initial. Final full-gate evidence is in PR.
+
+R020 final verification at 304005c: all five gates PASS (310 Vitest / 24 files,
+67 Chromium, existing CLI matrices, typecheck/build), with no timeout/retry/rule
+changes. One intervening full run had simultaneous existing-test timeouts and
+subsequent axe-already-running errors; the cause is not established. Logs remain
+under r020-final; the successful run is r020-verified. PR #23's two hosted checks
+were SUCCESS and GitHub MERGEABLE before merge commit bb72b87.
+
+## 2026-11-12 / R021
+
+From master bb72b87. Five new Vitest cases and the first 360/light Chromium case
+failed before static Modal cancellation guards. The fix respects already-cancelled
+open/cancel/close-button events; ordinary delegation, focus restoration, explicit
+cleanup, idempotence and reinitialization remain covered. Gallery's one-attempt
+confirmation consumer preserves input on the first Escape/close click; eight
+Chromium scenarios exercise real native dialog behavior at four widths/themes.
+Full five-gate and hosted CI/HEAD/merge results are recorded in the R021 PR.
+Shared/static CSS, tokens and React/Vue Modal are unchanged. NOT_RUN: human
+browser/visual/keyboard/OS IME, screen readers, physical touch/DPI, full WCAG AA,
+Firefox/WebKit and human-approved visual regression baselines.

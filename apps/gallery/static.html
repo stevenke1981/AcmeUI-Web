@@ -24,12 +24,15 @@
   <section id="modal-fallback">
     <h2>對話框內容</h2>
     <p>此範例使用原生 dialog。沒有 JavaScript 或不支援 showModal 的瀏覽器仍可閱讀這段說明。</p>
+    <label class="acme-checkbox" for="confirm-close"><input id="confirm-close" type="checkbox"><span>下次關閉先確認一次</span></label>
+    <p>勾選後，第一次 Escape／關閉按鈕會保留對話框並提示，再次操作才關閉。</p>
     <button class="acme-button acme-button--primary" type="button" data-acme-modal-open>開啟對話框</button>
   </section>
   <dialog class="acme-dialog" aria-labelledby="dialog-title">
     <div class="acme-modal__panel acme-stack">
       <h2 id="dialog-title">原生 Modal</h2>
       <p>瀏覽器處理背景 inert 與 Tab／Shift+Tab；Escape 或關閉按鈕會還原開啟者焦點。</p>
+      <p role="status" data-acme-close-status></p>
       <label class="acme-field">姓名<input class="acme-input" name="name"></label>
       <button class="acme-button acme-button--primary" type="button" data-acme-modal-close>關閉</button>
     </div>
@@ -37,6 +40,17 @@
 </main>
 <script type="module">
   import { enhanceTabs, enhanceModal } from "../../packages/static/src/interactions.mjs";
+  // Consumer capture handlers run before the enhancement's bubble handlers.
+  const dialog = document.querySelector("dialog");
+  function confirmClose(event) {
+    const confirm = document.querySelector("#confirm-close");
+    if (!confirm.checked) return;
+    event.preventDefault();
+    confirm.checked = false;
+    dialog.querySelector("[data-acme-close-status]").textContent = "已保留內容；再次 Escape 或關閉按鈕可關閉。";
+  }
+  dialog.addEventListener("cancel", confirmClose, true);
+  dialog.addEventListener("click", event => { if (event.target.closest("[data-acme-modal-close]")) confirmClose(event); }, true);
   let cleanupTabs, cleanupModal;
   function initialize() {
     cleanupTabs = enhanceTabs(document.querySelector("[data-acme-tabs]"));
