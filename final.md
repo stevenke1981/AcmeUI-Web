@@ -398,3 +398,13 @@ touch/DPI, Firefox/WebKit/other OS, native static dialog Tab/inert/Escape, compl
 rendered contrast/label checks, full family/state screenshots, full WCAG AA audit
 and human-approved visual baselines. No screenshot baselines were created or
 approved. R010 remains open; publication/releases/settings were not changed.
+
+## 2026-11-13 / R023
+
+Vue Switch ignores already-cancelled clicks before changing state or emitting;
+React parity and consumer onClick ordering pass without runtime changes.
+The 12-case targeted regression first reproduced 4 Vue failures (8 passes),
+then passed all 12; before output is in ignored .cache/r023-before.log.
+API docs and ROADMAP-006 are synchronized; R024/R025 remain pending.
+No CSS/token changes. Local gates pass (338 Vitest, 83 Chromium); hosted CI is in the
+R023 PR. Human responsive/accessibility review remains NOT_RUN.

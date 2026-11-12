@@ -397,3 +397,13 @@ keyboard behavior and Gallery at four widths/themes. Static native boundaries
 retain only R013's single unfocused-document transition and attach measured
 states; they never permit a background control or focused body. Human review,
 screen readers, touch/DPI and approved visual baselines remain NOT_RUN.
+
+## R023 / Switch click ownership
+
+scripts/test/switch-events.test.tsx adds 12 React/Vue cases: cancelled capture
+clicks preserve aria-checked/data-checked and emit nothing; ordinary clicks request
+one toggle. Both initial values, controlled props/consumer updates and disabled
+controls are covered. React onClick runs before the cancellation guard.
+Before the Vue fix: 4 failed / 8 passed, recorded in ignored .cache/r023-before.log.
+After: 12 passed. Full suite is now 338 Vitest in 28 files; test:browser has 83
+Chromium cases (no browser case added for R023). See ROADMAP-006.
