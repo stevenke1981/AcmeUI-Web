@@ -42,6 +42,7 @@ export function enhanceTabs(root) {
   });
   select(Math.max(0, tabs.findIndex(tab => tab.getAttribute("aria-selected") === "true")));
   const click = event => {
+    if (event.defaultPrevented) return;
     const index = tabs.findIndex(tab => tab.contains(event.target));
     if (index < 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button > 0) return;
     event.preventDefault(); select(index);
