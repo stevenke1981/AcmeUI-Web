@@ -174,3 +174,14 @@ descendant that overrides to `visible`; without an override the inherited value
 still excludes it. Ancestor `display:none`, `hidden`, `inert`, `aria-hidden` and
 closed-details exclusions are unchanged. React/Vue share this helper; static and
 Tailwind use the native dialog. No CSS/token changes.
+
+## Static Tabs consumer cancellation (R025)
+
+`enhanceTabs` ignores clicks already defaultPrevented. A cancelled click does not
+change selection, `aria-selected`, roving tabindex or panel `hidden`, and the
+enhancement does not call `preventDefault()` itself. Cancel before the enhancement
+bubble listener, for example with a capture listener on an ancestor or the tab;
+a later bubble handler cannot undo a completed selection. Ordinary uncancelled
+clicks still prevent the link default and select once. Modifier-key and
+non-primary-button clicks retain native link behavior. Keyboard
+defaultPrevented/isComposing handling is unchanged.

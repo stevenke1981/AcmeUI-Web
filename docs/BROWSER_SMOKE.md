@@ -1,4 +1,4 @@
-# Automated HTML and browser smoke (R009–R024)
+# Automated HTML and browser smoke (R009–R025)
 
 The parser gate runs in `pnpm lint` / `pnpm test`. It uses HTML-validate 9's HTML5
 content models for close order, implicit closes, allowed parents/children,
@@ -27,7 +27,7 @@ CI upload path. A Vitest guard checks both resolved paths against that directory
 See the official [Playwright browser installation](https://playwright.dev/docs/browsers)
 and [HTML-validate rules](https://html-validate.org/rules/index.html).
 
-The current 91 Chromium headless cases cover:
+The current 99 Chromium headless cases cover:
 
 - 48 previews × 360/768/1280/1536 × light/dark: no document horizontal overflow
   beyond 1px rounding, visible h1/nonempty main, working theme toggle where
@@ -156,3 +156,10 @@ R024 adds eight four-width/theme React/Vue Modal cases: a `visibility:visible`
 control inside a `visibility:hidden|collapse` wrapper is reached by real Shift+Tab
 and Tab boundaries, while an inherited-hidden sibling and a `display:none` subtree
 are skipped. They failed before the core fix.
+
+R025 adds eight four-width/theme static Gallery Tabs cases: a capture consumer
+cancels the first real click on 「使用方式」, so 「總覽」 remains selected and its
+panel remains visible; the next click selects 「使用方式」 and hides the original
+panel. All eight failed before the click guard and passed after. These cases are
+automated Chromium only. Human visual/keyboard review, Firefox/WebKit and
+screen-reader validation remain NOT_RUN.
