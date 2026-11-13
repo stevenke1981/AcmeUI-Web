@@ -66,3 +66,9 @@
 - [x] R023 / P2：Vue Switch 尊重已取消 click，React/Vue 事件與受控模式對照
 - [x] R024 / P2：Modal 焦點候選尊重子層明確 visibility:visible
 - [x] R025 / P2：Static Tabs click 尊重 defaultPrevented
+
+## ROADMAP-007（2026-11-14 第七輪 React/Vue Tabs cancelled click 稽核）
+
+詳見 [稽核與驗收條件](docs/roadmap/ROADMAP-007.md)。
+
+- [x] R026 / P2：React/Vue Tabs click 尊重 defaultPrevented

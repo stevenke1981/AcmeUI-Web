@@ -47,6 +47,9 @@ preventDefault。取消須發生在 enhancement 的 bubble listener 之前，例
 祖先的 capture listener；已完成的選取無法由較晚的 bubble handler 撤銷。一般
 未取消的 click 仍 preventDefault 並選取一次；Ctrl/Meta/Shift/Alt 與非主鍵維持
 原生連結行為。鍵盤 defaultPrevented/isComposing 契約不變。
+React/Vue Tabs 的 click 同樣忽略已 defaultPrevented 的事件，保留選取、
+aria-selected、roving tabindex 與面板可見性（React 用 hidden，Vue 用 v-show）；
+一般未取消的 click 仍選取一次。這是 R026 與 static R025 的對應契約。
 目前支援固定、單層、由左至右的水平 Tabs；cleanup 前請保持該元件 markup 穩定。
 React/Vue Tabs 支援動態清單：無效 defaultValue 或已移除的選取會回到第一項，
 清空後重新載入也選取第一項；重排保留有效選取。靜態/Tailwind HTML 若需要
@@ -73,7 +76,9 @@ Vitest 使用 jsdom，native dialog API 以 test doubles 驗證委派與 cleanup
 不證明瀏覽器行為。R013 另以 Chromium 在四尺寸與亮暗色驗證原生 modality、
 Tab／Shift+Tab、背景焦點阻擋、Escape／close 及開啟者焦點還原。
 R025 另以 Chromium 在四尺寸與亮暗色驗證 static Tabs 的 capture 取消與後續
-一般 click；修正前 8 個案例失敗，修正後通過。這不是真人鍵盤或視覺驗證。
+一般 click；修正前 8 個案例失敗，修正後通過。R026 以同一組四尺寸與亮暗色
+驗證 React/Vue Tabs fixtures 的 cancelled click；修正前 8 個案例失敗，修正後
+通過。這不是真人鍵盤或視覺驗證。
 Chromium 在 Tab 邊界可能先離開 document，下一次按鍵才回到 dialog；
 實測範圍與 JSON 附件見 [browser smoke](../../docs/BROWSER_SMOKE.md)。
 視覺、真人瀏覽器審查、觸控與螢幕閱讀器仍為 NOT_RUN。
