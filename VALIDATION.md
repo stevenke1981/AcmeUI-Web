@@ -614,3 +614,12 @@ exit 0. Hosted CI and merge-readiness are recorded in the R023 PR. NOT_RUN: huma
 browser/visual/keyboard review, OS IME, screen readers, touch/DPI, full WCAG AA,
 Firefox/WebKit and human-approved visual baselines. R024/R025 remain pending in
 [ROADMAP-006](docs/roadmap/ROADMAP-006.md).
+
+## 2026-11-13 / R024
+
+From the R023 branch (stacked on PR #26). Six new Vitest cases (core + React/Vue Modal)
+and eight Chromium cases (4 widths x 2 themes) failed before the fix and pass after.
+Only the candidate's own computed visibility is checked; ancestor display/hidden/inert/
+aria-hidden exclusions remain. Raw outputs are in ignored .cache/r024-before*.log.
+Full gate and hosted CI results are in the R024 PR. NOT_RUN: human browser/visual/
+keyboard review, screen readers, OS IME, Firefox/WebKit, approved visual baselines.

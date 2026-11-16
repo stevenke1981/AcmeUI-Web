@@ -408,3 +408,12 @@ then passed all 12; before output is in ignored .cache/r023-before.log.
 API docs and ROADMAP-006 are synchronized; R024/R025 remain pending.
 No CSS/token changes. Local gates pass (338 Vitest, 83 Chromium); hosted CI is in the
 R023 PR. Human responsive/accessibility review remains NOT_RUN.
+
+## 2026-11-13 / R024
+
+From the R023 branch (stacked on PR #26). Six new Vitest cases (core + React/Vue Modal)
+and eight Chromium cases (4 widths x 2 themes) failed before the fix and pass after.
+Only the candidate's own computed visibility is checked; ancestor display/hidden/inert/
+aria-hidden exclusions remain. Raw outputs are in ignored .cache/r024-before*.log.
+Full gate and hosted CI results are in the R024 PR. NOT_RUN: human browser/visual/
+keyboard review, screen readers, OS IME, Firefox/WebKit, approved visual baselines.

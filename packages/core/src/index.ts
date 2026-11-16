@@ -45,12 +45,13 @@ function focusCandidates(container:HTMLElement):HTMLElement[]{
       // Closed details exposes only its first summary subtree. The details node
       // itself may still opt in through tabindex; nested disclosures obey each ancestor.
       if(node!==el&&node.localName==="details"&&!node.hasAttribute("open")){
-        const summary=Array.from(node.children).find(child=>child.localName==="summary");
+        const summary:Element|undefined=Array.from(node.children).find(child=>child.localName==="summary");
         if(!summary?.contains(el))return false;
       }
       if(node.hidden||node.hasAttribute("inert")||node.getAttribute("aria-hidden")==="true")return false;
       const style=view?.getComputedStyle(node);
-      if(style?.display==="none"||style?.visibility==="hidden"||style?.visibility==="collapse")return false;
+      // Visibility is inherited but descendants can override it; display cannot.
+      if(style?.display==="none"||(node===el&&(style?.visibility==="hidden"||style?.visibility==="collapse")))return false;
     }
     return true;
   });

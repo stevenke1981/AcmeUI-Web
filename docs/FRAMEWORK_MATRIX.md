@@ -69,3 +69,12 @@ React/Vue Switch ignore clicks already defaultPrevented, preserving checked stat
 and emitting no onCheckedChange / update:modelValue. Cancel before the component
 handler, for example with a capture listener; React also calls its consumer
 onClick prop before checking cancellation. Ordinary and controlled behavior is unchanged.
+
+## Modal visibility override (R024)
+
+`getFocusable` / Modal Tab trapping evaluate a candidate's own computed
+`visibility`. An ancestor with `visibility:hidden|collapse` no longer excludes a
+descendant that overrides to `visible`; without an override the inherited value
+still excludes it. Ancestor `display:none`, `hidden`, `inert`, `aria-hidden` and
+closed-details exclusions are unchanged. React/Vue share this helper; static and
+Tailwind use the native dialog. No CSS/token changes.

@@ -26,7 +26,7 @@ Use repo-local `COREPACK_HOME="$PWD/.cache/corepack"` and
 | `pnpm test:cli:installed` | Three isolated pnpm manifest installations; all 144 unmodified generated build scripts, including 96 React/Vue typechecks and dist outputs; identical manifests reuse each isolated install |
 | `pnpm typecheck` | Core/React/Vue/Gallery plus unit-test and browser TypeScript fixtures |
 | `pnpm build` | Gallery (including static example) and React/Vue examples, with build-warning gate |
-| `pnpm test:browser` | 83 headless Chromium cases; all 48 previews at four widths/two themes, representative four-adapter style/geometry comparison, focus ring, Gallery Tabs/Modal, child keyboard cancellation and native static dialog; see docs/BROWSER_SMOKE.md |
+| `pnpm test:browser` | 91 headless Chromium cases; all 48 previews at four widths/two themes, representative four-adapter style/geometry comparison, focus ring, Gallery Tabs/Modal, child keyboard cancellation and native static dialog; see docs/BROWSER_SMOKE.md |
 
 Vitest imports the actual Gallery App, visits every tab and opens its Modal in
 both themes. All 23 families must render using their real class/semantic
@@ -407,3 +407,10 @@ controls are covered. React onClick runs before the cancellation guard.
 Before the Vue fix: 4 failed / 8 passed, recorded in ignored .cache/r023-before.log.
 After: 12 passed. Full suite is now 338 Vitest in 28 files; test:browser has 83
 Chromium cases (no browser case added for R023). See ROADMAP-006.
+
+## R024 / visibility override focus
+
+packages/core/test/visibility-focus.test.ts and scripts/test/visibility-focus.test.tsx add
+14 Vitest cases (6 failed before the fix): visible override under hidden/collapse ancestors,
+own hidden/collapse, inherited hidden, and display:none/hidden/inert/aria-hidden ancestors.
+scripts/browser/visibility-focus.spec.ts adds 8 Chromium cases with real Tab/Shift+Tab.
