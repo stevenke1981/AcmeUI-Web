@@ -1,5 +1,16 @@
 # Test Strategy
 
+## 2026-11-16 / ROADMAP-009 audit
+
+Baseline master e36bfcb is clean with no open PRs; ROADMAP-008 / R027 are merged
+as #30 / #31 and both hosted checks on #31 succeeded. Temporary CSS focus audits
+reproduce four Vitest failures and four React/Vue Chromium failures: self
+display:contents and descendants of content-visibility:hidden become phantom
+Tab boundaries. Native controls establish the self/descendant distinction.
+ROADMAP-009 contains the reproducer and one R028 slice. These temporary tests
+are parked under ignored tmp/r028-audit; permanent regressions follow in R028.
+Human browser/visual, screen readers, physical touch/DPI and baselines: NOT_RUN.
+
 ## 2026-11-16 / ROADMAP-008 audit
 
 Baseline master bd74dbd has no open PRs; R026 is merged as PR #29 with both

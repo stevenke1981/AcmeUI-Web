@@ -5,7 +5,17 @@ This is an ongoing development record, not a published release or a statement of
 production readiness. Current evidence is in VALIDATION.md and test.md. Entries
 below are historical snapshots; later slices supersede earlier open-work notes.
 
-## Current development / R027
+## Current audit / ROADMAP-009
+
+Review/fix from clean master e36bfcb after merged #30 / #31. ROADMAP-001–008
+implementation items are checked; no open PRs exist at audit start. Four temporary
+Vitest and four real-adapter Chromium regressions reproduce phantom Modal focus
+boundaries for display:contents and content-visibility:hidden. ROADMAP-009 plans
+one R028 slice with native self/descendant controls, Gallery and browser acceptance.
+No runtime change belongs to this audit PR. Human review, screen readers,
+physical touch/DPI and approved visual baselines remain NOT_RUN.
+
+## Historical development / R027
 
 From merged ROADMAP-008 master `9fc49c7`. React/Vue Modal respects cancelled
 close click/backdrop mousedown, accepts only primary backdrop dismissal and
