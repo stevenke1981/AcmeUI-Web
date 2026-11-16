@@ -1,5 +1,15 @@
 # Test Strategy
 
+## 2026-11-16 / ROADMAP-008 audit
+
+Baseline master bd74dbd has no open PRs; R026 is merged as PR #29 with both
+hosted validate checks successful. The temporary R027 real-component audit suite
+reproduces 8 failures and 2 passing controls across React/Vue: cancelled close
+clicks, cancelled backdrop mousedown and middle/right backdrop mousedown still
+request close. See ROADMAP-008 for a self-contained reproducer and acceptance.
+Permanent regressions and browser evidence belong to the implementation PR.
+Human browser, screen-reader, touch/DPI and approved visual baselines: NOT_RUN.
+
 ## Current required gates (R022)
 
 After `pnpm install --frozen-lockfile`, run the same five commands as
