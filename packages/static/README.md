@@ -41,6 +41,12 @@ Home/End 會自動選取並移動焦點；點擊保留 Ctrl/Meta 等修飾鍵的
 不變更選取／焦點；一般方向鍵與 Home/End、static Enter/Space 仍正常處理。
 消費端須在元件 bubble handler 前取消，例如祖先的 capture listener。
 合成組字旗標不代表真實 OS IME 已驗證。
+static enhanceTabs 的 click 也忽略已 defaultPrevented 的事件：先取消的 click
+不切換 aria-selected、roving tabindex 或 panel hidden；enhancement 本身不再呼叫
+preventDefault。取消須發生在 enhancement 的 bubble listener 之前，例如 tab 或
+祖先的 capture listener；已完成的選取無法由較晚的 bubble handler 撤銷。一般
+未取消的 click 仍 preventDefault 並選取一次；Ctrl/Meta/Shift/Alt 與非主鍵維持
+原生連結行為。鍵盤 defaultPrevented/isComposing 契約不變。
 目前支援固定、單層、由左至右的水平 Tabs；cleanup 前請保持該元件 markup 穩定。
 React/Vue Tabs 支援動態清單：無效 defaultValue 或已移除的選取會回到第一項，
 清空後重新載入也選取第一項；重排保留有效選取。靜態/Tailwind HTML 若需要
@@ -66,6 +72,8 @@ Tailwind 仍沿用此處的原生 dialog，不提供另一套互動 runtime。
 Vitest 使用 jsdom，native dialog API 以 test doubles 驗證委派與 cleanup，
 不證明瀏覽器行為。R013 另以 Chromium 在四尺寸與亮暗色驗證原生 modality、
 Tab／Shift+Tab、背景焦點阻擋、Escape／close 及開啟者焦點還原。
+R025 另以 Chromium 在四尺寸與亮暗色驗證 static Tabs 的 capture 取消與後續
+一般 click；修正前 8 個案例失敗，修正後通過。這不是真人鍵盤或視覺驗證。
 Chromium 在 Tab 邊界可能先離開 document，下一次按鍵才回到 dialog；
 實測範圍與 JSON 附件見 [browser smoke](../../docs/BROWSER_SMOKE.md)。
 視覺、真人瀏覽器審查、觸控與螢幕閱讀器仍為 NOT_RUN。

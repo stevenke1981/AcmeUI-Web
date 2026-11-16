@@ -26,7 +26,7 @@ Use repo-local `COREPACK_HOME="$PWD/.cache/corepack"` and
 | `pnpm test:cli:installed` | Three isolated pnpm manifest installations; all 144 unmodified generated build scripts, including 96 React/Vue typechecks and dist outputs; identical manifests reuse each isolated install |
 | `pnpm typecheck` | Core/React/Vue/Gallery plus unit-test and browser TypeScript fixtures |
 | `pnpm build` | Gallery (including static example) and React/Vue examples, with build-warning gate |
-| `pnpm test:browser` | 91 headless Chromium cases; all 48 previews at four widths/two themes, representative four-adapter style/geometry comparison, focus ring, Gallery Tabs/Modal, child keyboard cancellation and native static dialog; see docs/BROWSER_SMOKE.md |
+| `pnpm test:browser` | 99 headless Chromium cases; all 48 previews at four widths/two themes, representative four-adapter style/geometry comparison, focus ring, Gallery Tabs/Modal, child keyboard/static Tabs click cancellation and native static dialog; see docs/BROWSER_SMOKE.md |
 
 Vitest imports the actual Gallery App, visits every tab and opens its Modal in
 both themes. All 23 families must render using their real class/semantic
@@ -414,3 +414,16 @@ packages/core/test/visibility-focus.test.ts and scripts/test/visibility-focus.te
 14 Vitest cases (6 failed before the fix): visible override under hidden/collapse ancestors,
 own hidden/collapse, inherited hidden, and display:none/hidden/inert/aria-hidden ancestors.
 scripts/browser/visibility-focus.spec.ts adds 8 Chromium cases with real Tab/Shift+Tab.
+
+## R025 / static Tabs cancelled click
+
+scripts/test/static-tabs-events.test.ts adds six Vitest cases: capture cancellation
+before/after enhancement, including a child target, leaves selection, aria-selected,
+roving tabindex and hidden panels unchanged; the next uncancelled click selects once.
+Modifier/non-primary clicks and cleanup/reinitialization are covered. Before the fix:
+5 failed / 1 passed (ignored .cache/r025-before.log); after: 6 passed. Existing
+static Tabs suites add 29 passes (35 targeted total); typecheck passes.
+scripts/browser/static-tabs-events.spec.ts adds eight 4-width × 2-theme Chromium
+Gallery cases; all eight failed before the fix and passed after. Full suite is now
+358 Vitest in 31 files; test:browser has 99 Chromium cases. Human visual/keyboard,
+Firefox/WebKit and screen-reader checks remain NOT_RUN.

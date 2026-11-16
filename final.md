@@ -417,3 +417,15 @@ Only the candidate's own computed visibility is checked; ancestor display/hidden
 aria-hidden exclusions remain. Raw outputs are in ignored .cache/r024-before*.log.
 Full gate and hosted CI results are in the R024 PR. NOT_RUN: human browser/visual/
 keyboard review, screen readers, OS IME, Firefox/WebKit, approved visual baselines.
+
+## 2026-11-13 / R025
+
+From the R024 branch (stacked on PR #27). Static `enhanceTabs` ignores already
+cancelled clicks before target resolution or selection, preserving selection,
+roving tabindex and panel visibility. Six new Vitest cases reproduced 5 failures
+before the one-line guard and pass after; existing static Tabs suites remain 29
+passes (35 targeted total). `pnpm typecheck` passes. Eight four-width/theme
+Chromium Gallery cases all failed before the guard and passed after. Local gates
+pass (358 Vitest / 31 files, 99 Chromium); hosted CI is in the R025 PR. Human
+visual/keyboard, screen readers, OS IME, touch/DPI, Firefox/WebKit and approved
+visual baselines remain NOT_RUN.

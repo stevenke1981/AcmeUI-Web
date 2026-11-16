@@ -65,4 +65,4 @@
 
 - [x] R023 / P2：Vue Switch 尊重已取消 click，React/Vue 事件與受控模式對照
 - [x] R024 / P2：Modal 焦點候選尊重子層明確 visibility:visible
-- [ ] R025 / P2：Static Tabs click 尊重 defaultPrevented
+- [x] R025 / P2：Static Tabs click 尊重 defaultPrevented

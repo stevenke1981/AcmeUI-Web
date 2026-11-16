@@ -612,7 +612,8 @@ Local gates on the branch: pnpm install --frozen-lockfile, pnpm test (338 Vitest
 28 files), test:cli:installed, typecheck, build and test:browser (83 Chromium) all
 exit 0. Hosted CI and merge-readiness are recorded in the R023 PR. NOT_RUN: human
 browser/visual/keyboard review, OS IME, screen readers, touch/DPI, full WCAG AA,
-Firefox/WebKit and human-approved visual baselines. R024/R025 remain pending in
+Firefox/WebKit and human-approved visual baselines. R024/R025 were pending at the
+time of this entry; R025 is now implemented in
 [ROADMAP-006](docs/roadmap/ROADMAP-006.md).
 
 ## 2026-11-13 / R024
@@ -623,3 +624,22 @@ Only the candidate's own computed visibility is checked; ancestor display/hidden
 aria-hidden exclusions remain. Raw outputs are in ignored .cache/r024-before*.log.
 Full gate and hosted CI results are in the R024 PR. NOT_RUN: human browser/visual/
 keyboard review, screen readers, OS IME, Firefox/WebKit, approved visual baselines.
+
+## 2026-11-13 / R025 — static Tabs cancelled click
+
+From the R024 branch (stacked on PR #27). `enhanceTabs` now returns before target
+resolution or selection when the click is already defaultPrevented. The permanent
+`scripts/test/static-tabs-events.test.ts` covers capture cancellation before and
+after enhancement, child click targets, lifted cancellation, modifier/non-primary
+buttons, cleanup and reinitialization. Before the fix: 5 failed / 1 passed
+(ignored `.cache/r025-before.log`); after: 6 passed. Existing
+`packages/static/test/interactions.test.ts` (23) and
+`scripts/test/tabs-keyboard.test.tsx` (6) also pass: 35 targeted Vitest total.
+`pnpm typecheck` passed. The new 4-width × 2-theme Chromium spec failed all 8
+cases before the fix and passed all 8 after (ignored `.cache/r025-before-browser.log`
+and `.cache/r025-after-browser.log`). Local gates on the branch all exit 0:
+`pnpm install --frozen-lockfile`, `pnpm test` (358 Vitest / 31 files),
+`test:cli:installed`, typecheck, build and `test:browser` (99 Chromium). Hosted CI
+will be recorded in the R025 PR. NOT_RUN: human browser/visual/keyboard review,
+screen readers, OS IME/注音, physical DPI/touch, Firefox/WebKit, approved visual
+baselines.
