@@ -1,6 +1,29 @@
 # Validation Report
 
-Date: 2026-11-11
+## 2026-11-16 / R027 — Modal mouse dismissal
+
+From master `9fc49c7` after ROADMAP-008 / PR #30 merged with both hosted CI
+checks successful and GitHub MERGEABLE. React/Vue Modal ignores cancelled close
+clicks and backdrop mousedown; only primary self-target backdrop mousedown
+requests close, preventing its native focus default to preserve opener focus.
+Non-primary defaults remain browser-owned. Gallery provides a one-attempt
+consumer guard; API/framework docs and todos are synchronized. Shared/static
+CSS, semantic tokens and static/Tailwind interactions are unchanged.
+
+Permanent Vitest: 10 failed / 2 passed before runtime fixes, 12 passed after;
+an earlier combined Modal regression run passed 62. New Chromium: 16 passed at
+360/768/1280/1536 in light/dark. Initial adapter cases failed on middle-button
+dismissal; an intermediate Gallery run found native focus overriding opener
+restoration. The strict opener assertion passes after preventing primary focus
+default; non-primary focus is tested for keyboard re-entry. Raw ignored logs and
+scope are in ROADMAP-008. Full five-command local results and hosted CI/merge
+evidence are recorded in the R027 PR.
+
+NOT_RUN: human browser/visual/keyboard review, screen readers, physical touch/DPI,
+OS IME, Firefox/WebKit/other OS, full WCAG AA and approved visual baselines.
+No npm publication, release, deployment or repository settings change.
+
+Historical baseline date: 2026-11-11
 
 ## Automated evidence history
 

@@ -142,3 +142,7 @@ Gallery Chromium 案例覆蓋事件交接。合成組字旗標不代表 OS IME �
 ROADMAP-005 的 R020–R022 補上三種 Tabs 的鍵盤事件交接、static Modal 取消
 事件與 details/summary 焦點契約。Gallery 提供暫停快捷鍵、一次關閉確認及
 進階選項草稿範例；自動驗證範圍與人工 NOT_RUN 項目見 VALIDATION。
+
+ROADMAP-008 的 R027 對齊 React/Vue Modal 滑鼠關閉事件：先取消的關閉按鈕
+click／遮罩 mousedown 保留對話框，遮罩只接受主鍵。Gallery 可勾選攔截一次
+關閉操作；靜態／Tailwind 維持原生 dialog 與 R021 契約。人工審查仍為 NOT_RUN。

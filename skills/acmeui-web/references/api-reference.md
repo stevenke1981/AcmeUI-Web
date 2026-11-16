@@ -195,3 +195,24 @@ for example with a capture listener; a later bubble handler cannot undo a
 completed selection. Ordinary uncancelled clicks still select once. Keyboard
 defaultPrevented/isComposing handling and static `enhanceTabs` R025 click
 behaviour are unchanged.
+
+## React/Vue Modal mouse dismissal (R027)
+
+The built-in close button ignores clicks already `defaultPrevented`. Backdrop
+`mousedown` requests close only for an uncancelled primary button (`button === 0`)
+whose target is the backdrop itself. Middle/right buttons and panel/descendant
+events do not request close or receive an extra `preventDefault()`.
+The handled primary backdrop mousedown prevents its native focus default before
+requesting close, so it cannot override cleanup's opener focus restoration.
+Non-primary native focus behavior remains browser-owned; Tab can re-enter the
+active focus trap after such an interaction.
+Cancel before the component bubble handler, for example with an ancestor capture
+handler. A later bubble handler cannot retract an emitted close request. Cancelling
+keeps the controlled dialog open, with focus isolation and retained content;
+ordinary close-button activation (including Enter/Space), primary backdrop and
+Escape still request close. Consumers continue to own the `open` prop.
+Gallery demonstrates consuming one close-button click or primary backdrop
+mousedown. Its guard also intercepts the close button's keyboard-generated click;
+Escape remains governed by the separate notes example. Static/Tailwind retains
+native dialog plus the R021 click/cancel contract; no backdrop-dismissal runtime,
+CSS or token changes are introduced for those adapters.
