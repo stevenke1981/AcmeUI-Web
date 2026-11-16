@@ -78,3 +78,9 @@
 詳見 [稽核證據、重現步驟與驗收條件](docs/roadmap/ROADMAP-008.md)。
 
 - [x] R027 / P2：React/Vue Modal 滑鼠關閉尊重 defaultPrevented，遮罩只接受主鍵並保留 opener 焦點還原
+
+## ROADMAP-009（2026-11-16 第九輪 Modal CSS 焦點候選稽核）
+
+詳見 [稽核證據、重現步驟與驗收條件](docs/roadmap/ROADMAP-009.md)。
+
+- [ ] R028 / P2：Modal 排除 display:contents 自身與 content-visibility:hidden 子孫的錯誤焦點候選，保留有效控制項與動態 CSS 邊界
