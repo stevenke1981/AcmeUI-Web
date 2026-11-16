@@ -597,3 +597,20 @@ physical touch/DPI, Firefox/WebKit/other OS, complete rendered contrast/labels,
 full family/state screenshots, full WCAG AA, approved visual baselines and
 npm/yarn install matrices. No npm publication, release, deployment or settings
 changes; no claim of project completion or production readiness.
+
+## 2026-11-13 / R023 — Switch cancelled click
+
+Vue Switch now returns before state changes or update:modelValue when click is
+already defaultPrevented, retaining its disabled guard. React already calls the
+consumer onClick first and respects cancellation; no React runtime change.
+The permanent scripts/test/switch-events.test.tsx initially had 4 Vue failures /
+8 passes (raw output: ignored .cache/r023-before.log); after the fix, all 12 pass.
+Coverage includes both initial values, capture cancellation, ordinary clicks,
+controlled props and updates, aria-checked/data-checked, callback counts and disabled.
+API/framework docs describe cancelling before the component handler. No CSS/token changes.
+Local gates on the branch: pnpm install --frozen-lockfile, pnpm test (338 Vitest /
+28 files), test:cli:installed, typecheck, build and test:browser (83 Chromium) all
+exit 0. Hosted CI and merge-readiness are recorded in the R023 PR. NOT_RUN: human
+browser/visual/keyboard review, OS IME, screen readers, touch/DPI, full WCAG AA,
+Firefox/WebKit and human-approved visual baselines. R024/R025 remain pending in
+[ROADMAP-006](docs/roadmap/ROADMAP-006.md).

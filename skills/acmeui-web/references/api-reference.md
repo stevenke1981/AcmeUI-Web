@@ -158,3 +158,10 @@ prevented and delegates one close to the native dialog. Native close restores a
 connected opener; explicit cleanup closes and releases listeners even when a
 consumer previously blocked dismissal. React/Vue retain R019 keydown ownership;
 Tailwind uses this same optional static module, without a separate runtime.
+
+## Switch cancelled click (R023)
+
+React/Vue Switch ignore clicks already defaultPrevented, preserving checked state
+and emitting no onCheckedChange / update:modelValue. Cancel before the component
+handler, for example with a capture listener; React also calls its consumer
+onClick prop before checking cancellation. Ordinary and controlled behavior is unchanged.

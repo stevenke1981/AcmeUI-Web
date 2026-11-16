@@ -62,3 +62,10 @@ static/Tailwind 的同一 details HTML 由原生 dialog 處理。Gallery 與八�
 四尺寸/亮暗色 Chromium 案例展示展開、收合、Tab/Shift+Tab 與草稿保留；
 沒有額外 CSS/token 或人工視覺 baseline。請提供明確 summary，瀏覽器自動
 生成的 fallback summary、shadow DOM 與正 tabindex 不在 helper 契約內。
+
+## Switch cancelled click (R023)
+
+React/Vue Switch ignore clicks already defaultPrevented, preserving checked state
+and emitting no onCheckedChange / update:modelValue. Cancel before the component
+handler, for example with a capture listener; React also calls its consumer
+onClick prop before checking cancellation. Ordinary and controlled behavior is unchanged.

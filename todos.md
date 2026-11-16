@@ -58,3 +58,11 @@
 - [x] R020 / P2：React/Vue/static Tabs 尊重已取消與組字中的鍵盤事件
 - [x] R021 / P2：Static Modal 尊重消費端取消的原生 cancel／開關 click
 - [x] R022 / P2：Modal 原生 details/summary 循序焦點候選與動態邊界
+
+## ROADMAP-006（2026-11-13 第六輪 cancelled click 與 visibility 稽核）
+
+詳見 [稽核與驗收條件](docs/roadmap/ROADMAP-006.md)。
+
+- [x] R023 / P2：Vue Switch 尊重已取消 click，React/Vue 事件與受控模式對照
+- [ ] R024 / P2：Modal 焦點候選尊重子層明確 visibility:visible
+- [ ] R025 / P2：Static Tabs click 尊重 defaultPrevented
