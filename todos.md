@@ -77,4 +77,4 @@
 
 詳見 [稽核證據、重現步驟與驗收條件](docs/roadmap/ROADMAP-008.md)。
 
-- [ ] R027 / P2：React/Vue Modal 滑鼠關閉尊重 defaultPrevented，遮罩只接受主鍵
+- [x] R027 / P2：React/Vue Modal 滑鼠關閉尊重 defaultPrevented，遮罩只接受主鍵並保留 opener 焦點還原

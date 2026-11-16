@@ -10,7 +10,7 @@ request close. See ROADMAP-008 for a self-contained reproducer and acceptance.
 Permanent regressions and browser evidence belong to the implementation PR.
 Human browser, screen-reader, touch/DPI and approved visual baselines: NOT_RUN.
 
-## Current required gates (R022)
+## Current required gates (R027)
 
 After `pnpm install --frozen-lockfile`, run the same five commands as
 `.github/workflows/ci.yml`:
@@ -36,7 +36,7 @@ Use repo-local `COREPACK_HOME="$PWD/.cache/corepack"` and
 | `pnpm test:cli:installed` | Three isolated pnpm manifest installations; all 144 unmodified generated build scripts, including 96 React/Vue typechecks and dist outputs; identical manifests reuse each isolated install |
 | `pnpm typecheck` | Core/React/Vue/Gallery plus unit-test and browser TypeScript fixtures |
 | `pnpm build` | Gallery (including static example) and React/Vue examples, with build-warning gate |
-| `pnpm test:browser` | 99 headless Chromium cases; all 48 previews at four widths/two themes, representative four-adapter style/geometry comparison, focus ring, Gallery Tabs/Modal, child keyboard/static Tabs click cancellation and native static dialog; see docs/BROWSER_SMOKE.md |
+| `pnpm test:browser` | 123 headless Chromium cases; all 48 previews at four widths/two themes, representative four-adapter style/geometry comparison, focus ring, Gallery Tabs/Modal, keyboard/click cancellation, Modal mouse dismissal and native static dialog; see docs/BROWSER_SMOKE.md |
 
 Vitest imports the actual Gallery App, visits every tab and opens its Modal in
 both themes. All 23 families must render using their real class/semantic
@@ -450,3 +450,21 @@ After: 4 passed. Existing Tabs suites add 44 passes (48 targeted total).
 scripts/browser/tabs-click-events.spec.ts adds eight 4-width × 2-theme Chromium
 fixture cases; all eight failed before the fix and passed after. See ROADMAP-007.
 Human visual/keyboard, Firefox/WebKit and screen-reader checks remain NOT_RUN.
+
+## R027 / Modal mouse dismissal
+
+The permanent 12-case React/Vue/Gallery suite first reproduced 10 failures and
+2 passing controls. All 12 pass after guards for cancelled close-button click,
+cancelled backdrop mousedown and non-primary backdrop buttons. Primary backdrop
+dismissal prevents its native focus default before requesting close; panel
+descendants and non-primary defaults remain browser-owned. Earlier combined
+keyboard/isolation/tabs-modal checks passed 62 cases.
+
+Sixteen new four-width/two-theme Chromium cases operate both adapters and
+Gallery, with retained drafts, active inert, real middle/right/primary buttons,
+cancelled events, normal close, Enter/Space, Escape and opener restoration.
+The original eight adapter cases failed on middle-button dismissal. An
+intermediate run exposed primary-backdrop focus overriding opener restoration;
+the final focus assertion stays strict. Non-primary native focus is measured
+only for keyboard re-entry, not assumed to remain in the dialog. See ROADMAP-008
+for logs and exact scope. Human review and approved baselines remain NOT_RUN.

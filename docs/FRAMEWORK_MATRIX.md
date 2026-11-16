@@ -98,3 +98,18 @@ bubble handler, for example with a capture listener; a later bubble handler
 cannot undo a completed selection. Ordinary clicks still select once. Keyboard
 defaultPrevented/isComposing and static R025 click behaviour are unchanged.
 No CSS/token changes.
+
+## React/Vue Modal mouse dismissal (R027)
+
+React/Vue built-in close-button clicks and backdrop mousedown respect prior
+`defaultPrevented`. Backdrop dismissal accepts only the primary button directly
+on the backdrop; middle/right buttons and panel descendants are left alone.
+Consumers cancel before the component bubble handler (for example, ancestor
+capture); cancelled dismissal preserves content and active focus isolation.
+Gallery offers a one-attempt consumer guard, including the close button's
+keyboard-generated click. Ordinary dismissal, Escape, cleanup and opener focus
+restoration remain available. Static/Tailwind keeps native dialog and R021's
+existing contract. Shared styles, semantic tokens and the public props stay aligned.
+Handled primary backdrop mousedown prevents the native focus default before
+requesting close, preserving opener restoration. Non-primary native focus remains
+browser-owned; the active Tab trap still handles keyboard re-entry.

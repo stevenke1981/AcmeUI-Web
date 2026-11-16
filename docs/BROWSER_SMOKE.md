@@ -1,4 +1,4 @@
-# Automated HTML and browser smoke (R009–R026)
+# Automated HTML and browser smoke (R009–R027)
 
 The parser gate runs in `pnpm lint` / `pnpm test`. It uses HTML-validate 9's HTML5
 content models for close order, implicit closes, allowed parents/children,
@@ -27,7 +27,7 @@ CI upload path. A Vitest guard checks both resolved paths against that directory
 See the official [Playwright browser installation](https://playwright.dev/docs/browsers)
 and [HTML-validate rules](https://html-validate.org/rules/index.html).
 
-The current 107 Chromium headless cases cover:
+The current 123 Chromium headless cases cover:
 
 - 48 previews × 360/768/1280/1536 × light/dark: no document horizontal overflow
   beyond 1px rounding, visible h1/nonempty main, working theme toggle where
@@ -170,3 +170,17 @@ and its panel text remains visible; the next click selects Beta. All eight faile
 before the click guard and passed after. These cases are automated Chromium only.
 Human visual/keyboard review, Firefox/WebKit and screen-reader validation remain
 NOT_RUN.
+
+R027 adds sixteen four-width/theme scenarios: eight operate both actual
+React/Vue Modal adapters, eight operate Gallery's one-attempt mouse guard.
+They use real middle/right/primary buttons, cancelled close click/backdrop
+mousedown, retained drafts, inert background, normal dismissal, Enter/Space,
+Escape, cleanup and strict opener focus restoration. The initial eight adapter
+cases failed on middle-button dismissal. An intermediate Gallery run caught the
+native primary-mousedown focus default overriding opener restoration; both
+adapters now prevent that default before requesting close. Non-primary native
+focus behavior stays browser-owned, with real Tab confirming trap re-entry;
+cancelled events still require focus inside the dialog. Final targeted run:
+16 passed. This makes 123 Chromium cases, with no approved visual baselines.
+Human browser/visual/keyboard, screen-reader, physical touch/DPI and cross-engine
+review remain NOT_RUN.

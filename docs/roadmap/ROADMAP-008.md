@@ -29,7 +29,7 @@ slice，不以三個 slice 為配額，也不把既有人工 NOT_RUN 項目勾�
 
 | ID | 優先序 | Slice 與驗收條件 | 狀態 |
 |---|---|---|---|
-| R027 | P2 | React/Vue Modal 滑鼠關閉事件交接：已取消的 close-button click／backdrop mousedown 不要求關閉；中鍵／右鍵遮罩事件不要求關閉且不額外取消。一般主鍵遮罩、close-button click／鍵盤、Escape、inert cleanup 與 opener 還原保持可用。雙框架回歸測試、Gallery 可操作示例、四尺寸／亮暗色 Chromium 自動化與文件同步 | 待實作；修正前 8 failed / 2 passed |
+| R027 | P2 | React/Vue Modal 滑鼠關閉事件交接：已取消的 close-button click／backdrop mousedown 不要求關閉；中鍵／右鍵遮罩事件不要求關閉且不額外取消。一般主鍵遮罩、close-button click／鍵盤、Escape、inert cleanup 與 opener 還原保持可用。雙框架回歸測試、Gallery 可操作示例、四尺寸／亮暗色 Chromium 自動化與文件同步 | 已實作；永久 Vitest 修正前 10 failed / 2 passed、修正後 12 passed；Chromium 16 passed |
 
 ## 最小重現步驟
 
@@ -69,7 +69,7 @@ for (const framework of ['React', 'Vue']) it(`${framework} cancelled close`, asy
    操作改成 `fireEvent.mouseDown(document.querySelector('.acme-modal')!)`，
    可重現 cancelled backdrop。移除 capture 並給 mouseDown `{ button: 1 }`
    或 `{ button: 2 }`，可重現中鍵／右鍵誤關閉。
-5. 暫存 reproducer 不納入實作提交；永久測試命令規劃為
+5. 暫存 reproducer 不納入實作提交；永久測試命令為
    `pnpm exec vitest run scripts/test/modal-dismissal.test.tsx`。
    若 Corepack 需要可寫入快取，命令前設定 repo 內的
    `COREPACK_HOME="$PWD/.cache/corepack" TMPDIR="$PWD/.cache/tmp"`。
@@ -80,7 +80,8 @@ for (const framework of ['React', 'Vue']) it(`${framework} cancelled close`, asy
    顯示 MERGEABLE 後合併，不等待 Codex code review。
 2. 從已合併 master 實作 R027，單獨一個 PR。close-button handler 先檢查
    `defaultPrevented`；backdrop handler 僅接受未取消、主鍵、target 等於
-   currentTarget 的 mousedown。保留受控 `open` 與 callback／emit 語意。
+   currentTarget 的 mousedown，先 preventDefault 再要求關閉，避免原生焦點動作
+   覆蓋 opener 還原。保留受控 `open` 與 callback／emit 語意。
 3. 永久 Vitest 覆蓋兩框架 cancelled／ordinary 事件、callback／emit 次數、
    panel 子元素不誤關閉、非主鍵不額外 preventDefault、取消後 inert／焦點仍在。
 4. Gallery 提供可選擇攔截一次滑鼠關閉的示例；消費端須在 component bubble
@@ -92,6 +93,38 @@ for (const framework of ['React', 'Vue']) it(`${framework} cancelled close`, asy
    `pnpm build`、`pnpm test:browser`。保留 token/CSS drift gates、共用
    React/Vue/static/Tailwind 樣式、可見焦點與既有 responsive 自動檢查。
    所有 hosted CI 必須成功且 GitHub 顯示 MERGEABLE 才合併；不留下綠燈未合併 PR。
+
+## R027 實作與驗證證據
+
+ROADMAP PR [#30](https://github.com/stevenke1981/AcmeUI-Web/pull/30) 的兩個
+hosted `validate` 均 SUCCESS，GitHub 顯示 MERGEABLE 後合併至 `9fc49c7`。
+R027 分支由此 master 建立，沒有疊在未合併 PR 上。
+
+永久 `scripts/test/modal-dismissal.test.tsx` 加入 Gallery 兩個真實 consumer
+案例後，在 runtime 修正前為 **10 failed / 2 passed**（ignored
+`.cache/r027-permanent-before.log`），修正後 **12 passed**。包含雙框架取消／
+一般事件、callback／emit 次數、非主鍵不額外取消、panel 子元素不誤關閉、
+取消後保留內容與 inert；正常主鍵遮罩會先取消原生 mousedown 焦點預設。
+另與既有 keyboard／isolation／兩框架 tabs-modal 測試合跑曾為 62 passed。
+
+`scripts/browser/modal-dismissal.spec.ts` 新增 16 個 Chromium 案例：8 個在每個
+尺寸／主題分別操作 React 和 Vue，8 個操作 Gallery 的一次性 guard。使用真實
+滑鼠、Enter／Space／Escape，確認草稿保留、取消後焦點與背景隔離、正常關閉
+只要求一次、清除 inert 與 opener 還原。最初基準上的 8 個 adapter 案例皆在
+中鍵誤關閉處失敗（`.cache/r027-before-browser.log`）；最終 16 passed
+（`.cache/r027-targeted-browser-after.log`）。
+
+中途測試另揭露兩點（`.cache/r027-intermediate-browser.log`）：
+
+- native 中鍵／右鍵在非可聚焦遮罩上可改變焦點；它們保留瀏覽器預設，測試
+  改成斷言對話框／內容／inert 保留，並用真實 Tab 確認仍可進入既有 focus trap。
+  取消操作本身仍嚴格要求焦點在對話框內，不把 native 行為誤稱為焦點維持。
+- Gallery 的一般主鍵遮罩關閉後，原生 mousedown 預設會覆蓋 cleanup 還原的
+  opener 焦點，8 個 Gallery 案例因此失敗。兩框架在這條已接管的關閉路徑
+  先 preventDefault 才要求關閉，最終同一 opener 斷言通過，沒有放寬為 body。
+
+共用 CSS、語意 tokens、static 與 Tailwind runtime 沿用既有契約。完整本機
+五項 gates 與 hosted CI／MERGEABLE 證據記錄於 R027 PR。
 
 ## 未執行與授權邊界
 

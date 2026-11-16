@@ -5,7 +5,19 @@ This is an ongoing development record, not a published release or a statement of
 production readiness. Current evidence is in VALIDATION.md and test.md. Entries
 below are historical snapshots; later slices supersede earlier open-work notes.
 
-## Current development / R022
+## Current development / R027
+
+From merged ROADMAP-008 master `9fc49c7`. React/Vue Modal respects cancelled
+close click/backdrop mousedown, accepts only primary backdrop dismissal and
+prevents that path's native focus default to preserve opener restoration.
+Gallery demonstrates a one-attempt consumer guard. Twelve permanent regressions
+pass (10 failed / 2 passed before runtime fixes); sixteen new Chromium cases
+pass across four widths/two themes. API/framework docs and todos are updated;
+shared/static styles and semantic tokens are unchanged. Five-command gates and
+hosted CI/merge evidence are recorded in the R027 PR. Human browser/visual/
+keyboard, screen-reader, touch/DPI and approved baseline checks remain NOT_RUN.
+
+## Historical development / R022
 
 From master 229059a after R021 / PR #24 merged. Core Modal focus candidates now
 recognize the first explicit details summary and exclude closed body content,
