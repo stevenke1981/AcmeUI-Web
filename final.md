@@ -440,3 +440,11 @@ before the click guards and pass after; existing Tabs suites remain 44 passes
 before the guard and passed after. Local gates pass (362 Vitest / 32 files, 107 Chromium); hosted CI is in the R026 PR.
 Human visual/keyboard, screen readers, OS IME, touch/DPI, Firefox/WebKit and
 approved visual baselines remain NOT_RUN.
+## 2026-11-16 / ROADMAP-008 audit
+
+Review/fix audit from clean master bd74dbd; no open PRs. ROADMAP-007/R026 is
+merged in PR #29. ROADMAP-008 records the next single slice, R027, with source
+evidence, reproduction steps and merge gates. A temporary real-component test
+reproduced 8 failures / 2 passing controls for React/Vue Modal mouse dismissal.
+No runtime changes in this planning PR. Human browser/visual review, screen
+readers, physical touch/DPI and approved visual baselines remain NOT_RUN.

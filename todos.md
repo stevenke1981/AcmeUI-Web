@@ -72,3 +72,9 @@
 詳見 [稽核與驗收條件](docs/roadmap/ROADMAP-007.md)。
 
 - [x] R026 / P2：React/Vue Tabs click 尊重 defaultPrevented
+
+## ROADMAP-008（2026-11-16 第八輪 Modal 滑鼠關閉稽核）
+
+詳見 [稽核證據、重現步驟與驗收條件](docs/roadmap/ROADMAP-008.md)。
+
+- [ ] R027 / P2：React/Vue Modal 滑鼠關閉尊重 defaultPrevented，遮罩只接受主鍵

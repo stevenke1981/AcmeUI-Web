@@ -81,7 +81,10 @@ React/Vue 來源型別檢查與 Vite 打包（沿用 example toolchain）。驗�
 第二輪 [ROADMAP-002](docs/roadmap/ROADMAP-002.md)、
 第三輪 [ROADMAP-003](docs/roadmap/ROADMAP-003.md)、
 第四輪 [ROADMAP-004](docs/roadmap/ROADMAP-004.md)、
-第五輪 [ROADMAP-005](docs/roadmap/ROADMAP-005.md)
+第五輪 [ROADMAP-005](docs/roadmap/ROADMAP-005.md)、
+第六輪 [ROADMAP-006](docs/roadmap/ROADMAP-006.md)、
+第七輪 [ROADMAP-007](docs/roadmap/ROADMAP-007.md)、
+第八輪 [ROADMAP-008](docs/roadmap/ROADMAP-008.md)
 及 [VALIDATION.md](VALIDATION.md)。
 
 ## Agent Skill
