@@ -427,3 +427,16 @@ scripts/browser/static-tabs-events.spec.ts adds eight 4-width × 2-theme Chromiu
 Gallery cases; all eight failed before the fix and passed after. Full suite is now
 358 Vitest in 31 files; test:browser has 99 Chromium cases. Human visual/keyboard,
 Firefox/WebKit and screen-reader checks remain NOT_RUN.
+
+## R026 / React and Vue Tabs cancelled click
+
+scripts/test/tabs-click-events.test.tsx adds four React/Vue cases: a capture
+consumer that preventDefault()s a click on a non-selected tab leaves
+aria-selected, roving tabindex and panel visibility unchanged; the next
+uncancelled click selects once, and a repeat click on the already-selected tab
+is harmless. Vue assertions use v-show / computed display, not the hidden
+attribute. Before the fix: 4 failed / 0 passed (ignored .cache/r026-before.log).
+After: 4 passed. Existing Tabs suites add 44 passes (48 targeted total).
+scripts/browser/tabs-click-events.spec.ts adds eight 4-width × 2-theme Chromium
+fixture cases; all eight failed before the fix and passed after. See ROADMAP-007.
+Human visual/keyboard, Firefox/WebKit and screen-reader checks remain NOT_RUN.

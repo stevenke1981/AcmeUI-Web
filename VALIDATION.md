@@ -643,3 +643,20 @@ and `.cache/r025-after-browser.log`). Local gates on the branch all exit 0:
 will be recorded in the R025 PR. NOT_RUN: human browser/visual/keyboard review,
 screen readers, OS IME/注音, physical DPI/touch, Firefox/WebKit, approved visual
 baselines.
+
+## 2026-11-14 / R026 — React/Vue Tabs cancelled click
+
+From the R025 branch (stacked on PR #28). React and Vue Tabs now return before
+changing selection when the click is already defaultPrevented. The permanent
+`scripts/test/tabs-click-events.test.tsx` covers capture cancellation and lifted
+cancellation for both adapters, including panel visibility (`hidden` / `v-show`)
+and roving tabindex. Before the fix: 4 failed / 0 passed (ignored
+`.cache/r026-before.log`); after: 4 passed. Existing Tabs suites
+(tabs-keyboard, tabs-values, react/vue tabs-modal, static-tabs-events) also pass:
+48 targeted Vitest total. The new 4-width × 2-theme Chromium fixture spec failed
+all 8 cases before the fix and passed all 8 after (ignored
+`.cache/r026-before-browser.log` and `.cache/r026-after-browser.log`). Local gates on the branch all exit 0: `pnpm install --frozen-lockfile`,
+`pnpm test` (362 Vitest / 32 files), `test:cli:installed`, typecheck, build and
+`test:browser` (107 Chromium). Hosted CI will be recorded in the R026 PR.
+NOT_RUN: human browser/visual/keyboard review, screen readers, OS IME/注音,
+physical DPI/touch, Firefox/WebKit, approved visual baselines.

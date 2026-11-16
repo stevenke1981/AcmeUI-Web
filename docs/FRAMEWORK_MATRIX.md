@@ -88,3 +88,13 @@ listener; a later bubble handler cannot undo a completed selection. Ordinary
 clicks retain `preventDefault()` plus one selection; modifier-key and
 non-primary-button native link behavior is unchanged. Keyboard
 defaultPrevented/isComposing behavior is unchanged.
+
+## React/Vue Tabs cancelled click (R026)
+
+React and Vue Tabs ignore clicks already defaultPrevented before changing
+selection, preserving `aria-selected`, roving tabindex and panel visibility
+(`hidden` in React, `v-show` in Vue). Consumers must cancel before the component
+bubble handler, for example with a capture listener; a later bubble handler
+cannot undo a completed selection. Ordinary clicks still select once. Keyboard
+defaultPrevented/isComposing and static R025 click behaviour are unchanged.
+No CSS/token changes.

@@ -429,3 +429,14 @@ Chromium Gallery cases all failed before the guard and passed after. Local gates
 pass (358 Vitest / 31 files, 99 Chromium); hosted CI is in the R025 PR. Human
 visual/keyboard, screen readers, OS IME, touch/DPI, Firefox/WebKit and approved
 visual baselines remain NOT_RUN.
+
+## 2026-11-14 / R026
+
+From the R025 branch (stacked on PR #28). React and Vue Tabs ignore already
+cancelled clicks before changing selection, preserving `aria-selected`, roving
+tabindex and panel visibility. Four new Vitest cases reproduced 4 failures
+before the click guards and pass after; existing Tabs suites remain 44 passes
+(48 targeted total). Eight four-width/theme Chromium fixture cases all failed
+before the guard and passed after. Local gates pass (362 Vitest / 32 files, 107 Chromium); hosted CI is in the R026 PR.
+Human visual/keyboard, screen readers, OS IME, touch/DPI, Firefox/WebKit and
+approved visual baselines remain NOT_RUN.
